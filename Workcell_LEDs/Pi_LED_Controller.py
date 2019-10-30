@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-
+#
 #Program to control LEDs from Raspberry Pi
 #
-#Author: 	Sean Woodward
+#Author:	Sean Woodward
 #Date:		30/10/2019
 #
 #For further information on AdaFruits NeoPixel Library, see: https://learn.adafruit.com/neopixels-on-raspberry-pi/python-usage
