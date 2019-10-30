@@ -1,4 +1,4 @@
-# PAA_LEDs
+# PAA LEDs
 Software to controll LEDs for workcells on a Raspberry Pi
 
 ## Packages to Install
