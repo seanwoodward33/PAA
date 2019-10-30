@@ -64,9 +64,9 @@ if __name__ == '__main__':
     #Testing Loop
     try:
         while True:
-            ColourWipe(ledStrip, (255,0,0))
-            ColourWipe(ledStrip, (0,255,0))
-            ColourWipe(ledStrip, (0,0,255))
+            ColourWipe(ledStrip, (255,0,0), 0)
+            ColourWipe(ledStrip, (0,255,0), 0)
+            ColourWipe(ledStrip, (0,0,255), 0)
             
     except KeyboardInterrupt:
         ColourWipe(ledStrip, (0,0,0), 10)
