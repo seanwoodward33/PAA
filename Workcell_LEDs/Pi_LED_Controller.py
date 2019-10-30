@@ -45,15 +45,13 @@ def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in 
     for i in range(iterations):
         for j in range(3):
             for k in range(0,len(strip),3):
-                if(k+j > len(strip)):
-                   break
-                strip[k+j] = colour
+                if(k+j <= len(strip)):
+                    strip[k+j] = colour
             strip.show()
             time.sleep(waitTime/1000.0)
             for k in range(0,len(strip),3):
-                if(k+j > len(strip)):
-                    break
-                strip[k+j] = 0
+                if(k+j <= len(strip)):
+                    strip[k+j] = 0
 
 def ErrorState(strip):
     for i in range(len(strip)):
