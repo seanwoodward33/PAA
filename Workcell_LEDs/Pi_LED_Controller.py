@@ -53,7 +53,7 @@ def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in 
 
 def ErrorState(strip):
     for i in range(strip.numPixels()):
-        strip.setPixelColour(i, neopixel.Colour(0,255,0))
+        strip.setPixelColour(i, (0,255,0))
     strip.show()
                 
 #Main program logic
@@ -64,9 +64,9 @@ if __name__ == '__main__':
     #Testing Loop
     try:
         while True:
-            ColourWipe(ledStrip, neopixel.Colour(255,0,0))
-            ColourWipe(ledStrip, neopixel.Colour(0,255,0))
-            ColourWipe(ledStrip, neopixel.Colour(0,0,255))
+            ColourWipe(ledStrip, (255,0,0))
+            ColourWipe(ledStrip, (0,255,0))
+            ColourWipe(ledStrip, (0,0,255))
             
     except KeyboardInterrupt:
-        ColourWipe(ledStrip, neopixel.Colour(0,0,0), 10)
+        ColourWipe(ledStrip, (0,0,0), 10)
