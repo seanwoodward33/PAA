@@ -19,7 +19,7 @@ import threading
 #Define LED strip configuration
 def LedSetup(ledPin = board.D18, ledCount = 25, ledOrder = neopixel.GRB):
     ledPin = board.D18						                        #GPIO pin LEDs are connected to Pi
-    ledCount = 1							                        #Number of LEDs in strip
+    ledCount = 49							                        #Number of LEDs in strip
     ledOrder = neopixel.GRB                                         #Set to *.GRB or *.RGB depending on how LEDs are wired
     ledStrip = neopixel.NeoPixel(ledPin, ledCount, brightness=0.2, auto_write=False, pixel_order=ledOrder)
     return ledStrip
@@ -45,11 +45,14 @@ def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in 
     for i in range(iterations):
         for j in range(3):
             for k in range(0,len(strip)-1,3):
-                print(k+j)
+                if(k+j > len(strip):
+                   break
                 strip[k+j] = colour
             strip.show()
             time.sleep(waitTime/1000.0)
             for k in range(0,len(strip)-1,3):
+                   if(k+j > len(strip):
+                      break
                 strip[k+j] = 0
 
 def ErrorState(strip):
