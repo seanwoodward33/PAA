@@ -17,7 +17,7 @@ import board
 #Define LED strip configuration
 ledPin = board.D18						#GPIO pin LEDs are connected to Pi
 ledCount = 25							#Number of LEDs in strip
-ledOrder = neopixel.GRB					#Set to *.GRB or *.RGB depending on how LEDs are wired
+ledOrder = neopixel.GRB						#Set to *.GRB or *.RGB depending on how LEDs are wired
 ledStrip = neopixel.NeoPixel(ledPin, ledCount, brightness=0.2, auto_write=False, pixel_order=ORDER)
 
 #Define functions to control LEDs
