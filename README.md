@@ -1,5 +1,7 @@
 # PAA LEDs
-Software to controll LEDs for workcells on a Raspberry Pi
+Software to controll LEDs for workcells on a Raspberry Pi.
+
+This software is written in Python. The intention is that the Pi will run various pre-installed light animations, which can be updated as necessary.
 
 ## Packages to Install
 
