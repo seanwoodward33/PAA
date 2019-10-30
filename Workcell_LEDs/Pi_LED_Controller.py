@@ -26,19 +26,19 @@ def LedSetup(ledPin = board.D18, ledCount = 25, ledOrder = neopixel.GRB):
 
 #Define functions to control LEDs
 def ColourWipe(strip, colour, waitTime=50):                     #waitTime is in ms
-	#Wipe colour across pixel line, one pixel at a time
-	for i in range(len(strip)):
-		strip[i] = colour
-		strip.show()
-		time.sleep(waitTime/1000.0)
+    #Wipe colour across pixel line, one pixel at a time
+    for i in range(len(strip)):
+        strip[i] = colour
+        strip.show()
+        time.sleep(waitTime/1000.0)
 
 def ColourWipeTwo(strip, colour, waitTime=50):                  #waitTime is in ms
 	#Wipe colour across pixel line, one pixel at a time
-	for i in range(math.ceil(len(strip)/2)):
-		strip[i] = colour
-		strip[len(strip)-i] = colour
-		strip.show()
-		time.sleep(waitTime/1000.0)
+    for i in range(math.ceil(len(strip)/2)):
+        strip[i] = colour
+        strip[len(strip)-i] = colour
+        strip.show()
+        time.sleep(waitTime/1000.0)
 
 def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in ms
     #Movie theatre light style chaser animation
@@ -67,8 +67,8 @@ if __name__ == '__main__':
             ColourWipe(ledStrip, (255,0,0), 0)
             ColourWipe(ledStrip, (0,255,0), 0)
             ColourWipe(ledStrip, (0,0,255), 0)
-	    ColourWipeTwo(ledStrip, (0,255,0), 0)
-	    TheatreChase(ledStrip, (255,255,255),0)
+            ColourWipeTwo(ledStrip, (0,255,0), 0)
+            TheatreChase(ledStrip, (255,255,255),0)
             
     except KeyboardInterrupt:
         ColourWipe(ledStrip, (0,0,0), 10)
