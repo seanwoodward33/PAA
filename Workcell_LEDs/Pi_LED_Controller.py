@@ -23,6 +23,7 @@ def LedSetup(ledPin = board.D18, ledCount = 25, ledOrder = neopixel.GRB):
     ledOrder = neopixel.GRB                                         #Set to *.GRB or *.RGB depending on how LEDs are wired
     ledStrip = neopixel.NeoPixel(ledPin, ledCount, brightness=0.2, auto_write=False, pixel_order=ledOrder)
     ledStrip.begin()
+    return ledStrip
 
 #Define functions to control LEDs
 def ColourWipe(strip, colour, waitTime=50):                     #waitTime is in ms
@@ -59,6 +60,14 @@ def ErrorState(strip):
 #Main program logic
 if __name__ == '__main__':
     #Initialise LED strip
-    LedSetup()
+    ledStrip = LedSetup()
     
-    
+    #Testing Loop
+    try:
+        while True:
+            ColourWipe(ledStrip, neopixel.Colour(255,0,0))
+            ColourWipe(ledStrip, neopixel.Colour(0,255,0))
+            ColourWipe(ledStrip, neopixel.Colour(0,0,255))
+            
+    except KeyboardInterrupt:
+        ColourWipe(ledStrip, neopixel.Colour(0,0,0), 10)
