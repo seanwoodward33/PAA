@@ -59,7 +59,7 @@ def ErrorState(strip):
     for i in range(len(strip)):
         strip[i] = (0,255,0)
     strip.show()
-                
+
 #Main program logic
 if __name__ == '__main__':
     #Initialise LED strip
