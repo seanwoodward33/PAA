@@ -13,6 +13,7 @@ import time
 import neopixel
 import board
 import math
+import threading
 
 
 #Define LED strip configuration
@@ -49,6 +50,11 @@ def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in 
             time.sleep(waitTime/1000.0)
             for k in range(0,strip.numPixels(),3):
                 strip.setPixelColour(k+j, 0)
+
+def ErrorState(strip):
+    for i in range(strip.numPixels()):
+        strip.setPixelColour(i, neopixel.Colour(0,255,0))
+    strip.show()
                 
 #Main program logic
 if __name__ == '__main__':
