@@ -28,15 +28,15 @@ def LedSetup(ledPin = board.D18, ledCount = 25, ledOrder = neopixel.GRB):
 def ColourWipe(strip, colour, waitTime=50):                     #waitTime is in ms
 	#Wipe colour across pixel line, one pixel at a time
 	for i in range(len(strip)):
-		strip.setPixelColour(i, colour)
+		strip[i] = colour
 		strip.show()
 		time.sleep(waitTime/1000.0)
 
 def ColourWipeTwo(strip, colour, waitTime=50):                  #waitTime is in ms
 	#Wipe colour across pixel line, one pixel at a time
 	for i in range(math.ceil(len(strip)/2)):
-		strip.setPixelColour(i, colour)
-		strip.setPixelColour(len(strip)-i, colour)
+		strip[i] = colour
+		strip[len(strip)-i] = colour
 		strip.show()
 		time.sleep(waitTime/1000.0)
 
@@ -45,15 +45,15 @@ def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in 
     for i in range(iterations):
         for j in range(3):
             for k in range(0,len(strip),3):
-                strip.setPixelColour(k+j, colour)
+                strip[k+j] = colour
             strip.show()
             time.sleep(waitTime/1000.0)
             for k in range(0,len(strip),3):
-                strip.setPixelColour(k+j, 0)
+                strip[k+j] = 0
 
 def ErrorState(strip):
     for i in range(len(strip)):
-        strip.setPixelColour(i, (0,255,0))
+        strip[i] = (0,255,0)
     strip.show()
                 
 #Main program logic
