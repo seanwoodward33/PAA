@@ -16,20 +16,22 @@ import math
 
 
 #Define LED strip configuration
-ledPin = board.D18						#GPIO pin LEDs are connected to Pi
-ledCount = 25							#Number of LEDs in strip
-ledOrder = neopixel.GRB						#Set to *.GRB or *.RGB depending on how LEDs are wired
-ledStrip = neopixel.NeoPixel(ledPin, ledCount, brightness=0.2, auto_write=False, pixel_order=ledOrder)
+def LedSetup(ledPin = board.D18, ledCount = 25, ledOrder = neopixel.GRB):
+    ledPin = board.D18						                        #GPIO pin LEDs are connected to Pi
+    ledCount = 25							                        #Number of LEDs in strip
+    ledOrder = neopixel.GRB                                         #Set to *.GRB or *.RGB depending on how LEDs are wired
+    ledStrip = neopixel.NeoPixel(ledPin, ledCount, brightness=0.2, auto_write=False, pixel_order=ledOrder)
+    ledStrip.begin()
 
 #Define functions to control LEDs
-def colourWipe(strip, colour, waitTime=50):
+def ColourWipe(strip, colour, waitTime=50):                     #waitTime is in ms
 	#Wipe colour across pixel line, one pixel at a time
 	for i in range(strip.numPixels()):
 		strip.setPixelColour(i, colour)
 		strip.show()
 		time.sleep(waitTime/1000.0)
 
-def colourWipeTwo(strip, colour, waitTime=50):
+def ColourWipeTwo(strip, colour, waitTime=50):                  #waitTime is in ms
 	#Wipe colour across pixel line, one pixel at a time
 	for i in range(math.ceil(strip.numPixels()/2)):
 		strip.setPixelColour(i, colour)
@@ -37,7 +39,7 @@ def colourWipeTwo(strip, colour, waitTime=50):
 		strip.show()
 		time.sleep(waitTime/1000.0)
 
-def theatreChase(strip, colour, waitTime=50, iterations=10):
+def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in ms
     #Movie theatre light style chaser animation
     for i in range(iterations):
         for j in range(3):
@@ -47,4 +49,10 @@ def theatreChase(strip, colour, waitTime=50, iterations=10):
             time.sleep(waitTime/1000.0)
             for k in range(0,strip.numPixels(),3):
                 strip.setPixelColour(k+j, 0)
-
+                
+#Main program logic
+if __name__ == '__main__':
+    #Initialise LED strip
+    LedSetup()
+    
+    
