@@ -22,7 +22,6 @@ def LedSetup(ledPin = board.D18, ledCount = 25, ledOrder = neopixel.GRB):
     ledCount = 25							                        #Number of LEDs in strip
     ledOrder = neopixel.GRB                                         #Set to *.GRB or *.RGB depending on how LEDs are wired
     ledStrip = neopixel.NeoPixel(ledPin, ledCount, brightness=0.2, auto_write=False, pixel_order=ledOrder)
-    ledStrip.begin()
     return ledStrip
 
 #Define functions to control LEDs
