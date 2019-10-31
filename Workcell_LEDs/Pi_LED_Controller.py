@@ -21,27 +21,36 @@ def LedSetup(ledPin = board.D18, ledCount = 25, ledOrder = neopixel.GRB):
     ledPin = board.D18						                        #GPIO pin LEDs are connected to Pi
     ledCount = 98							                        #Number of LEDs in strip
     ledOrder = neopixel.GRB                                         #Set to *.GRB or *.RGB depending on how LEDs are wired
-    ledStrip = neopixel.NeoPixel(ledPin, ledCount, brightness=1.0, auto_write=False, pixel_order=ledOrder)
+    ledStrip = neopixel.NeoPixel(ledPin, ledCount, brightness=0.2, auto_write=False, pixel_order=ledOrder)
     return ledStrip
 
 #Define functions to control LEDs
 #Wipe colour across pixel line, one pixel at a time
-def ColourWipe(strip, colour, waitTime=50):                     #waitTime is in ms
+def ColourWipe(strip, colour, waitTime=10):                     #waitTime is in ms
     for i in range(len(strip)):
         strip[i] = colour
         strip.show()
         time.sleep(waitTime/1000.0)
 
 #Wipe colour across pixel line, one pixel at a time
-def ColourWipeTwo(strip, colour, waitTime=50):                  #waitTime is in ms
+def ColourWipeTwo(strip, colour, waitTime=10):                  #waitTime is in ms
     for i in range(math.ceil(len(strip)/2)):
         strip[i] = colour
         strip[len(strip)-1-i] = colour
         strip.show()
         time.sleep(waitTime/1000.0)
 
+#Single pixel progression
+def SinglePixelWipe(strip, singleColour, backColour = (0,0,0), waitTime=10):
+    strip.fill(backColour)
+    for i in range(len(strip)):
+        strip[i-1] = backColour
+        strip[i] = singleColour
+        strip.show()
+        time.sleep(waitTime/1000.0)
+
 #Movie theatre light style chaser animation
-def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in ms
+def TheatreChase(strip, colour, waitTime=10, iterations=10):    #waitTime is in ms
     for i in range(iterations):
         for j in range(3):
             for k in range(0,len(strip),3):
@@ -54,7 +63,7 @@ def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in 
                     strip[k+j] = 0
 
 #Draw a rainbow that fades across all the LEDs at once
-def Rainbow(strip, waitTime=50, iterations = 10):
+def Rainbow(strip, waitTime=10, iterations = 10):
     ledCount = len(strip)
     for i in range(iterations):
         for j in range(len(strip)):
@@ -82,8 +91,9 @@ if __name__ == '__main__':
             ColourWipe(ledStrip, (255,0,0), 0)
             ColourWipe(ledStrip, (0,255,0), 0)
             ColourWipe(ledStrip, (0,0,255), 0)
-            ColourWipeTwo(ledStrip, (0,255,0), 0)
+            ColourWipeTwo(ledStrip, (0,255,0), 10)
             TheatreChase(ledStrip, (255,255,255))
+            SinglePixelWipe(ledStrip,(255,0,255))
             ErrorState(ledStrip)
             time.sleep(1)
             RunState(ledStrip)
