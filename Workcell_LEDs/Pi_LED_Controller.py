@@ -33,7 +33,7 @@ def ColourWipe(strip, colour, waitTime=10):                     #waitTime is in 
         time.sleep(waitTime/1000.0)
 
 #Wipe colour across pixel line, one pixel at a time
-def ColourWipeTwo(strip, colour, waitTime=10):                  #waitTime is in ms
+def ColourWipeTwo(strip, colour, waitTime=20):                  #waitTime is in ms
     for i in range(math.ceil(len(strip)/2)):
         strip[i] = colour
         strip[len(strip)-1-i] = colour
@@ -49,8 +49,19 @@ def SinglePixelWipe(strip, singleColour, backColour = (0,0,0), waitTime=10):
         strip.show()
         time.sleep(waitTime/1000.0)
 
+#Single pixel progression with retention
+def SinglePixelWipeRetain(strip, singleColour, backColour = (0,0,0), waitTime=10):
+    strip.fill(backColour)
+    for i in range(len(strip)):
+        for j in range(len(strip)-i):
+            strip[j-1] = backColour
+            strip[j] = singleColour
+            strip.show()
+            time.sleep(waitTime/1000.0)
+
+
 #Movie theatre light style chaser animation
-def TheatreChase(strip, colour, waitTime=10, iterations=10):    #waitTime is in ms
+def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in ms
     for i in range(iterations):
         for j in range(3):
             for k in range(0,len(strip),3):
@@ -91,9 +102,10 @@ if __name__ == '__main__':
             ColourWipe(ledStrip, (255,0,0), 0)
             ColourWipe(ledStrip, (0,255,0), 0)
             ColourWipe(ledStrip, (0,0,255), 0)
-            ColourWipeTwo(ledStrip, (0,255,0), 10)
+            ColourWipeTwo(ledStrip, (0,255,0))
             TheatreChase(ledStrip, (255,255,255))
             SinglePixelWipe(ledStrip,(255,0,255))
+            SinglePixelWipeRetain(ledStrip,(255,0,255))
             ErrorState(ledStrip)
             time.sleep(1)
             RunState(ledStrip)
