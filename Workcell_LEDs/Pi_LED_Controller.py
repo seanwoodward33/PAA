@@ -55,8 +55,6 @@ def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in 
 
 def ErrorState(strip):
     strip.fill((0,255,0))
-    #for i in range(len(strip)):
-    #    strip[i] = (0,255,0)
     strip.show()
 
 #Main program logic
