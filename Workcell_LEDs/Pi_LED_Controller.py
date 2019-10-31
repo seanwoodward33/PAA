@@ -44,17 +44,19 @@ def ColourWipeTwo(strip, colour, waitTime=20):                  #waitTime is in 
 def SinglePixelWipe(strip, singleColour, backColour = (0,0,0), waitTime=10):
     strip.fill(backColour)
     for i in range(len(strip)):
-        strip[i-1] = backColour
+        if (i > 0):
+            strip[i-1] = backColour
         strip[i] = singleColour
         strip.show()
         time.sleep(waitTime/1000.0)
 
 #Single pixel progression with retention
-def SinglePixelWipeRetain(strip, singleColour, backColour = (0,0,0), waitTime=10):
+def SinglePixelWipeRetain(strip, singleColour, backColour = (0,0,0), waitTime=0):
     strip.fill(backColour)
     for i in range(len(strip)):
         for j in range(len(strip)-i):
-            strip[j-1] = backColour
+            if (j > 0):
+                strip[j-1] = backColour
             strip[j] = singleColour
             strip.show()
             time.sleep(waitTime/1000.0)
