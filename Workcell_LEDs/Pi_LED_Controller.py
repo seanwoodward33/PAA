@@ -89,6 +89,7 @@ def Rainbow(strip, waitTime=10, iterations = 500):
 
 #Knightrider
 def Knightrider(strip, waitTime, iterations = 500):
+    pass
     
 
 
