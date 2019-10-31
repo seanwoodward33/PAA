@@ -57,11 +57,17 @@ def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in 
 def Rainbow(strip, waitTime=50, iterations = 10):
     for i in range(iterations):
         for j in range(len(strip)):
-            strip[i] = colorsys.hsv_to_rgb()
+            strip[i] = colorsys.hsv_to_rgb(((j/len(strip)+i)%255)*255,1.0,0.2)
+        strip.show()
 
 #Emergency Stop, Red lights
 def ErrorState(strip):
     strip.fill((255,0,0))
+    strip.show()
+
+#Emergency Stop, Red lights
+def RunState(strip):
+    strip.fill((0,255,0))
     strip.show()
 
 #Main program logic
@@ -78,7 +84,10 @@ if __name__ == '__main__':
             ColourWipeTwo(ledStrip, (0,255,0), 50)
             TheatreChase(ledStrip, (255,255,255))
             ErrorState(ledStrip)
-            time.sleep(3)
+            time.sleep(1)
+            RunState(ledStrip)
+            time.sleep(1)
+            Rainbow(ledStrip,10)
             
     except KeyboardInterrupt:
         ColourWipe(ledStrip, (0,0,0), 10)
