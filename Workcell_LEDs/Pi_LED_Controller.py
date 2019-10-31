@@ -87,6 +87,11 @@ def Rainbow(strip, waitTime=10, iterations = 500):
             strip[j] = HsvToRgb((((j+i)%ledCount)/ledCount),1.0,1.0)
         strip.show()
 
+#Knightrider
+def Knightrider(strip, waitTime, iterations = 500):
+    
+
+
 #Emergency Stop, Red lights
 def ErrorState(strip):
     strip.fill((255,0,0))
@@ -117,6 +122,14 @@ if __name__ == '__main__':
             time.sleep(1)
             RunState(ledStrip)
             time.sleep(1)
+            strip.fill((2,116,153))
+            time.sleep(5)
+            strip.fill((53,177,203))
+            time.sleep(5)
+            strip.fill((230,81,151))
+            time.sleep(5)
+            strip.fill((151,19,75))
+            time.sleep(5)
             #Rainbow(ledStrip,10)
             
     except KeyboardInterrupt:
