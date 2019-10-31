@@ -54,7 +54,7 @@ def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in 
                     strip[k+j] = 0
 
 def ErrorState(strip):
-    strip[:] = = (0,255,0)
+    strip[:] = (0,255,0)
     #for i in range(len(strip)):
     #    strip[i] = (0,255,0)
     strip.show()
@@ -73,6 +73,7 @@ if __name__ == '__main__':
             ColourWipeTwo(ledStrip, (0,255,0), 50)
             TheatreChase(ledStrip, (255,255,255))
             ErrorState(ledStrip)
+            time.sleep(3)
             
     except KeyboardInterrupt:
         ColourWipe(ledStrip, (0,0,0), 10)
