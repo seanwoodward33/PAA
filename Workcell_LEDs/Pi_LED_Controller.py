@@ -20,7 +20,7 @@ import colorsys
 def LedSetup(ledPin = board.D18, ledCount = 25, ledOrder = neopixel.GRB):
     ledPin = board.D18						                        #GPIO pin LEDs are connected to Pi
     ledCount = 98							                        #Number of LEDs in strip
-    ledOrder = neopixel.GRB                                         #Set to *.GRB or *.RGB depending on how LEDs are wired
+    ledOrder = neopixel.RGB                                         #Set to *.GRB or *.RGB depending on how LEDs are wired
     ledStrip = neopixel.NeoPixel(ledPin, ledCount, brightness=0.2, auto_write=False, pixel_order=ledOrder)
     return ledStrip
 
@@ -61,7 +61,7 @@ def Rainbow(strip, waitTime=50, iterations = 10):
 
 #Emergency Stop, Red lights
 def ErrorState(strip):
-    strip.fill((0,255,0))
+    strip.fill((255,0,0))
     strip.show()
 
 #Main program logic
