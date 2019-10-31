@@ -85,7 +85,7 @@ def Rainbow(strip, waitTime=10, iterations = 50):
     for i in range(iterations):
         for j in range(len(strip)):
             strip[i] = HsvToRgb((((j+i)%ledCount)/ledCount),1.0,1.0)
-        strip.show()
+            strip.show()
 
 #Emergency Stop, Red lights
 def ErrorState(strip):
