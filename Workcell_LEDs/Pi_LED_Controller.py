@@ -71,6 +71,7 @@ if __name__ == '__main__':
             ColourWipe(ledStrip, (0,0,255), 0)
             ColourWipeTwo(ledStrip, (0,255,0), 50)
             TheatreChase(ledStrip, (255,255,255))
+            ErrorState(ledStrip)
             
     except KeyboardInterrupt:
         ColourWipe(ledStrip, (0,0,0), 10)
