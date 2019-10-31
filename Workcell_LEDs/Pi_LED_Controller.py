@@ -14,7 +14,7 @@ import neopixel
 import board
 import math
 import threading
-
+import colorsys
 
 #Define LED strip configuration
 def LedSetup(ledPin = board.D18, ledCount = 25, ledOrder = neopixel.GRB):
@@ -25,23 +25,23 @@ def LedSetup(ledPin = board.D18, ledCount = 25, ledOrder = neopixel.GRB):
     return ledStrip
 
 #Define functions to control LEDs
+#Wipe colour across pixel line, one pixel at a time
 def ColourWipe(strip, colour, waitTime=50):                     #waitTime is in ms
-    #Wipe colour across pixel line, one pixel at a time
     for i in range(len(strip)):
         strip[i] = colour
         strip.show()
         time.sleep(waitTime/1000.0)
 
+#Wipe colour across pixel line, one pixel at a time
 def ColourWipeTwo(strip, colour, waitTime=50):                  #waitTime is in ms
-	#Wipe colour across pixel line, one pixel at a time
     for i in range(math.ceil(len(strip)/2)):
         strip[i] = colour
         strip[len(strip)-1-i] = colour
         strip.show()
         time.sleep(waitTime/1000.0)
 
+#Movie theatre light style chaser animation
 def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in ms
-    #Movie theatre light style chaser animation
     for i in range(iterations):
         for j in range(3):
             for k in range(0,len(strip),3):
@@ -53,6 +53,13 @@ def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in 
                 if(k+j < len(strip)):
                     strip[k+j] = 0
 
+#Draw a rainbow that fades across all the LEDs at once
+def Rainbow(strip, waitTime=50, iterations = 10):
+    for i in range(iterations):
+        for j in range(len(strip)):
+            strip[i] = colorsys.hsv_to_rgb()
+
+#Emergency Stop, Red lights
 def ErrorState(strip):
     strip.fill((0,255,0))
     strip.show()
