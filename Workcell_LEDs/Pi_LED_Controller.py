@@ -55,9 +55,10 @@ def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in 
 
 #Draw a rainbow that fades across all the LEDs at once
 def Rainbow(strip, waitTime=50, iterations = 10):
+    ledCount = len(strip)
     for i in range(iterations):
         for j in range(len(strip)):
-            strip[i] = colorsys.hsv_to_rgb((((j/len(strip))+i)%255)/255,1.0,0.2)
+            strip[i] = colorsys.hsv_to_rgb((((j+i)%ledCount)/ledCount),1.0,0.2)*(255,255,255)
         strip.show()
 
 #Emergency Stop, Red lights
@@ -87,7 +88,7 @@ if __name__ == '__main__':
             time.sleep(1)
             RunState(ledStrip)
             time.sleep(1)
-            Rainbow(ledStrip,10)
+            #Rainbow(ledStrip,10)
             
     except KeyboardInterrupt:
         ColourWipe(ledStrip, (0,0,0), 10)
