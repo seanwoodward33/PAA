@@ -66,10 +66,10 @@ if __name__ == '__main__':
     #Testing Loop
     try:
         while True:
-            ColourWipe(ledStrip, (255,0,0), 10)
-            ColourWipe(ledStrip, (0,255,0), 10)
-            ColourWipe(ledStrip, (0,0,255), 10)
-            ColourWipeTwo(ledStrip, (0,255,0), 10)
+            ColourWipe(ledStrip, (255,0,0), 0)
+            ColourWipe(ledStrip, (0,255,0), 0)
+            ColourWipe(ledStrip, (0,0,255), 0)
+            ColourWipeTwo(ledStrip, (0,255,0), 0)
             TheatreChase(ledStrip, (255,255,255))
             
     except KeyboardInterrupt:
