@@ -57,7 +57,7 @@ def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in 
 def Rainbow(strip, waitTime=50, iterations = 10):
     for i in range(iterations):
         for j in range(len(strip)):
-            strip[i] = colorsys.hsv_to_rgb(((j/len(strip)+i)%255)*255,1.0,0.2)
+            strip[i] = colorsys.hsv_to_rgb((((j/len(strip))+i)%255)*255,1.0,0.2)
         strip.show()
 
 #Emergency Stop, Red lights
