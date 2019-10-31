@@ -80,7 +80,7 @@ def HsvToRgb(h,s,v):
     return tuple(round(i * 255) for i in colorsys.hsv_to_rgb(h,s,v))
 
 #Draw a rainbow that fades across all the LEDs at once
-def Rainbow(strip, waitTime=10, iterations = 50):
+def Rainbow(strip, waitTime=10, iterations = 500):
     ledCount = len(strip)
     for i in range(iterations):
         for j in range(len(strip)):
