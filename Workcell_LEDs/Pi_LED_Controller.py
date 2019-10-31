@@ -49,6 +49,7 @@ def TheatreChase(strip, colour, waitTime=50, iterations=10):    #waitTime is in 
                 print ("k = " + str(k))
                 print ("j+k = " + str(j+k))
                 if(k+j <= len(strip)):
+                    print ("Inside if statement")
                     strip[k+j] = colour
             strip.show()
             time.sleep(waitTime/1000.0)
