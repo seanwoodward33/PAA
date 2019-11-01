@@ -84,7 +84,7 @@ def Knightrider(strip, waitTime, iterations = 500):
     direction = up
     for i in range(iterations):
         
-    pass
+        pass
     
 
 
