@@ -56,7 +56,7 @@ def PixelWipe(strip, singleColour, wipeLength = 4, backColour = (0,0,0), waitTim
     strip.fill(backColour)
     for i in range(len(strip) + wipeLength):
         for j in range(wipeLength):
-            if (i-j > 0 & i-j < len(strip)):  
+            if (i-j > 0 and i-j < len(strip)):
                 strip[i-j] = singleColour
         strip[i-wipeLength] = backColour
         strip.show()
