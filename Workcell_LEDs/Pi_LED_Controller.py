@@ -56,8 +56,8 @@ if __name__ == '__main__':
             #animations.ColourWipeTwo(ledStrip, (0,255,0))
             #animations.SinglePixelWipe(ledStrip,(255,0,255))
             #animations.Rainbow(ledStrip)
-            #animations.PixelWipe(ledStrip,(255,0,255))
-            animations.PixelWipeRetain(ledStrip,(255,0,255))
+            animations.PixelWipe(ledStrip,(255,0,255))
+            #animations.PixelWipeRetain(ledStrip,(255,0,255))
             #animations.SinglePixelWipeRetain(ledStrip,(255,0,255))
             
     except KeyboardInterrupt:
