@@ -51,6 +51,28 @@ def SinglePixelWipeRetain(strip, singleColour, backColour = (0,0,0), waitTime=0)
             strip.show()
             time.sleep(waitTime/1000.0)
 
+#Pixel progression
+def PixelWipe(strip, singleColour, wipeLength = 4, backColour = (0,0,0), waitTime=10):
+    strip.fill(backColour)
+    for i in range(len(strip)):
+        for j in range(wipeLength):
+            if (i-j > 0):  
+                strip[i-j] = singleColour
+        strip[i-wipeLength] = backColour
+        strip.show()
+        time.sleep(waitTime/1000.0)
+
+#Pixel progression with retention
+def PixelWipeRetain(strip, singleColour, wipeLength = 4, backColour = (0,0,0), waitTime=0):
+    strip.fill(backColour)
+    for i in range(len(strip)):
+        for j in range(len(strip)-i):
+            if (j > 0):
+                strip[j-1] = backColour
+            strip[j] = singleColour
+            strip.show()
+            time.sleep(waitTime/1000.0)
+
 
 #Movie theatre light style chaser animation
 def TheatreChase(strip, colour, waitTime=50, iterations=30):    #waitTime is in ms
@@ -83,7 +105,8 @@ def Knightrider(strip, waitTime, iterations = 500):
     ledCount = len(strip)
     direction = up
     for i in range(iterations):
-        
+        if (direction == up):
+            
         pass
     
 
