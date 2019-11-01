@@ -9,6 +9,10 @@ Date:		01/11/2019
 For further information on AdaFruits NeoPixel Library, see: https://learn.adafruit.com/neopixels-on-raspberry-pi/python-usage
 Inspirtaion drawn from tutorial, see: https://tutorials-raspberrypi.com/connect-control-raspberry-pi-ws2812-rgb-led-strips/
 """
+#Import relevant libraries
+import time
+import math
+import colorsys
 
 #Define functions to control LEDs
 #Wipe colour across pixel line, one pixel at a time
@@ -93,3 +97,7 @@ def RunState(strip):
 def SolidColour (strip, colour):
     strip.fill(colour)
     strip.show()
+
+#Main program logic
+if __name__ == '__main__':
+    print("This program contains animations for use in the LED Pi Controller")

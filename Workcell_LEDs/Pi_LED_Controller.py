@@ -10,15 +10,12 @@
 #Inspirtaion drawn from tutorial, see: https://tutorials-raspberrypi.com/connect-control-raspberry-pi-ws2812-rgb-led-strips/
 
 #Import relevant libraries
-import time
 import neopixel
 import board
-import math
 import threading
-import colorsys
 
 #Import animations from separate file
-from animations.py import *
+import animations
 
 #Define LED strip configuration
 def LedSetup(ledPin = board.D18, ledCount = 25, ledOrder = neopixel.GRB):
@@ -53,14 +50,14 @@ if __name__ == '__main__':
     #Testing Loop
     try:
         while True:
-            ColourWipe(ledStrip, (255,0,0), 0)
-            ColourWipe(ledStrip, (0,255,0), 0)
-            ColourWipe(ledStrip, (0,0,255), 0)
-            ColourWipeTwo(ledStrip, (0,255,0))
-            TheatreChase(ledStrip, (255,255,255))
-            SinglePixelWipe(ledStrip,(255,0,255))
-            Rainbow(ledStrip)
-            SinglePixelWipeRetain(ledStrip,(255,0,255))
+            animations.ColourWipe(ledStrip, (255,0,0), 0)
+            animations.ColourWipe(ledStrip, (0,255,0), 0)
+            animations.ColourWipe(ledStrip, (0,0,255), 0)
+            animations.ColourWipeTwo(ledStrip, (0,255,0))
+            animations.TheatreChase(ledStrip, (255,255,255))
+            animations.SinglePixelWipe(ledStrip,(255,0,255))
+            animations.Rainbow(ledStrip)
+            animations.SinglePixelWipeRetain(ledStrip,(255,0,255))
             
     except KeyboardInterrupt:
-        ColourWipe(ledStrip, (0,0,0), 10)
+        animations.ColourWipe(ledStrip, (0,0,0), 10)
