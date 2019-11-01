@@ -68,11 +68,12 @@ def PixelWipeRetain(strip, singleColour, wipeLength = 4, backColour = (0,0,0), w
     strip.fill(backColour)
     for i in range(len(strip)):
         for j in range(len(strip)-i):
-            if (j > 0):
-                strip[j-1] = backColour
-            strip[j] = singleColour
-            strip.show()
-            time.sleep(waitTime/1000.0)
+            for k in range(wipeLength):
+                if (j-k > 0 and j-k < len(strip)-i):
+                    strip[j-k] = singleColour
+                strip[j-wipeLength] = backColour
+                strip.show()
+                time.sleep(waitTime/1000.0)
 
 
 #Movie theatre light style chaser animation
@@ -104,9 +105,9 @@ def Rainbow(strip, waitTime=10, iterations = 500):
 #Knightrider
 def Knightrider(strip, waitTime, iterations = 500):
     ledCount = len(strip)
-    direction = up
+    direction = "up"
     for i in range(iterations):
-        if (direction == up):
+        if (direction == "up"):
             pass
     pass
 
