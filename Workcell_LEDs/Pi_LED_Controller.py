@@ -50,13 +50,13 @@ if __name__ == '__main__':
     #Testing Loop
     try:
         while True:
-            animations.ColourWipe(ledStrip, (255,0,0), 0)
-            animations.ColourWipe(ledStrip, (0,255,0), 0)
-            animations.ColourWipe(ledStrip, (0,0,255), 0)
-            animations.ColourWipeTwo(ledStrip, (0,255,0))
-            animations.SinglePixelWipe(ledStrip,(255,0,255))
-            animations.Rainbow(ledStrip)
-            animations.PixelWipe(ledStrip,(255,0,255))
+            #animations.ColourWipe(ledStrip, (255,0,0), 0)
+            #animations.ColourWipe(ledStrip, (0,255,0), 0)
+            #animations.ColourWipe(ledStrip, (0,0,255), 0)
+            #animations.ColourWipeTwo(ledStrip, (0,255,0))
+            #animations.SinglePixelWipe(ledStrip,(255,0,255))
+            #animations.Rainbow(ledStrip)
+            #animations.PixelWipe(ledStrip,(255,0,255))
             animations.PixelWipeRetain(ledStrip,(255,0,255))
             #animations.SinglePixelWipeRetain(ledStrip,(255,0,255))
             
