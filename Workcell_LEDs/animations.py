@@ -44,7 +44,7 @@ def SinglePixelWipe(strip, singleColour, backColour = (0,0,0), waitTime=10):
 def SinglePixelWipeRetain(strip, singleColour, backColour = (0,0,0), waitTime=0):
     strip.fill(backColour)
     for i in range(len(strip)):
-        SinglePixelWipe(strip[:len(strip)-i])
+        SinglePixelWipe(strip[:len(strip)-i],singleColour)
         #for j in range(len(strip)-i):
         #    if (j > 0):
         #        strip[j-1] = backColour
