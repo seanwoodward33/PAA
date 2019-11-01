@@ -106,9 +106,8 @@ def Knightrider(strip, waitTime, iterations = 500):
     direction = up
     for i in range(iterations):
         if (direction == up):
-            
-        pass
-    
+            pass
+    pass
 
 
 #Emergency Stop, Red lights
