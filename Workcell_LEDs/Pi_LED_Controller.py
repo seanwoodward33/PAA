@@ -22,7 +22,7 @@ def LedSetup(ledPin = board.D18, ledCount = 25, ledOrder = neopixel.GRB):
     ledPin = board.D18						                        #GPIO pin LEDs are connected to Pi
     ledCount = 98							                        #Number of LEDs in strip
     ledOrder = neopixel.GRB                                         #Set to *.GRB or *.RGB depending on how LEDs are wired
-    ledStrip = neopixel.NeoPixel(ledPin, ledCount, brightness=0.5, auto_write=False, pixel_order=ledOrder)
+    ledStrip = neopixel.NeoPixel(ledPin, ledCount, brightness=0.2, auto_write=False, pixel_order=ledOrder)
     return ledStrip
     
 #Colour definitions
@@ -54,7 +54,6 @@ if __name__ == '__main__':
             animations.ColourWipe(ledStrip, (0,255,0), 0)
             animations.ColourWipe(ledStrip, (0,0,255), 0)
             animations.ColourWipeTwo(ledStrip, (0,255,0))
-            animations.TheatreChase(ledStrip, (255,255,255))
             animations.SinglePixelWipe(ledStrip,(255,0,255))
             animations.Rainbow(ledStrip)
             animations.PixelWipe(ledStrip,(255,0,255))
