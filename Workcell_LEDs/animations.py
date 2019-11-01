@@ -66,7 +66,7 @@ def PixelWipe(strip, singleColour, wipeLength = 4, backColour = (0,0,0), waitTim
 #Pixel progression with retention
 def PixelWipeRetain(strip, singleColour, wipeLength = 4, backColour = (0,0,0), waitTime=0):
     strip.fill(backColour)
-    for i in range(len(strip)):
+    for i in range(len(strip)+wipeLength):
         for j in range(len(strip)-(i*wipeLength)):
             for k in range(wipeLength):
                 if (j-k > 0 and j-k < len(strip)-i):
