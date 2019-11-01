@@ -64,6 +64,7 @@ def TheatreChase(strip, colour, waitTime=50, iterations=30):    #waitTime is in 
             for k in range(0,len(strip),3):
                 if(k+j < len(strip)):
                     strip[k+j] = 0
+            strip.show()
 
 #Non-normalised HSV to RGB function
 def HsvToRgb(h,s,v):
@@ -73,12 +74,16 @@ def HsvToRgb(h,s,v):
 def Rainbow(strip, waitTime=10, iterations = 500):
     ledCount = len(strip)
     for i in range(iterations):
-        for j in range(len(strip)):
+        for j in range(ledCount):
             strip[j] = HsvToRgb((((j+i)%ledCount)/ledCount),1.0,1.0)
         strip.show()
 
 #Knightrider
 def Knightrider(strip, waitTime, iterations = 500):
+    ledCount = len(strip)
+    direction = up
+    for i in range(iterations):
+        
     pass
     
 
