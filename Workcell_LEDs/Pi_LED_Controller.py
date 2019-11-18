@@ -38,7 +38,6 @@ paaSrunPri = (81,40,125)
 paaSrunSec = (60,23,92)
 paaStorPri = (00,144,208)
 paaStorSec = (00, 89, 163)
-pass
 
 
 #Main program logic
@@ -56,7 +55,7 @@ if __name__ == '__main__':
             #animations.ColourWipe(ledStrip, (0,0,255), 0)
             #animations.ColourWipeTwo(ledStrip, (0,255,0))
             #animations.SinglePixelWipe(ledStrip,(255,0,255))
-            animations.Rainbow(ledStrip)
+            animations.Rainbow(ledStrip, 1, 2000)
             #animations.PixelWipe(ledStrip,(255,0,255))
             #animations.PixelWipeRetain(ledStrip,(255,0,255))
             #animations.SinglePixelWipeRetain(ledStrip,(255,0,255))
