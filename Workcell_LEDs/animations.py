@@ -126,6 +126,7 @@ def RunState(strip):
 def SolidColour (strip, colour):
     strip.fill(colour)
     strip.show()
+    pass
 
 #Main program logic
 if __name__ == '__main__':

@@ -38,6 +38,7 @@ paaSrunPri = (81,40,125)
 paaSrunSec = (60,23,92)
 paaStorPri = (00,144,208)
 paaStorSec = (00, 89, 163)
+pass
 
 
 #Main program logic
