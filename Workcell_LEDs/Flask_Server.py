@@ -5,7 +5,7 @@ Created on Mon Nov 18 15:03:32 2019
 @author: sean_woodward
 """
 #Import libraries for Flask server
-from Flask import Flask, request
+from flask import Flask, request
 from flask_restful import Resource, Api
 from json import dumps
 from flask.ext.jsonpify import jsonify
