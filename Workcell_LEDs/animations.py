@@ -22,7 +22,7 @@ def ColourWipe(strip, colour, waitTime=10):                     #waitTime is in 
         strip.show()
         time.sleep(waitTime/1000.0)
 
-#Wipe colour across pixel line, one pixel at a time
+#Wipe colour across pixel line, one pixel at a time from each end
 def ColourWipeTwo(strip, colour, waitTime=20):                  #waitTime is in ms
     for i in range(math.ceil(len(strip)/2)):
         strip[i] = colour
