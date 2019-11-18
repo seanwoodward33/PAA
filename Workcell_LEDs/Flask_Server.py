@@ -7,8 +7,8 @@ Created on Mon Nov 18 15:03:32 2019
 #Import libraries for Flask server
 from flask import Flask, request
 from flask_restful import Resource, Api
-from json import dumps
-from flask.ext.jsonpify import jsonify
+#from json import dumps
+#from flask.ext.jsonpify import jsonify
 
 #Import Pi_LED_Controller from seperate file
 import Pi_LED_Controller as PiCont
