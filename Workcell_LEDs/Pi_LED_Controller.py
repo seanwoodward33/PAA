@@ -61,4 +61,4 @@ if __name__ == '__main__':
             #animations.SinglePixelWipeRetain(ledStrip,(255,0,255))
             
     except KeyboardInterrupt:
-        animations.ColourWipe(ledStrip, (0,0,0), int(1000/ledStrip.ledCount))
+        animations.ColourWipe(ledStrip, (0,0,0), int(1000/len(ledStrip)))
