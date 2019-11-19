@@ -24,11 +24,7 @@ api = Api(app)
 #Define classes for flask
 class Rainbow(Resource):
     def get(self):
-        t.stop()
-        t.join()
-        t.start()
-        t.Animation("Rainbow")
-        #animations.Rainbow(ledStrip, numOfLoops = 10)
+        animations.Rainbow(ledStrip, numOfLoops = 10)
 
 class Pixelwipe(Resource):
     def get(self):
@@ -36,10 +32,7 @@ class Pixelwipe(Resource):
 
 class Shutdown(Resource):
     def get(self):
-        t._stop()
-        t.join()
-        t.start()
-        t.Animation("ColourWipe")
+        animations.ColourWipe(ledStrip, (0,0,0), int(1000/len(ledStrip)))
         
         
 #Add functions to web address
@@ -70,5 +63,5 @@ class animationThread():
 if __name__ == '__main__':
     ledStrip = PiCont.LedSetup()
     threading.Thread(target = flaskThread).start()
-    t = threading.Thread(target = animationThread)
-    t.start()
+    #t = threading.Thread(target = animationThread)
+    #t.start()
