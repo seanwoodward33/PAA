@@ -62,9 +62,9 @@ class animationThread():
 #Default run program
 if __name__ == '__main__':
     ledStrip = PiCont.LedSetup()
-    app.run(host = '0.0.0.0', port = '5002')
+    #app.run(host = '0.0.0.0', port = '5002')
     #flaskThread()
-    #t = threading.Thread(target = flaskThread)
-    #t.start()
+    t = threading.Thread(target = flaskThread)
+    t.start()
     #t = threading.Thread(target = animationThread)
     #t.start()
