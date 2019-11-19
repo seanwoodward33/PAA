@@ -25,6 +25,7 @@ api = Api(app)
 class Rainbow(Resource):
     def get(self):
         t.stop()
+        t.join()
         t.start()
         t.Animation("Rainbow")
         #animations.Rainbow(ledStrip, numOfLoops = 10)
@@ -36,6 +37,7 @@ class Pixelwipe(Resource):
 class Shutdown(Resource):
     def get(self):
         t._stop()
+        t.join()
         t.start()
         t.Animation("ColourWipe")
         
