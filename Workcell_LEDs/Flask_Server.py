@@ -32,7 +32,10 @@ class Pixelwipe(Resource):
 
 class Shutdown(Resource):
     def get(self):
-        animations.ColourWipe(ledStrip, (0,0,0), int(1000/len(ledStrip)))
+        t._stop()
+        t.start()
+        t.animation("ColourWipe")
+        
         
 #Add functions to web address
 api.add_resource(Rainbow, '/rainbow')
@@ -43,11 +46,16 @@ api.add_resource(Shutdown, '/shutdown')
 def flaskThread():
     app.run(host = '0.0.0.0', port = '5002')
 
-class animationThread:
-    def __init__(self)
-    
-    def self.animation():
+class animationThread():
+    def __init__(self):
         pass
+    
+    def Animation(self, input):
+        method = getattr(self,input)
+        return method()
+    
+    def ColourWipe(self):
+        animations.ColourWipe(ledStrip, (0,0,0), int(1000/len(ledStrip)))
     
 
 
@@ -55,3 +63,5 @@ class animationThread:
 if __name__ == '__main__':
     ledStrip = PiCont.LedSetup()
     threading.Thread(target = flaskThread).start()
+    t = threading.Thread(target = animationThread)
+    t.start()
