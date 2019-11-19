@@ -24,20 +24,29 @@ api = Api(app)
 #Define classes for flask
 class Rainbow(Resource):
     def get(self):
-        animations.Rainbow(ledStrip, numOfLoops = 10)
+        t.stop()
+        t.start()
+        t.Animation("Rainbow")
+        #animations.Rainbow(ledStrip, numOfLoops = 10)
 
-class Pixelwipe(Resource):
+class ColourWipe(Resource):
     def get(self):
-        animations.PixelWipe(ledStrip,(255,0,255))
+        t.stop()
+        t.start()
+        t.Animation("ColourWipe")
+        #animations.ColourWipe(ledStrip,(255,0,255))
 
 class Shutdown(Resource):
     def get(self):
-        animations.ColourWipe(ledStrip, (0,0,0), int(1000/len(ledStrip)))
+        t.stop()
+        t.start()
+        t.Animation("Shutdown")
+        #animations.ColourWipe(ledStrip, (0,0,0), int(1000/len(ledStrip)))
         
         
 #Add functions to web address
 api.add_resource(Rainbow, '/rainbow')
-api.add_resource(Pixelwipe, '/pixelwipe')
+api.add_resource(ColourWipe, '/colourwipe')
 api.add_resource(Shutdown, '/shutdown')
 
 #Define functions for threading
@@ -51,13 +60,15 @@ class animationThread():
     def Animation(self, input):
         method = getattr(self,input)
         return method()
-    
-    def ColourWipe(self):
-        animations.ColourWipe(ledStrip, (0,0,0), int(1000/len(ledStrip)))
-    
+
     def Rainbow(self):
         animations.Rainbow(ledStrip, numOfLoops = 10)
-
+    
+    def ColourWipe(self):
+        animations.ColourWipe(ledStrip, (255,0,255), int(1000/len(ledStrip)))
+    
+    def Shutdown(self):
+        animations.ColourWipe(ledStrip, (0,0,0), int(1000/len(ledStrip)))
 
 #Default run program
 if __name__ == '__main__':
