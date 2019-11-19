@@ -4,6 +4,9 @@ Created on Mon Nov 18 15:03:32 2019
 
 @author: sean_woodward
 """
+#Import libraries
+import threading
+
 #Import libraries for Flask server
 from flask import Flask, request
 from flask_restful import Resource, Api
@@ -18,10 +21,10 @@ import animations
 app = Flask(__name__)
 api = Api(app)
 
-#Define classes for functions
+#Define classes for flask
 class Rainbow(Resource):
     def get(self):
-        animations.Rainbow(ledStrip)
+        animations.Rainbow(ledStrip, numOfLoops = 10)
 
 class Pixelwipe(Resource):
     def get(self):
@@ -36,8 +39,19 @@ api.add_resource(Rainbow, '/rainbow')
 api.add_resource(Pixelwipe, '/pixelwipe')
 api.add_resource(Shutdown, '/shutdown')
 
+#Define functions for threading
+def flaskThread():
+    app.run(host = '0.0.0.0', port = '5002')
+
+class animationThread:
+    def __init__(self)
+    
+    def self.animation():
+        pass
+    
+
 
 #Default run program
 if __name__ == '__main__':
     ledStrip = PiCont.LedSetup()
-    app.run(host = '0.0.0.0', port = '5002')
+    threading.Thread(target = flaskThread).start()
