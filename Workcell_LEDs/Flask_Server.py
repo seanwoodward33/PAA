@@ -60,7 +60,7 @@ class animationThread():
     def ColourWipe(self):
         animations.ColourWipe(ledStrip, (0,0,0), int(1000/len(ledStrip)))
     
-    def Rainbow
+    def Rainbow(self):
         animations.Rainbow(ledStrip, numOfLoops = 10)
 
 
