@@ -24,21 +24,21 @@ api = Api(app)
 #Define classes for flask
 class Rainbow(Resource):
     def get(self):
-        t.stop()
+        #t.stop()
         t.start()
         t.Animation("Rainbow")
         #animations.Rainbow(ledStrip, numOfLoops = 10)
 
 class ColourWipe(Resource):
     def get(self):
-        t.stop()
+        #t.stop()
         t.start()
         t.Animation("ColourWipe")
         #animations.ColourWipe(ledStrip,(255,0,255))
 
 class Shutdown(Resource):
     def get(self):
-        t.stop()
+        #t.stop()
         t.start()
         t.Animation("Shutdown")
         #animations.ColourWipe(ledStrip, (0,0,0), int(1000/len(ledStrip)))
@@ -77,4 +77,3 @@ if __name__ == '__main__':
     #flaskThread()
     threading.Thread(target = flaskThread).start()
     t = threading.Thread(target = animationThread)
-    t.start()
