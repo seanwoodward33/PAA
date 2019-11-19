@@ -24,7 +24,10 @@ api = Api(app)
 #Define classes for flask
 class Rainbow(Resource):
     def get(self):
-        animations.Rainbow(ledStrip, numOfLoops = 10)
+        t.stop()
+        t.start()
+        t.Animation("Rainbow")
+        #animations.Rainbow(ledStrip, numOfLoops = 10)
 
 class Pixelwipe(Resource):
     def get(self):
@@ -34,7 +37,7 @@ class Shutdown(Resource):
     def get(self):
         t._stop()
         t.start()
-        t.animation("ColourWipe")
+        t.Animation("ColourWipe")
         
         
 #Add functions to web address
@@ -57,6 +60,8 @@ class animationThread():
     def ColourWipe(self):
         animations.ColourWipe(ledStrip, (0,0,0), int(1000/len(ledStrip)))
     
+    def Rainbow
+        animations.Rainbow(ledStrip, numOfLoops = 10)
 
 
 #Default run program
