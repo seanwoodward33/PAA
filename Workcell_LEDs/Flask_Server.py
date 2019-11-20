@@ -55,7 +55,11 @@ api.add_resource(Shutdown, '/shutdown')
 def flaskThread():
     app.run(host = '0.0.0.0', port = '5002')
 
-class animationThread(threading.Thread):
+def animationThread(t):
+    pass
+    
+
+class animationClass():
     def __init__(self):
         self.QueueGet()
     
@@ -92,5 +96,11 @@ if __name__ == '__main__':
     animationNameQ.put("Rainbow")
     
     #Start animation thread
+    t = animationClass()
+    threading.Thread(target = animationThread, args=t).start()
+    
+    """
+    #Start animation thread
     t = threading.Thread(target = animationThread)
     t.start()
+    """
