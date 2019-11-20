@@ -29,21 +29,21 @@ class Rainbow(Resource):
         animationNameQ.put("Rainbow")
         #animationArgsQ.put("")
         runQ.put("stop")
-        t.QueueGet()
+        t.self.QueueGet()
 
 class ColourWipe(Resource):
     def get(self):
         animationNameQ.put("ColourWipe")
         #animationArgsQ.put("")
         runQ.put("stop")
-        t.QueueGet()
+        t.self.QueueGet()
 
 class Shutdown(Resource):
     def get(self):
         animationNameQ.put("Shutdown")
         #animationArgsQ.put("")
         runQ.put("stop")
-        t.QueueGet()
+        t.self.QueueGet()
         
         
 #Add functions to web address
