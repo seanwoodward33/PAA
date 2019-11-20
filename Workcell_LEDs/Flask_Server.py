@@ -59,6 +59,7 @@ def flaskThread():
 
 class animationClass():
     def __init__(self):
+        print("thread starting")
         self.QueueGet()
     
     def QueueGet(self):
