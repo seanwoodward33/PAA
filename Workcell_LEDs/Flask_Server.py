@@ -29,21 +29,21 @@ class Rainbow(Resource):
         animationNameQ.put("Rainbow")
         #animationArgsQ.put("")
         runQ.put("stop")
-        t.QueueGet(self)
+        threading.Thread(target = animationClass).start()
 
 class ColourWipe(Resource):
     def get(self):
         animationNameQ.put("ColourWipe")
         #animationArgsQ.put("")
         runQ.put("stop")
-        t.QueueGet(self)
+        threading.Thread(target = animationClass).start()
 
 class Shutdown(Resource):
     def get(self):
         animationNameQ.put("Shutdown")
         #animationArgsQ.put("")
         runQ.put("stop")
-        t.QueueGet(self)
+        threading.Thread(target = animationClass).start()
         
         
 #Add functions to web address
@@ -53,10 +53,8 @@ api.add_resource(Shutdown, '/shutdown')
 
 #Define functions for threading
 def flaskThread():
+    threading.Thread(target = animationClass).start()
     app.run(host = '0.0.0.0', port = '5002')
-
-def animationThread(t):
-    pass
     
 
 class animationClass():
@@ -89,15 +87,11 @@ if __name__ == '__main__':
     animationNameQ = queue.Queue()
     animationArgsQ = queue.Queue()
 
-    #Start Flask thread
-    threading.Thread(target = flaskThread).start()
-
     #Set up default run
     animationNameQ.put("Rainbow")
     
-    #Start animation thread
-    t = animationClass()
-    threading.Thread(target = animationThread, args=t).start()
+    #Start Flask thread
+    threading.Thread(target = flaskThread).start()
     
     """
     #Start animation thread
