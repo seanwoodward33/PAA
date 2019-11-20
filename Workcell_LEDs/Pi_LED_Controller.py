@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #!/usr/bin/env python3
-#
+"""
 #Program to control LEDs from Raspberry Pi
 #
 #Author:	Sean Woodward
@@ -8,11 +8,11 @@
 #
 #For further information on AdaFruits NeoPixel Library, see: https://learn.adafruit.com/neopixels-on-raspberry-pi/python-usage
 #Inspirtaion drawn from tutorial, see: https://tutorials-raspberrypi.com/connect-control-raspberry-pi-ws2812-rgb-led-strips/
+"""
 
 #Import relevant libraries
 import neopixel
 import board
-import threading
 
 #Import animations from separate file
 import animations
@@ -44,8 +44,6 @@ paaStorSec = (00, 89, 163)
 if __name__ == '__main__':
     #Initialise LED strip
     ledStrip = LedSetup()
-
-
     
     #Testing Loop
     try:

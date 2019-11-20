@@ -4,6 +4,7 @@ Created on Mon Nov 18 15:03:32 2019
 
 @author: sean_woodward
 """
+
 #Import libraries
 import threading
 import queue
@@ -53,7 +54,7 @@ def flaskThread():
 
 class animationThread():
     def __init__(self):
-        self.Animation(animationNameQueue.get())
+        self.Animation(animationNameQ.get())
     
     def Animation(self, input):
         method = getattr(self,input)
@@ -74,12 +75,16 @@ if __name__ == '__main__':
     ledStrip = PiCont.LedSetup()
     
     #Set up queues for passing between threads
-    runQueue = queue.Queue()
-    animationNameQueue = queue.Queue()
-    animationArgsQueue = queue.Queue()
-    
-    #app.run(host = '0.0.0.0', port = '5002')
-    #flaskThread()
+    runQ = queue.Queue()
+    animationNameQ = queue.Queue()
+    animationArgsQ = queue.Queue()
+
+    #Start Flask thread
     threading.Thread(target = flaskThread).start()
-    animationNameQueue.put("Rainbow")
-    threading.Thread(target = animationThread).start()
+
+    #Set up default run
+    animationNameQ.put("Rainbow")
+    
+    #Start animation thread
+    t = threading.Thread(target = animationThread)
+    t.start()

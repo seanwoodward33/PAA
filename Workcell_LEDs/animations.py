@@ -9,6 +9,7 @@ Date:		01/11/2019
 For further information on AdaFruits NeoPixel Library, see: https://learn.adafruit.com/neopixels-on-raspberry-pi/python-usage
 Inspirtaion drawn from tutorial, see: https://tutorials-raspberrypi.com/connect-control-raspberry-pi-ws2812-rgb-led-strips/
 """
+
 #Import relevant libraries
 import time
 import math
