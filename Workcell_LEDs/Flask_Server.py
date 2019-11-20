@@ -35,7 +35,7 @@ class Rainbow(Resource):
         #animationArgsQ.put("")
         runQ.put("stop")
         time.sleep(1)
-        threading.Thread(target = animationClass, name = "next ani").start()
+        threading.Thread(target = animationClass).start()
 
 class ColourWipe(Resource):
     def get(self):
@@ -43,7 +43,7 @@ class ColourWipe(Resource):
         #animationArgsQ.put("")
         runQ.put("stop")
         time.sleep(1)
-        threading.Thread(target = animationClass, name = "next ani").start()
+        threading.Thread(target = animationClass).start()
 
 class Shutdown(Resource):
     def get(self):
@@ -51,7 +51,7 @@ class Shutdown(Resource):
         #animationArgsQ.put("")
         runQ.put("stop")
         time.sleep(1)
-        threading.Thread(target = animationClass, name = "next ani").start()
+        threading.Thread(target = animationClass).start()
         
         
 #Add functions to web address
