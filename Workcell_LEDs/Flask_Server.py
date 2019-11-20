@@ -30,7 +30,7 @@ class Rainbow(Resource):
         animationNameQ.put("Rainbow")
         #animationArgsQ.put("")
         runQ.put("stop")
-        time.wait(1)
+        time.sleep(1)
         threading.Thread(target = animationClass).start()
 
 class ColourWipe(Resource):
@@ -38,7 +38,7 @@ class ColourWipe(Resource):
         animationNameQ.put("ColourWipe")
         #animationArgsQ.put("")
         runQ.put("stop")
-        time.wait(1)
+        time.sleep(1)
         threading.Thread(target = animationClass).start()
 
 class Shutdown(Resource):
@@ -46,7 +46,7 @@ class Shutdown(Resource):
         animationNameQ.put("Shutdown")
         #animationArgsQ.put("")
         runQ.put("stop")
-        time.wait(1)
+        time.sleep(1)
         threading.Thread(target = animationClass).start()
         
         
