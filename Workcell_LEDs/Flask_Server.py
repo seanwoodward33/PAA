@@ -6,6 +6,7 @@ Created on Mon Nov 18 15:03:32 2019
 """
 #Import libraries
 import threading
+import queue
 
 #Import libraries for Flask server
 from flask import Flask, request
@@ -52,7 +53,7 @@ def flaskThread():
 
 class animationThread():
     def __init__(self):
-        pass
+        self.Animation(animationNameQueue.get())
     
     def Animation(self, input):
         method = getattr(self,input)
@@ -69,8 +70,16 @@ class animationThread():
 
 #Default run program
 if __name__ == '__main__':
+    #Set up LED strip
     ledStrip = PiCont.LedSetup()
+    
+    #Set up queues for passing between threads
+    runQueue = queue.Queue()
+    animationNameQueue = queue.Queue()
+    animationArgsQueue = queue.Queue()
+    
     #app.run(host = '0.0.0.0', port = '5002')
     #flaskThread()
     threading.Thread(target = flaskThread).start()
-    t = threading.Thread(target = animationThread)
+    animationNameQueue.put("Rainbow")
+    threading.Thread(target = animationThread).start()
