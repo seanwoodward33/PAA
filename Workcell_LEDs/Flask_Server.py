@@ -61,15 +61,17 @@ api.add_resource(Shutdown, '/shutdown')
 
 #Define functions for threading
 def flaskThread():
+    logging.debug("Starting flaskThread")
     threading.Thread(target = animationClass).start()
     app.run(host = '0.0.0.0', port = '5002')
+    logging.debug("Stopping flaskThread")
     
 
 class animationClass():
     def __init__(self):
-        logging.debug("Starting")
+        logging.debug("Starting animationClass")
         self.QueueGet()
-        logging.debug("Exiting")
+        logging.debug("Exiting animationClass")
     
     def QueueGet(self):
         self.AnimationName(animationNameQ.get())
@@ -79,7 +81,7 @@ class animationClass():
         return method()
 
     def Rainbow(self):
-        animations.Rainbow(ledStrip, q = runQ, numOfLoops = 50)
+        animations.Rainbow(ledStrip, q = runQ, numOfLoops = 10)
     
     def ColourWipe(self):
         animations.ColourWipe(ledStrip, (255,0,255), int(1000/len(ledStrip)), q = runQ)
