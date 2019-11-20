@@ -17,8 +17,10 @@ import colorsys
 
 #Define functions to control LEDs
 #Wipe colour across pixel line, one pixel at a time
-def ColourWipe(strip, colour, waitTime=10):                     #waitTime is in ms
+def ColourWipe(strip, colour, waitTime=10, q):                     #waitTime is in ms
     for i in range(len(strip)):
+        if q.empty() == False:
+            break
         strip[i] = colour
         strip.show()
         time.sleep(waitTime/1000.0)
@@ -96,10 +98,12 @@ def HsvToRgb(h,s,v):
     return tuple(round(i * 255) for i in colorsys.hsv_to_rgb(h,s,v))
 
 #Draw a rainbow that fades across all the LEDs at once
-def Rainbow(strip, waitTime=10, numOfLoops = 5):
+def Rainbow(strip, waitTime=10, numOfLoops = 5, q):
     ledCount = len(strip)
     for i in range(numOfLoops*ledCount):
         for j in range(ledCount):
+            if q.empty() == False:
+                break
             strip[j] = HsvToRgb((((j+i)%ledCount)/ledCount),1.0,1.0)
         strip.show()
 
