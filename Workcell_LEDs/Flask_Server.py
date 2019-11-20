@@ -9,6 +9,10 @@ Created on Mon Nov 18 15:03:32 2019
 import threading
 import queue
 import time
+import logging
+
+#Setup logging
+logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] (%(threadName)-10s) %(message)s')
 
 #Import libraries for Flask server
 from flask import Flask, request
@@ -63,8 +67,9 @@ def flaskThread():
 
 class animationClass():
     def __init__(self):
-        print("thread starting")
+        logging.debug("Starting")
         self.QueueGet()
+        logging.debug("Exiting")
     
     def QueueGet(self):
         self.AnimationName(animationNameQ.get())
