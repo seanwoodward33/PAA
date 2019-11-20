@@ -24,24 +24,21 @@ api = Api(app)
 #Define classes for flask
 class Rainbow(Resource):
     def get(self):
-        #t.stop()
-        t.start()
-        t.Animation("Rainbow")
-        #animations.Rainbow(ledStrip, numOfLoops = 10)
+        #t.start()
+        #t.Animation("Rainbow")
+        animations.Rainbow(ledStrip, numOfLoops = 10)
 
 class ColourWipe(Resource):
     def get(self):
-        #t.stop()
-        t.start()
-        t.Animation("ColourWipe")
-        #animations.ColourWipe(ledStrip,(255,0,255))
+        #t.start()
+        #t.Animation("ColourWipe")
+        animations.ColourWipe(ledStrip,(255,0,255))
 
 class Shutdown(Resource):
     def get(self):
-        #t.stop()
-        t.start()
-        t.Animation("Shutdown")
-        #animations.ColourWipe(ledStrip, (0,0,0), int(1000/len(ledStrip)))
+        #t.start()
+        #t.Animation("Shutdown")
+        animations.ColourWipe(ledStrip, (0,0,0), int(1000/len(ledStrip)))
         
         
 #Add functions to web address
