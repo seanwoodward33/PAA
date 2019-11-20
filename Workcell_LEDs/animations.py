@@ -14,10 +14,14 @@ Inspirtaion drawn from tutorial, see: https://tutorials-raspberrypi.com/connect-
 import time
 import math
 import colorsys
+import queue
+
+#Default for queues
+q=queue.Queue()
 
 #Define functions to control LEDs
 #Wipe colour across pixel line, one pixel at a time
-def ColourWipe(strip, colour, waitTime=10, q):                     #waitTime is in ms
+def ColourWipe(strip, colour, waitTime=10, q=q):                     #waitTime is in ms
     for i in range(len(strip)):
         if q.empty() == False:
             break
@@ -98,7 +102,7 @@ def HsvToRgb(h,s,v):
     return tuple(round(i * 255) for i in colorsys.hsv_to_rgb(h,s,v))
 
 #Draw a rainbow that fades across all the LEDs at once
-def Rainbow(strip, waitTime=10, numOfLoops = 5, q):
+def Rainbow(strip, waitTime=10, numOfLoops = 5, q=q):
     ledCount = len(strip)
     for i in range(numOfLoops*ledCount):
         for j in range(ledCount):
