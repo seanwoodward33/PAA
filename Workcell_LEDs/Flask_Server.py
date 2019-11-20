@@ -55,7 +55,7 @@ api.add_resource(Shutdown, '/shutdown')
 def flaskThread():
     app.run(host = '0.0.0.0', port = '5002')
 
-class animationThread():
+class animationThread(threading.Thread):
     def __init__(self):
         self.QueueGet()
     
