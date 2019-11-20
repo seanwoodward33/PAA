@@ -8,6 +8,7 @@ Created on Mon Nov 18 15:03:32 2019
 #Import libraries
 import threading
 import queue
+import time
 
 #Import libraries for Flask server
 from flask import Flask, request
@@ -29,6 +30,7 @@ class Rainbow(Resource):
         animationNameQ.put("Rainbow")
         #animationArgsQ.put("")
         runQ.put("stop")
+        time.wait(1)
         threading.Thread(target = animationClass).start()
 
 class ColourWipe(Resource):
@@ -36,6 +38,7 @@ class ColourWipe(Resource):
         animationNameQ.put("ColourWipe")
         #animationArgsQ.put("")
         runQ.put("stop")
+        time.wait(1)
         threading.Thread(target = animationClass).start()
 
 class Shutdown(Resource):
@@ -43,6 +46,7 @@ class Shutdown(Resource):
         animationNameQ.put("Shutdown")
         #animationArgsQ.put("")
         runQ.put("stop")
+        time.wait(1)
         threading.Thread(target = animationClass).start()
         
         
