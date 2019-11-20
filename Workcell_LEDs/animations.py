@@ -24,6 +24,7 @@ q=queue.Queue()
 def ColourWipe(strip, colour, waitTime=10, q=q):                     #waitTime is in ms
     for i in range(len(strip)):
         if q.empty() == False:
+            q.get()
             return
         strip[i] = colour
         strip.show()
@@ -107,6 +108,7 @@ def Rainbow(strip, waitTime=10, numOfLoops = 5, q=q):
     for i in range(numOfLoops*ledCount):
         for j in range(ledCount):
             if q.empty() == False:
+                q.get()
                 return
             strip[j] = HsvToRgb((((j+i)%ledCount)/ledCount),1.0,1.0)
         strip.show()
