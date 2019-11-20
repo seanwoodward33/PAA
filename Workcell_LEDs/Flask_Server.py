@@ -79,7 +79,7 @@ class animationClass():
     
     def AnimationName(self, input):
         method = getattr(self,input)
-        logging.debug("Method called " + str(method))
+        logging.debug("Method called: " + input)
         return method()
 
     def Rainbow(self):
