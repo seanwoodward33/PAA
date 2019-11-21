@@ -34,6 +34,7 @@ def ColourWipe(strip, colour, waitTime=10, q=q):                     #waitTime i
             strip[i] = colour
             strip.show()
             time.sleep(waitTime/1000.0)
+    return
 
 #Wipe colour across pixel line, one pixel at a time from each end
 def ColourWipeTwo(strip, colour, waitTime=20):                  #waitTime is in ms
@@ -121,6 +122,7 @@ def Rainbow(strip, waitTime=10, numOfLoops = 5, q=q):
                     return
                 strip[j] = HsvToRgb((((j+i)%ledCount)/ledCount),1.0,1.0)
             strip.show()
+    return
 
 #Knightrider
 def Knightrider(strip, waitTime, iterations = 500):
