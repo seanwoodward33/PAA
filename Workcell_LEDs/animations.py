@@ -120,11 +120,6 @@ def Rainbow(strip, waitTime=10, numOfLoops = 5, q=q):
                     runLoop = False
                     return
                 strip[j] = HsvToRgb((((j+i)%ledCount)/ledCount),1.0,1.0)
-                if q.empty() == False:
-                    logging.debug("exiting animation")
-                    x = q.get()
-                    runLoop = False
-                    return
                 strip.show()
 
 #Knightrider
