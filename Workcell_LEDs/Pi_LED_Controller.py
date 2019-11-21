@@ -25,8 +25,8 @@ def LedSetup(ledPin = board.D18, ledCount = 25, ledOrder = neopixel.GRB):
     ledStrip = neopixel.NeoPixel(ledPin, ledCount, brightness=0.2, auto_write=False, pixel_order=ledOrder)
     return ledStrip
 
-def LedShutdown():
-    ledStrip.deinit()  
+def LedShutdown(x):
+    x.deinit()  
     
 #Colour definitions
 paaDarkBlue = (2,116,153)
