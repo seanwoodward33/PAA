@@ -25,7 +25,7 @@ class animationClass():
         self.ledStrip = PiCont.LedSetup()
         while runQ.empty() == False:
             logging.debug(runQ.get())
-        self.QueueGet()
+        #self.QueueGet()
         PiCont.LedShutdown(self.ledStrip)
         logging.debug("Exiting animationClass")
     
