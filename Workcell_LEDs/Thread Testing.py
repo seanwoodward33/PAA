@@ -26,12 +26,14 @@ class animationClass():
         print(self.ledStrip)
         self.ledStrip[0]=((255,255,255))
         self.ledStrip.show()
+        print(self.ledStrip)
         while runQ.empty() == False:
             logging.debug(runQ.get())
         #self.QueueGet()
         time.sleep(2)
         self.ledStrip[0]=((0,0,0))
         self.ledStrip.show()
+        print(self.ledStrip)
         #PiCont.LedShutdown(self.ledStrip)
         logging.debug("Exiting animationClass")
     
