@@ -20,9 +20,9 @@ import animations
 
 #
 class animationClass():
-    def __init__(self):
+    def __init__(self, ledStrip):
         logging.debug("Starting animationClass")
-        self.ledStrip = PiCont.LedSetup()
+        self.ledStrip = ledStrip
         print(self.ledStrip)
         self.ledStrip[0]=((255,255,255))
         self.ledStrip.show()
@@ -32,7 +32,7 @@ class animationClass():
         time.sleep(2)
         self.ledStrip[0]=((0,0,0))
         self.ledStrip.show()
-        PiCont.LedShutdown(self.ledStrip)
+        #PiCont.LedShutdown(self.ledStrip)
         logging.debug("Exiting animationClass")
     
     def QueueGet(self):
@@ -55,7 +55,7 @@ class animationClass():
 #Default run program
 if __name__ == '__main__':
     #Set up LED strip
-    #ledStrip = PiCont.LedSetup()
+    ledStrip = PiCont.LedSetup()
     
     #Set up queues for passing between threads
     runQ = queue.Queue()
@@ -66,7 +66,7 @@ if __name__ == '__main__':
     animationNameQ.put("Rainbow")
     
     #Start Flask thread
-    threading.Thread(target = animationClass, name = "First ani").start()
+    threading.Thread(target = animationClass, name = "First ani", args = (ledStrip)).start()
     
     #Run
     time.sleep(5)
