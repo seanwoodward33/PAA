@@ -23,10 +23,11 @@ class animationClass():
     def __init__(self):
         logging.debug("Starting animationClass")
         self.ledStrip = PiCont.LedSetup()
+        self.ledstrip[0]=(255,255,255)
         while runQ.empty() == False:
             logging.debug(runQ.get())
-        time.sleep(10)
         #self.QueueGet()
+        self.ledstrip[0]=(0,0,0)
         PiCont.LedShutdown(self.ledStrip)
         logging.debug("Exiting animationClass")
     
