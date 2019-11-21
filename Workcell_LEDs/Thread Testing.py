@@ -72,13 +72,14 @@ if __name__ == '__main__':
     
     #Run
     time.sleep(5)
-    animationNameQ.put("Shutdown")
+    animationNameQ.put("ColourWipe")
     runQ.put("stop")
     time.sleep(0.1)
     threading.Thread(target = animationClass).start()    
     time.sleep(3)
-    animationNameQ.put("ColourWipe")
+    animationNameQ.put("Shutdown")
     runQ.put("stop")
     time.sleep(0.1)
     threading.Thread(target = animationClass).start()
     time.sleep(3)
+    
