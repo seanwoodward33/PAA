@@ -61,13 +61,15 @@ if __name__ == '__main__':
     threading.Thread(target = animationClass, name = "First ani").start()
     
     #Run
-    time.sleep(15)
+    time.sleep(5)
     animationNameQ.put("Rainbow")
     runQ.put("stop")
     threading.Thread(target = animationClass).start()
+    time.sleep(3)
     animationNameQ.put("ColourWipe")
     runQ.put("stop")
     threading.Thread(target = animationClass).start()    
+    time.sleep(1)
     animationNameQ.put("Rainbow")
     runQ.put("stop")
     threading.Thread(target = animationClass).start()
