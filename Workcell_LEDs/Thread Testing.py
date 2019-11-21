@@ -19,7 +19,7 @@ import Pi_LED_Controller as PiCont
 import animations
 
 #
-class animationClass():
+class animationClass(threading.Thread):
     def __init__(self, ledStrip):
         logging.debug("Starting animationClass")
         self.ledStrip = ledStrip
