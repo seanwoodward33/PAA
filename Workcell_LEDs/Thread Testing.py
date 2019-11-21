@@ -20,7 +20,7 @@ import animations
 
 #
 class animationClass():
-    def __init__(self, args=()):
+    def __init__(self, ledStrip):
         logging.debug("Starting animationClass")
         self.ledStrip = ledStrip
         print(self.ledStrip)
@@ -68,7 +68,7 @@ if __name__ == '__main__':
     animationNameQ.put("Rainbow")
     
     #Start Flask thread
-    threading.Thread(target = animationClass, name = "First ani", args = (ledStrip)).start()
+    threading.Thread(target = animationClass, name = "First ani", ledStrip = ledStrip).start()
     
     #Run
     time.sleep(5)
