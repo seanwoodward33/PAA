@@ -81,7 +81,5 @@ if __name__ == '__main__':
     runQ.put("stop")
     time.sleep(0.1)
     threading.Thread(target = animationClass).start()
-    time.sleep(3)
-    #sys.exit()
     
     
