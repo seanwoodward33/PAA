@@ -47,7 +47,8 @@ paaStorSec = (00, 89, 163)
 if __name__ == '__main__':
     #Initialise LED strip
     ledStrip = LedSetup()
-    
+    print(ledStrip)
+"""
     #Testing Loop
     try:
         while True:
@@ -63,3 +64,4 @@ if __name__ == '__main__':
             
     except KeyboardInterrupt:
         animations.ColourWipe(ledStrip, (0,0,0), int(1000/len(ledStrip)))
+"""

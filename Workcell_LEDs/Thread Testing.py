@@ -23,6 +23,7 @@ class animationClass():
     def __init__(self):
         logging.debug("Starting animationClass")
         self.ledStrip = PiCont.LedSetup()
+        print(self.ledStrip)
         self.ledStrip[0]=(255,255,255)
         self.ledStrip.show()
         while runQ.empty() == False:
