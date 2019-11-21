@@ -41,10 +41,10 @@ class animationClass():
         animations.Rainbow(self.ledStrip, q = runQ, numOfLoops = 10)
     
     def ColourWipe(self):
-        animations.ColourWipe(self.ledStrip, (255,0,255), int(1000/len(ledStrip)), q = runQ)
+        animations.ColourWipe(self.ledStrip, (255,0,255), int(1000/len(self.ledStrip)), q = runQ)
     
     def Shutdown(self):
-        animations.ColourWipe(self.ledStrip, (0,0,0), int(1000/len(ledStrip)), q = runQ)
+        animations.ColourWipe(self.ledStrip, (0,0,0), int(1000/len(self.ledStrip)), q = runQ)
 
 #Default run program
 if __name__ == '__main__':
