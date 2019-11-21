@@ -67,7 +67,7 @@ if __name__ == '__main__':
     animationNameQ.put("Shutdown")
     runQ.put("stop")
     threading.Thread(target = animationClass).start()    
-    time.sleep(1)
+    time.sleep(3)
     animationNameQ.put("Rainbow")
     runQ.put("stop")
     threading.Thread(target = animationClass).start()
