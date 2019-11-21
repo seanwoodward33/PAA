@@ -10,7 +10,6 @@ import threading
 import queue
 import time
 import logging
-import sys
 
 #Setup logging
 logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] - %(asctime)s - (%(threadName)-10s) %(message)s')
@@ -72,17 +71,15 @@ if __name__ == '__main__':
     threading.Thread(target = animationClass, name = "First ani").start()
     
     #Run
-    time.sleep(5)
+    time.sleep(2)
     animationNameQ.put("ColourWipe")
     runQ.put("stop")
-    time.sleep(0.1)
     threading.Thread(target = animationClass).start()    
-    time.sleep(3)
+    time.sleep(2)
     animationNameQ.put("Shutdown")
     runQ.put("stop")
-    time.sleep(0.1)
     threading.Thread(target = animationClass).start()
     time.sleep(3)
-    sys.exit()
+    #sys.exit()
     
     
