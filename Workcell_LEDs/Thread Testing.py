@@ -27,8 +27,8 @@ class animationClass(threading.Thread):
         #self.ledStrip[0]=((255,255,255))
         #self.ledStrip.show()
         #print(self.ledStrip)
-        while runQ.empty() == False:
-            logging.debug(runQ.get())
+        #while runQ.empty() == False:
+        #   logging.debug(runQ.get())
         self.QueueGet()
         #time.sleep(2)
         #self.ledStrip[0]=((0,0,0))
@@ -74,9 +74,11 @@ if __name__ == '__main__':
     time.sleep(5)
     animationNameQ.put("Shutdown")
     runQ.put("stop")
+    time.sleep(1)
     threading.Thread(target = animationClass).start()    
     time.sleep(3)
     animationNameQ.put("ColourWipe")
     runQ.put("stop")
+    time.sleep(1)
     threading.Thread(target = animationClass).start()
     time.sleep(3)

@@ -27,7 +27,7 @@ def ColourWipe(strip, colour, waitTime=10, q=q):                     #waitTime i
     while runLoop == True:
         for i in range(len(strip)):
             if q.empty() == False:
-                logging.debug("exiting animation")
+                logging.debug("exiting colourwipe animation")
                 x = q.get()
                 runLoop = False
                 return
@@ -115,7 +115,7 @@ def Rainbow(strip, waitTime=10, numOfLoops = 5, q=q):
         for i in range(numOfLoops*ledCount):
             for j in range(ledCount):
                 if q.empty() == False:
-                    logging.debug("exiting animation")
+                    logging.debug("exiting rainbow animation")
                     x = q.get()
                     runLoop = False
                     return
