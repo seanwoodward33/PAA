@@ -12,7 +12,7 @@ import time
 import logging
 
 #Setup logging
-logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] (%(threadName)-10s) %(message)s')
+logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] - %(asctime)s - (%(threadName)-10s) %(message)s')
 
 #Import libraries for Flask server
 from flask import Flask, request
