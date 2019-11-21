@@ -10,6 +10,7 @@ import threading
 import queue
 import time
 import logging
+import sys
 
 #Setup logging
 logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] - %(asctime)s - (%(threadName)-10s) %(message)s')
@@ -82,4 +83,6 @@ if __name__ == '__main__':
     time.sleep(0.1)
     threading.Thread(target = animationClass).start()
     time.sleep(3)
+    sys.exit()
+    
     
