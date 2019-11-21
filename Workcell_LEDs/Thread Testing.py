@@ -23,17 +23,17 @@ class animationClass(threading.Thread):
     def __init__(self, args=()):
         logging.debug("Starting animationClass")
         self.ledStrip = ledStrip
-        print(self.ledStrip)
-        self.ledStrip[0]=((255,255,255))
-        self.ledStrip.show()
-        print(self.ledStrip)
+        #print(self.ledStrip)
+        #self.ledStrip[0]=((255,255,255))
+        #self.ledStrip.show()
+        #print(self.ledStrip)
         while runQ.empty() == False:
             logging.debug(runQ.get())
-        #self.QueueGet()
-        time.sleep(2)
-        self.ledStrip[0]=((0,0,0))
-        self.ledStrip.show()
-        print(self.ledStrip)
+        self.QueueGet()
+        #time.sleep(2)
+        #self.ledStrip[0]=((0,0,0))
+        #self.ledStrip.show()
+        #print(self.ledStrip)
         #PiCont.LedShutdown(self.ledStrip)
         logging.debug("Exiting animationClass")
     
