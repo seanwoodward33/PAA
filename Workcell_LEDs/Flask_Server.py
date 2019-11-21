@@ -35,9 +35,6 @@ class Rainbow(Resource):
         #animationArgsQ.put("")
         runQ.put("stop")
         time.sleep(1)
-        logging.debug("Attempting to read queue")
-        logging.debug(runQ.get())
-        logging.debug("Finished reading queue")
         threading.Thread(target = animationClass).start()
 
 class ColourWipe(Resource):
@@ -46,9 +43,6 @@ class ColourWipe(Resource):
         #animationArgsQ.put("")
         runQ.put("stop")
         time.sleep(1)
-        logging.debug("Attempting to read queue")
-        logging.debug(runQ.get())
-        logging.debug("Finished reading queue")
         threading.Thread(target = animationClass).start()
 
 class Shutdown(Resource):
@@ -57,9 +51,6 @@ class Shutdown(Resource):
         #animationArgsQ.put("")
         runQ.put("stop")
         time.sleep(1)
-        logging.debug("Attempting to read queue")
-        logging.debug(runQ.get())
-        logging.debug("Finished reading queue")
         threading.Thread(target = animationClass).start()
         
         
