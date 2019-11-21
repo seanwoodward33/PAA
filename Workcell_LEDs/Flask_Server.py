@@ -82,13 +82,13 @@ class animationClass():
         return method()
 
     def Rainbow(self):
-        animations.Rainbow(self.ledStrip, q = runQ, numOfLoops = 10)
+        animations.Rainbow(ledStrip, q = runQ, numOfLoops = 10)
     
     def ColourWipe(self):
-        animations.ColourWipe(self.ledStrip, (255,0,255), int(1000/len(self.ledStrip)), q = runQ)
+        animations.ColourWipe(ledStrip, (255,0,255), int(1000/len(ledStrip)), q = runQ)
     
     def Shutdown(self):
-        animations.ColourWipe(self.ledStrip, (0,0,0), int(1000/len(self.ledStrip)), q = runQ)
+        animations.ColourWipe(ledStrip, (0,0,0), int(1000/len(ledStrip)), q = runQ)
 
 #Default run program
 if __name__ == '__main__':
@@ -104,8 +104,8 @@ if __name__ == '__main__':
     animationNameQ.put("Rainbow")
     
     #Start Flask thread
-    app.run(host = '0.0.0.0', port = '5002')
     threading.Thread(target = animationClass, name = "First ani").start()
+    app.run(host = '0.0.0.0', port = '5002')
     #threading.Thread(target = flaskThread, name = "flaskThread").start()
     
     """
