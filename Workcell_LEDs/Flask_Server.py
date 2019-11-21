@@ -70,7 +70,6 @@ def flaskThread():
 class animationClass():
     def __init__(self):
         logging.debug("Starting animationClass")
-        self.ledStrip = PiCont.LedSetup()
         self.QueueGet()
         logging.debug("Exiting animationClass")
     
@@ -94,7 +93,7 @@ class animationClass():
 #Default run program
 if __name__ == '__main__':
     #Set up LED strip
-    #ledStrip = PiCont.LedSetup()
+    ledStrip = PiCont.LedSetup()
     
     #Set up queues for passing between threads
     runQ = queue.Queue()
@@ -105,7 +104,9 @@ if __name__ == '__main__':
     animationNameQ.put("Rainbow")
     
     #Start Flask thread
-    threading.Thread(target = flaskThread, name = "flaskThread").start()
+    app.run(host = '0.0.0.0', port = '5002')
+    threading.Thread(target = animationClass, name = "First ani").start()
+    #threading.Thread(target = flaskThread, name = "flaskThread").start()
     
     """
     #Start animation thread
