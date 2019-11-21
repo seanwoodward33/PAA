@@ -23,14 +23,17 @@ q=queue.Queue()
 #Define functions to control LEDs
 #Wipe colour across pixel line, one pixel at a time
 def ColourWipe(strip, colour, waitTime=10, q=q):                     #waitTime is in ms
-    for i in range(len(strip)):
-        if q.empty() == False:
-            logging.debug("exiting animation")
-            x = q.get()
-            return
-        strip[i] = colour
-        strip.show()
-        time.sleep(waitTime/1000.0)
+    runLoop = True
+    while runLoop == True:
+        for i in range(len(strip)):
+            if q.empty() == False:
+                logging.debug("exiting animation")
+                x = q.get()
+                runLoop = False
+                return
+            strip[i] = colour
+            strip.show()
+            time.sleep(waitTime/1000.0)
 
 #Wipe colour across pixel line, one pixel at a time from each end
 def ColourWipeTwo(strip, colour, waitTime=20):                  #waitTime is in ms
@@ -106,19 +109,22 @@ def HsvToRgb(h,s,v):
 
 #Draw a rainbow that fades across all the LEDs at once
 def Rainbow(strip, waitTime=10, numOfLoops = 5, q=q):
+    runLoop = True
     ledCount = len(strip)
-    for i in range(numOfLoops*ledCount):
-        for j in range(ledCount):
-            if q.empty() == False:
-                logging.debug("exiting animation")
-                x = q.get()
-                return
-            strip[j] = HsvToRgb((((j+i)%ledCount)/ledCount),1.0,1.0)
-        if q.empty() == False:
-            logging.debug("exiting animation")
-            x = q.get()
-            return
-        strip.show()
+    while runLoop == True:
+        for i in range(numOfLoops*ledCount):
+            for j in range(ledCount):
+                if q.empty() == False:
+                    logging.debug("exiting animation")
+                    x = q.get()
+                    runLoop == False
+                    return
+                strip[j] = HsvToRgb((((j+i)%ledCount)/ledCount),1.0,1.0)
+                if q.empty() == False:
+                    logging.debug("exiting animation")
+                    x = q.get()
+                    return
+                strip.show()
 
 #Knightrider
 def Knightrider(strip, waitTime, iterations = 500):
