@@ -22,6 +22,8 @@ import animations
 class animationClass():
     def __init__(self):
         logging.debug("Starting animationClass")
+        while runQ.empty() == False:
+            logging.debug("runQ.get()")
         self.QueueGet()
         logging.debug("Exiting animationClass")
     
