@@ -76,7 +76,7 @@ if __name__ == '__main__':
     runQ.put("stop")
     threading.Thread(target = animationClass).start()    
     time.sleep(3)
-    animationNameQ.put("Rainbow")
+    animationNameQ.put("ColourWipe")
     runQ.put("stop")
     threading.Thread(target = animationClass).start()
     time.sleep(3)
