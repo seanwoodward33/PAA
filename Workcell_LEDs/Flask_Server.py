@@ -68,6 +68,9 @@ class animationClass(threading.Thread):
     def __init__(self):
         logging.debug("Starting animationClass")
         self.ledStrip = ledStrip
+        while runQ.empty() == False:
+            logging.debug("Clearing Queue")
+            logging.debug(runQ.get())
         self.QueueGet()
         logging.debug("Exiting animationClass")
     
