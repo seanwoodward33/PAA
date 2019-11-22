@@ -111,6 +111,7 @@ if __name__ == '__main__':
 
     #Set up default run
     animationNameQ.put("Rainbow")
+    animationNameQ.put("Rainbow")
     
     #Start Flask thread
     threading.Thread(target = (animationClass(ledStrip1))).start()
