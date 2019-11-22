@@ -64,7 +64,7 @@ def flaskThread():
     app.run(host = '0.0.0.0', port = '5002')
     logging.debug("Stopping flaskThread")
     
-class animationClass(threading.thread):
+class animationClass(threading.Thread):
     def __init__(self):
         logging.debug("Starting animationClass")
         self.ledStrip = ledStrip
