@@ -72,7 +72,7 @@ def flaskThread():
     logging.debug("Stopping flaskThread")
     
 class animationClass(threading.Thread):
-    def __init__(self, ledStrip):
+    def __init__(self, args):
         logging.debug("Starting animationClass")
         self.ledStrip = ledStrip
         while runQ.empty() == False:
