@@ -17,8 +17,6 @@ logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] - %(asctime)s -
 #Import libraries for Flask server
 from flask import Flask, request
 from flask_restful import Resource, Api
-#from json import dumps
-#from flask.ext.jsonpify import jsonify
 
 #Import Pi_LED_Controller from seperate file
 import Pi_LED_Controller as PiCont
@@ -34,7 +32,7 @@ class Rainbow(Resource):
         animationNameQ.put("Rainbow")
         #animationArgsQ.put("")
         runQ.put("stop")
-        time.sleep(1)
+        time.sleep(0.1)
         threading.Thread(target = animationClass).start()
 
 class ColourWipe(Resource):
@@ -42,7 +40,7 @@ class ColourWipe(Resource):
         animationNameQ.put("ColourWipe")
         #animationArgsQ.put("")
         runQ.put("stop")
-        time.sleep(1)
+        time.sleep(0.1)
         threading.Thread(target = animationClass).start()
 
 class Shutdown(Resource):
@@ -66,10 +64,10 @@ def flaskThread():
     app.run(host = '0.0.0.0', port = '5002')
     logging.debug("Stopping flaskThread")
     
-
-class animationClass():
+class animationClass(threading.thread):
     def __init__(self):
         logging.debug("Starting animationClass")
+        self.ledStrip = ledStrip
         self.QueueGet()
         logging.debug("Exiting animationClass")
     
