@@ -145,6 +145,8 @@ def Rainbow(strip, waitTime=10, q=q):
                 runLoop = ThreadCheck(q, runLoop)
                 strip[j] = HsvToRgb((((j+i)%ledCount)/ledCount),1.0,1.0)
             strip.show()
+        logging.debug("In I loop")
+    logging.debug("Escaped I loop")
 
 #Knightrider
 def Knightrider(strip, waitTime, q=q):
