@@ -26,7 +26,9 @@ def ThreadCheck(q, runLoop):
         logging.debug("exiting animation")
         x = q.get()
         runLoop = False
-        return runLoop        
+        return runLoop
+    else:
+        return runLoop
 
 #Define functions to control LEDs
 #Wipe colour across pixel line, one pixel at a time
