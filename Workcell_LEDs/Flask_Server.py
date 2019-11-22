@@ -35,7 +35,7 @@ class Rainbow(Resource):
         runQ.put("stop")
         time.sleep(0.1)
         #threading.Thread(target = animationClass).start()
-        threading.Thread(target = animationClass, args = (ledStrip1,)).start()
+        threading.Thread(target = animationClass).start()#), args = (ledStrip1,)).start()
         #threading.Thread(target = animationClass, args = (ledStrip2,)).start()
 
 class ColourWipe(Resource):
@@ -45,7 +45,7 @@ class ColourWipe(Resource):
         runQ.put("stop")
         time.sleep(0.1)
         #threading.Thread(target = animationClass).start()
-        threading.Thread(target = animationClass, args = (ledStrip1,)).start()
+        threading.Thread(target = animationClass).start()#), args = (ledStrip1,)).start()
         #threading.Thread(target = animationClass, args = (ledStrip2,)).start()
 
 class Shutdown(Resource):
@@ -55,7 +55,7 @@ class Shutdown(Resource):
         runQ.put("stop")
         time.sleep(0.1)
         #threading.Thread(target = animationClass).start()
-        threading.Thread(target = animationClass, args = (ledStrip1,)).start()
+        threading.Thread(target = animationClass).start()#), args = (ledStrip1,)).start()
         #threading.Thread(target = animationClass, args = (ledStrip2,)).start()
         
         
@@ -72,9 +72,9 @@ def flaskThread():
     logging.debug("Stopping flaskThread")
     
 class animationClass(threading.Thread):
-    def __init__(self, ledStrip):
+    def __init__(self):#, ledStrip):
         logging.debug("Starting animationClass")
-        self.ledStrip = ledStrip
+        self.ledStrip = ledStrip1
         while runQ.empty() == False:
             logging.debug("Clearing Queue")
             logging.debug(runQ.get())
@@ -114,7 +114,7 @@ if __name__ == '__main__':
     #animationNameQ.put("Rainbow")
     
     #Start Flask thread
-    threading.Thread(target = animationClass, args = (ledStrip1,)).start()
+    threading.Thread(target = animationClass).start()#), args = (ledStrip1,)).start()
     #threading.Thread(target = animationClass, args = (ledStrip2,)).start()
     app.run(host = '0.0.0.0', port = '5002')
     #threading.Thread(target = flaskThread, name = "flaskThread").start()
