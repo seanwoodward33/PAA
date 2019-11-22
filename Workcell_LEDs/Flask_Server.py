@@ -35,8 +35,8 @@ class Rainbow(Resource):
         runQ.put("stop")
         time.sleep(0.1)
         #threading.Thread(target = animationClass).start()
-        threading.Thread(target = animationClass(ledStrip1)).start()
-        threading.Thread(target = animationClass(ledStrip2)).start()
+        threading.Thread(target = animationClass, args = (ledStrip1,)).start()
+        threading.Thread(target = animationClass, args = (ledStrip2,)).start()
 
 class ColourWipe(Resource):
     def get(self):
@@ -45,8 +45,8 @@ class ColourWipe(Resource):
         runQ.put("stop")
         time.sleep(0.1)
         #threading.Thread(target = animationClass).start()
-        threading.Thread(target = animationClass(ledStrip1)).start()
-        threading.Thread(target = animationClass(ledStrip2)).start()
+        threading.Thread(target = animationClass, args = (ledStrip1,)).start()
+        threading.Thread(target = animationClass, args = (ledStrip2,)).start()
 
 class Shutdown(Resource):
     def get(self):
@@ -55,8 +55,8 @@ class Shutdown(Resource):
         runQ.put("stop")
         time.sleep(0.1)
         #threading.Thread(target = animationClass).start()
-        threading.Thread(target = animationClass(ledStrip1)).start()
-        threading.Thread(target = animationClass(ledStrip2)).start()
+        threading.Thread(target = animationClass, args = (ledStrip1,)).start()
+        threading.Thread(target = animationClass, args = (ledStrip2,)).start()
         
         
 #Add functions to web address
@@ -93,10 +93,10 @@ class animationClass(threading.Thread):
         animations.Rainbow(self.ledStrip, q = runQ)
     
     def ColourWipe(self):
-        animations.ColourWipe(self.ledStrip, (255,0,255), waittime = int(1000/len(self.ledStrip)), q = runQ)
+        animations.ColourWipe(self.ledStrip, (255,0,255), waitTime = int(1000/len(self.ledStrip)), q = runQ)
     
     def Shutdown(self):
-        animations.ColourWipe(self.ledStrip, (0,0,0), waittime = int(1000/len(self.ledStrip)), q = runQ)
+        animations.ColourWipe(self.ledStrip, (0,0,0), waitTime = int(1000/len(self.ledStrip)), q = runQ)
 
 #Default run program
 if __name__ == '__main__':
