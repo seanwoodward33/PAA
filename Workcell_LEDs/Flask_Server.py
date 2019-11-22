@@ -35,8 +35,8 @@ class Rainbow(Resource):
         runQ.put("stop")
         time.sleep(0.1)
         #threading.Thread(target = animationClass).start()
-        threading.Thread(target = animationClass, agrs = (ledStrip1)).start()
-        threading.Thread(target = animationClass, args = (ledStrip2)).start()
+        threading.Thread(target = animationClass(ledStrip1)).start()
+        threading.Thread(target = animationClass(ledStrip2)).start()
 
 class ColourWipe(Resource):
     def get(self):
@@ -45,8 +45,8 @@ class ColourWipe(Resource):
         runQ.put("stop")
         time.sleep(0.1)
         #threading.Thread(target = animationClass).start()
-        threading.Thread(target = animationClass, agrs = (ledStrip1)).start()
-        threading.Thread(target = animationClass, args = (ledStrip2)).start()
+        threading.Thread(target = animationClass(ledStrip1)).start()
+        threading.Thread(target = animationClass(ledStrip2)).start()
 
 class Shutdown(Resource):
     def get(self):
@@ -55,8 +55,8 @@ class Shutdown(Resource):
         runQ.put("stop")
         time.sleep(0.1)
         #threading.Thread(target = animationClass).start()
-        threading.Thread(target = animationClass, agrs = (ledStrip1)).start()
-        threading.Thread(target = animationClass, args = (ledStrip2)).start()
+        threading.Thread(target = animationClass(ledStrip1)).start()
+        threading.Thread(target = animationClass(ledStrip2)).start()
         
         
 #Add functions to web address
@@ -113,8 +113,8 @@ if __name__ == '__main__':
     animationNameQ.put("Rainbow")
     
     #Start Flask thread
-    threading.Thread(target = animationClass, ledStrip1).start()
-    threading.Thread(target = animationClass, ledStrip2).start()
+    threading.Thread(target = animationClass(ledStrip1)).start()
+    threading.Thread(target = animationClass(ledStrip2)).start()
     app.run(host = '0.0.0.0', port = '5002')
     #threading.Thread(target = flaskThread, name = "flaskThread").start()
     
