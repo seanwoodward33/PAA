@@ -34,7 +34,8 @@ def ColourWipe(strip, colour, waitTime=10, q=q):                     #waitTime i
             strip[i] = colour
             strip.show()
             time.sleep(waitTime/1000.0)
-        runLoop = False
+        strip.fill((0,0,0))
+        strip.show()
 
 #Wipe colour across pixel line, one pixel at a time from each end
 def ColourWipeTwo(strip, colour, waitTime=20):                  #waitTime is in ms
