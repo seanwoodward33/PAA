@@ -139,7 +139,6 @@ def HsvToRgb(h,s,v):
 #Draw a rainbow that fades across all the LEDs at once
 def Rainbow(strip, waitTime=10, q=q):
     runLoop = True
-    logging.debug("runLoop = " + str(runLoop))
     ledCount = len(strip)
     while runLoop == True:
         for i in range(ledCount):
