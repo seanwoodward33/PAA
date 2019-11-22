@@ -33,7 +33,9 @@ class Rainbow(Resource):
         #animationArgsQ.put("")
         runQ.put("stop")
         time.sleep(0.1)
-        threading.Thread(target = animationClass).start()
+        #threading.Thread(target = animationClass).start()
+        threading.Thread(target = animationClass, ledStrip = ledStrip1).start()
+        threading.Thread(target = animationClass, ledStrip = ledStrip2).start()
 
 class ColourWipe(Resource):
     def get(self):
@@ -41,7 +43,9 @@ class ColourWipe(Resource):
         #animationArgsQ.put("")
         runQ.put("stop")
         time.sleep(0.1)
-        threading.Thread(target = animationClass).start()
+        #threading.Thread(target = animationClass).start()
+        threading.Thread(target = animationClass, ledStrip = ledStrip1).start()
+        threading.Thread(target = animationClass, ledStrip = ledStrip2).start()
 
 class Shutdown(Resource):
     def get(self):
@@ -49,7 +53,9 @@ class Shutdown(Resource):
         #animationArgsQ.put("")
         runQ.put("stop")
         time.sleep(0.1)
-        threading.Thread(target = animationClass).start()
+        #threading.Thread(target = animationClass).start()
+        threading.Thread(target = animationClass, ledStrip = ledStrip1).start()
+        threading.Thread(target = animationClass, ledStrip = ledStrip2).start()
         
         
 #Add functions to web address
@@ -65,7 +71,7 @@ def flaskThread():
     logging.debug("Stopping flaskThread")
     
 class animationClass(threading.Thread):
-    def __init__(self):
+    def __init__(self, ledStrip):
         logging.debug("Starting animationClass")
         self.ledStrip = ledStrip
         while runQ.empty() == False:
@@ -83,18 +89,19 @@ class animationClass(threading.Thread):
         return method()
 
     def Rainbow(self):
-        animations.Rainbow(ledStrip, q = runQ)
+        animations.Rainbow(self.ledStrip, q = runQ)
     
     def ColourWipe(self):
-        animations.ColourWipe(ledStrip, (255,0,255), waittime = int(1000/len(ledStrip)), q = runQ)
+        animations.ColourWipe(self.ledStrip, (255,0,255), waittime = int(1000/len(self.ledStrip)), q = runQ)
     
     def Shutdown(self):
-        animations.ColourWipe(ledStrip, (0,0,0), waittime = int(1000/len(ledStrip)), q = runQ)
+        animations.ColourWipe(self.ledStrip, (0,0,0), waittime = int(1000/len(self.ledStrip)), q = runQ)
 
 #Default run program
 if __name__ == '__main__':
     #Set up LED strip
-    ledStrip = PiCont.LedSetup()
+    ledStrip1 = PiCont.LedSetup(ledCount = 96)
+    ledStrip2 = PiCont.LedSetup(ledCount = 51)
     
     #Set up queues for passing between threads
     runQ = queue.Queue()
