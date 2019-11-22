@@ -36,7 +36,7 @@ class Rainbow(Resource):
         time.sleep(0.1)
         #threading.Thread(target = animationClass).start()
         threading.Thread(target = animationClass, args = (ledStrip1,)).start()
-        threading.Thread(target = animationClass, args = (ledStrip2,)).start()
+        #threading.Thread(target = animationClass, args = (ledStrip2,)).start()
 
 class ColourWipe(Resource):
     def get(self):
@@ -46,7 +46,7 @@ class ColourWipe(Resource):
         time.sleep(0.1)
         #threading.Thread(target = animationClass).start()
         threading.Thread(target = animationClass, args = (ledStrip1,)).start()
-        threading.Thread(target = animationClass, args = (ledStrip2,)).start()
+        #threading.Thread(target = animationClass, args = (ledStrip2,)).start()
 
 class Shutdown(Resource):
     def get(self):
@@ -56,7 +56,7 @@ class Shutdown(Resource):
         time.sleep(0.1)
         #threading.Thread(target = animationClass).start()
         threading.Thread(target = animationClass, args = (ledStrip1,)).start()
-        threading.Thread(target = animationClass, args = (ledStrip2,)).start()
+        #threading.Thread(target = animationClass, args = (ledStrip2,)).start()
         
         
 #Add functions to web address
@@ -102,7 +102,7 @@ class animationClass(threading.Thread):
 if __name__ == '__main__':
     #Set up LED strip
     ledStrip1 = PiCont.LedSetup(ledCount = 96, ledPin = board.D18)
-    ledStrip2 = PiCont.LedSetup(ledCount = 51, ledPin = board.D12)
+    #ledStrip2 = PiCont.LedSetup(ledCount = 51, ledPin = board.D12)
     
     #Set up queues for passing between threads
     runQ = queue.Queue()
@@ -111,11 +111,11 @@ if __name__ == '__main__':
 
     #Set up default run
     animationNameQ.put("Rainbow")
-    animationNameQ.put("Rainbow")
+    #animationNameQ.put("Rainbow")
     
     #Start Flask thread
     threading.Thread(target = animationClass, args = (ledStrip1,)).start()
-    threading.Thread(target = animationClass, args = (ledStrip2,)).start()
+    #threading.Thread(target = animationClass, args = (ledStrip2,)).start()
     app.run(host = '0.0.0.0', port = '5002')
     #threading.Thread(target = flaskThread, name = "flaskThread").start()
     
