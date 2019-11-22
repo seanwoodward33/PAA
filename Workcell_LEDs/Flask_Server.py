@@ -48,7 +48,7 @@ class Shutdown(Resource):
         animationNameQ.put("Shutdown")
         #animationArgsQ.put("")
         runQ.put("stop")
-        time.sleep(1)
+        time.sleep(0.1)
         threading.Thread(target = animationClass).start()
         
         
