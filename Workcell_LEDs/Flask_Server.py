@@ -90,13 +90,13 @@ class animationClass(threading.Thread):
         return method()
 
     def Rainbow(self):
-        animations.Rainbow(self.ledStrip, q = runQ)
+        animations.Rainbow(ledStrip1, q = runQ)
     
     def ColourWipe(self):
-        animations.ColourWipe(self.ledStrip, (255,0,255), waitTime = int(1000/len(self.ledStrip)), q = runQ)
+        animations.ColourWipe(ledStrip1, (255,0,255), waitTime = int(1000/len(ledStrip1)), q = runQ)
     
     def Shutdown(self):
-        animations.ColourWipe(self.ledStrip, (0,0,0), waitTime = int(1000/len(self.ledStrip)), q = runQ)
+        animations.ColourWipe(ledStrip1, (0,0,0), waitTime = int(1000/len(ledStrip1)), q = runQ)
 
 #Default run program
 if __name__ == '__main__':
