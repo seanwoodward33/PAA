@@ -100,8 +100,8 @@ class animationClass(threading.Thread):
 #Default run program
 if __name__ == '__main__':
     #Set up LED strip
-    ledStrip1 = PiCont.LedSetup(ledCount = 96)
-    ledStrip2 = PiCont.LedSetup(ledCount = 51)
+    ledStrip1 = PiCont.LedSetup(ledCount = 96, ledPin = board.D18)
+    ledStrip2 = PiCont.LedSetup(ledCount = 51, ledPin = board.D23)
     
     #Set up queues for passing between threads
     runQ = queue.Queue()
