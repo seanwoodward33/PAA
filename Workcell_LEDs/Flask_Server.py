@@ -10,6 +10,7 @@ import threading
 import queue
 import time
 import logging
+import board
 
 #Setup logging
 logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] - %(asctime)s - (%(threadName)-10s) %(message)s')
