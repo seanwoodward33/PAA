@@ -72,7 +72,7 @@ def flaskThread():
     logging.debug("Stopping flaskThread")
     
 class animationClass(threading.Thread):
-    def __init__(self, args):
+    def __init__(self, ledStrip):
         logging.debug("Starting animationClass")
         self.ledStrip = ledStrip
         while runQ.empty() == False:
@@ -113,8 +113,8 @@ if __name__ == '__main__':
     animationNameQ.put("Rainbow")
     
     #Start Flask thread
-    threading.Thread(target = animationClass, agrs = (ledStrip1)).start()
-    threading.Thread(target = animationClass, args = (ledStrip2)).start()
+    threading.Thread(target = animationClass, ledStrip1).start()
+    threading.Thread(target = animationClass, ledStrip2).start()
     app.run(host = '0.0.0.0', port = '5002')
     #threading.Thread(target = flaskThread, name = "flaskThread").start()
     
