@@ -14,11 +14,11 @@ Inspirtaion drawn from tutorial, see: https://tutorials-raspberrypi.com/connect-
 import time
 import math
 import colorsys
-#import queue
+import queue
 import logging
 
 #Default for queues
-#q=queue.Queue()
+q=queue.Queue()
 
 #Function to check wait loop
 def ThreadCheck(q, runLoop):
