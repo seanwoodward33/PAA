@@ -34,7 +34,7 @@ def ThreadCheck(q, runLoop):
 #Define functions to control LEDs
 #Wipe colour across pixel line, one pixel at a time
 def ColourWipe(strip, colour, backColour = (0,0,0), waitTime=10, q):                     #waitTime is in ms
-    logging.debug
+    #logging.debug
     runLoop = True
     while runLoop == True:
         for i in range(len(strip)):
