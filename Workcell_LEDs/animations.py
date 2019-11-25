@@ -141,6 +141,7 @@ def HsvToRgb(h,s,v):
 def Rainbow(strip, waitTime=10, q=q):
     runLoop = True
     ledCount = len(strip)
+    logging.debug("queue is: " + q)
     while runLoop == True:
         for i in range(ledCount):
             for j in range(ledCount):
