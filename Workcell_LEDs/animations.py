@@ -33,7 +33,7 @@ def ThreadCheck(q, runLoop):
 
 #Define functions to control LEDs
 #Wipe colour across pixel line, one pixel at a time
-def ColourWipe(strip, colour, backColour = (0,0,0), waitTime=10, q):                     #waitTime is in ms
+def ColourWipe(strip, colour, q, backColour = (0,0,0), waitTime=10):                     #waitTime is in ms
     #logging.debug
     runLoop = True
     while runLoop == True:
@@ -46,7 +46,7 @@ def ColourWipe(strip, colour, backColour = (0,0,0), waitTime=10, q):            
         strip.show()
 
 #Wipe colour across pixel line, one pixel at a time from each end
-def ColourWipeTwo(strip, colour, backColour = (0,0,0), waitTime=20, q):                  #waitTime is in ms
+def ColourWipeTwo(strip, colour, q, backColour = (0,0,0), waitTime=20):                  #waitTime is in ms
     runLoop = True
     while runLoop == True:
         for i in range(math.ceil(len(strip)/2)):
@@ -59,7 +59,7 @@ def ColourWipeTwo(strip, colour, backColour = (0,0,0), waitTime=20, q):         
         strip.show()
 
 #Single pixel progression
-def SinglePixelWipe(strip, singleColour, backColour = (0,0,0), waitTime=10, q):
+def SinglePixelWipe(strip, singleColour, q, backColour = (0,0,0), waitTime=10):
     runLoop = True
     while runLoop == True:
         strip.fill(backColour)
@@ -72,7 +72,7 @@ def SinglePixelWipe(strip, singleColour, backColour = (0,0,0), waitTime=10, q):
                 time.sleep(waitTime/1000.0)
 
 #Single pixel progression with retention
-def SinglePixelWipeRetain(strip, singleColour, backColour = (0,0,0), waitTime=0, q):
+def SinglePixelWipeRetain(strip, singleColour, q, backColour = (0,0,0), waitTime=0):
     runLoop = True
     while runLoop == True:
         strip.fill(backColour)
@@ -86,7 +86,7 @@ def SinglePixelWipeRetain(strip, singleColour, backColour = (0,0,0), waitTime=0,
                     time.sleep(waitTime/1000.0)
 
 #Pixel progression
-def PixelWipe(strip, singleColour, wipeLength = 4, backColour = (0,0,0), waitTime=10, q):
+def PixelWipe(strip, singleColour, q, wipeLength = 4, backColour = (0,0,0), waitTime=10):
     runLoop = True
     while runLoop == True:
         strip.fill(backColour)
@@ -101,7 +101,7 @@ def PixelWipe(strip, singleColour, wipeLength = 4, backColour = (0,0,0), waitTim
 
 
 #Pixel progression with retention
-def PixelWipeRetain(strip, singleColour, wipeLength = 4, backColour = (0,0,0), waitTime=0, q):
+def PixelWipeRetain(strip, singleColour, q, wipeLength = 4, backColour = (0,0,0), waitTime=0):
     runLoop = True
     while runLoop == True:
         strip.fill(backColour)
@@ -117,7 +117,7 @@ def PixelWipeRetain(strip, singleColour, wipeLength = 4, backColour = (0,0,0), w
 
 
 #Movie theatre light style chaser animation
-def TheatreChase(strip, colour, waitTime=50, q):    #waitTime is in ms
+def TheatreChase(strip, colour, q, waitTime=50):    #waitTime is in ms
     runLoop = True
     while runLoop == True:
         for j in range(3):
@@ -138,7 +138,7 @@ def HsvToRgb(h,s,v):
     return tuple(round(i * 255) for i in colorsys.hsv_to_rgb(h,s,v))
 
 #Draw a rainbow that fades across all the LEDs at once
-def Rainbow(strip, waitTime=10, q):
+def Rainbow(strip, q, waitTime=10):
     runLoop = True
     ledCount = len(strip)
     while runLoop == True:
