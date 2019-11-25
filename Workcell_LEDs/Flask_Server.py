@@ -90,7 +90,7 @@ class animationClass(threading.Thread):
         return method()
 
     def Rainbow(self):
-        animations.Rainbow(ledStrip1)#, q = runQ)
+        animations.Rainbow(ledStrip1, q = runQ)
     
     def ColourWipe(self):
         animations.ColourWipe(ledStrip1, (255,0,255), waitTime = int(1000/len(ledStrip1)), q = runQ)
