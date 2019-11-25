@@ -23,7 +23,7 @@ q=queue.Queue()
 #Function to check wait loop
 def ThreadCheck(q, runLoop):
     #logging.debug("checking queue")
-    if q.empty == False:
+    if q.empty() == False:
         logging.debug("exiting animation")
         x = q.get()
         runLoop = False
