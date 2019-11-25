@@ -24,7 +24,7 @@ q=queue.Queue()
 def ThreadCheck(q, runLoop):
     #logging.debug("checking queue")
     if q.empty() == False:
-        logging.debug("exiting animation")
+        logging.debug("exiting animation - runLoop set to False")
         x = q.get()
         runLoop = False
         return runLoop
@@ -147,7 +147,7 @@ def Rainbow(strip, q, waitTime=10):
                 runLoop = ThreadCheck(q, runLoop)
                 strip[j] = HsvToRgb((((j+i)%ledCount)/ledCount),1.0,1.0)
             strip.show()
-#            logging.debug("queue is: " + str(q.qsize()))
+    logging.debug("exiting animation - runLoop loop exited")
 
 #Knightrider
 def Knightrider(strip, waitTime, q):
