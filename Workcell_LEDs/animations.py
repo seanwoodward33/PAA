@@ -141,13 +141,13 @@ def HsvToRgb(h,s,v):
 def Rainbow(strip, waitTime=10, q=q):
     runLoop = True
     ledCount = len(strip)
-    logging.debug("queue is: " + str(q.qsize()))
     while runLoop == True:
         for i in range(ledCount):
             for j in range(ledCount):
                 runLoop = ThreadCheck(q, runLoop)
                 strip[j] = HsvToRgb((((j+i)%ledCount)/ledCount),1.0,1.0)
             strip.show()
+            logging.debug("queue is: " + str(q.qsize()))
 
 #Knightrider
 def Knightrider(strip, waitTime, q=q):
