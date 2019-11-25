@@ -148,6 +148,7 @@ def Rainbow(strip, waitTime=10, q=q):
                 strip[j] = HsvToRgb((((j+i)%ledCount)/ledCount),1.0,1.0)
             strip.show()
             logging.debug("queue is: " + str(q.qsize()))
+            time.sleep(10)
 
 #Knightrider
 def Knightrider(strip, waitTime, q=q):
