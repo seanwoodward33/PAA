@@ -31,13 +31,6 @@ def ThreadCheck(q, runLoop):
     else:
         return runLoop
 
-#Function to exit loops
-def LoopBreak(runLoop):
-    if runLoop == False:
-        break
-    else:
-        pass
-
 #Define functions to control LEDs
 #Wipe colour across pixel line, one pixel at a time
 def ColourWipe(strip, colour, q, backColour = (0,0,0), waitTime=10):                     #waitTime is in ms
@@ -46,11 +39,11 @@ def ColourWipe(strip, colour, q, backColour = (0,0,0), waitTime=10):            
     while runLoop == True:
         for i in range(len(strip)):
             runLoop = ThreadCheck(q, runLoop)
-            LoopBreak(runLoop)
+            if runLoop == False: break
             strip[i] = colour
             strip.show()
             time.sleep(waitTime/1000.0)
-        LoopBreak(runLoop)
+        if runLoop == False: break
         strip.fill(backColour)
         strip.show()
 
@@ -60,12 +53,12 @@ def ColourWipeTwo(strip, colour, q, backColour = (0,0,0), waitTime=20):         
     while runLoop == True:
         for i in range(math.ceil(len(strip)/2)):
             runLoop = ThreadCheck(q, runLoop)
-            LoopBreak(runLoop)
+            if runLoop == False: break
             strip[i] = colour
             strip[len(strip)-1-i] = colour
             strip.show()
             time.sleep(waitTime/1000.0)
-        LoopBreak(runLoop)
+        if runLoop == False: break
         strip.fill(backColour)
         strip.show()
 
@@ -76,7 +69,7 @@ def SinglePixelWipe(strip, singleColour, q, backColour = (0,0,0), waitTime=10):
         strip.fill(backColour)
         for i in range(len(strip)):
             runLoop = ThreadCheck(q,runLoop)
-            LoopBreak(runLoop)
+            if runLoop == False: break
             if (i > 0):
                 strip[i-1] = backColour
                 strip[i] = singleColour
@@ -89,10 +82,10 @@ def SinglePixelWipeRetain(strip, singleColour, q, backColour = (0,0,0), waitTime
     while runLoop == True:
         strip.fill(backColour)
         for i in range(len(strip)):
-            LoopBreak(runLoop)
+            if runLoop == False: break
             for j in range(len(strip)-i):
                 runLoop = ThreadCheck(q,runLoop)
-                LoopBreak(runLoop)
+                if runLoop == False: break
                 if (j > 0):
                     strip[j-1] = backColour
                     strip[j] = singleColour
@@ -105,10 +98,10 @@ def PixelWipe(strip, singleColour, q, wipeLength = 4, backColour = (0,0,0), wait
     while runLoop == True:
         strip.fill(backColour)
         for i in range(len(strip) + wipeLength):
-            LoopBreak(runLoop)
+            if runLoop == False: break
             for j in range(wipeLength):
                 runLoop = ThreadCheck(q, runLoop)
-                LoopBreak(runLoop)
+                if runLoop == False: break
                 if (i-j > 0 and i-j < len(strip)):
                     strip[i-j] = singleColour
                     strip[i-wipeLength] = backColour
@@ -122,12 +115,12 @@ def PixelWipeRetain(strip, singleColour, q, wipeLength = 4, backColour = (0,0,0)
     while runLoop == True:
         strip.fill(backColour)
         for i in range(len(strip)+wipeLength):
-            LoopBreak(runLoop)
+            if runLoop == False: break
             for j in range(len(strip)-(i*wipeLength)):
-                LoopBreak(runLoop)
+                if runLoop == False: break
                 for k in range(wipeLength):
                     runLoop = ThreadCheck(q,runLoop)
-                    LoopBreak(runLoop)
+                    if runLoop == False: break
                     if (j-k > 0 and j-k < len(strip)-i):
                         runLoop = ThreadCheck(q, runLoop)
                         strip[j-k] = singleColour
@@ -143,18 +136,18 @@ def TheatreChase(strip, colour, q, waitTime=50):    #waitTime is in ms
         for j in range(3):
             for k in range(0,len(strip),3):
                 runLoop = ThreadCheck(q, runLoop)
-                LoopBreak(runLoop)
+                if runLoop == False: break
                 if(k+j < len(strip)):
                     strip[k+j] = colour
             strip.show()
             time.sleep(waitTime/1000.0)
             for k in range(0,len(strip),3):
                 runLoop = ThreadCheck(q, runLoop)
-                LoopBreak(runLoop)
+                if runLoop == False: break
                 if(k+j < len(strip)):
                     runLoop = ThreadCheck(q, runLoop)
                     strip[k+j] = 0
-            LoopBreak(runLoop)
+            if runLoop == False: break
             strip.show()
 
 #Non-normalised HSV to RGB function
@@ -169,9 +162,9 @@ def Rainbow(strip, q, waitTime=10):
         for i in range(ledCount):
             for j in range(ledCount):
                 runLoop = ThreadCheck(q, runLoop)
-                LoopBreak(runLoop)
+                if runLoop == False: break
                 strip[j] = HsvToRgb((((j+i)%ledCount)/ledCount),1.0,1.0)
-            LoopBreak(runLoop)
+            if runLoop == False: break
             strip.show()
     logging.debug("exiting animation - runLoop loop exited")
 
@@ -191,7 +184,7 @@ def SolidColour (strip, colour, q):
     runLoop = True
     while runLoop == True:
         runLoop = ThreadCheck(q, runLoop)
-        LoopBreak(runLoop)
+        if runLoop == False: break
         strip.fill(colour)
         strip.show()
 
