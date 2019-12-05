@@ -55,7 +55,7 @@ if __name__ == '__main__':
     SLAS.LedInitialise()
     
     logging.debug("Setting up LED sections")
-    SLAS([[1,[0,98]]])
+    SLAS.LedSections([[1,[0,98]]])
     
     logging.debug("Printing LED sections")
     SLAS.PrintLedSections()
