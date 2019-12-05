@@ -36,7 +36,7 @@ class Workcell():
         self.ledSections = sections
     
     def PrintLedSections(self):
-        print (self.LedSections)
+        print (self.ledSections)
         
 
 
