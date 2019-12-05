@@ -1,0 +1,17 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Dec  5 12:01:17 2019
+
+@author: Sean_Woodward
+"""
+
+import board
+import digitalio
+
+button = digitalio.DigitalInOut(board.D4)
+button.direction = digitalio.Direction.INPUT
+button.pull = digitalio.Pull.DOWN
+
+while True:
+    if button.value == 1:
+        print ("high value received")

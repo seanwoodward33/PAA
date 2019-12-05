@@ -95,8 +95,7 @@ class animationClass(threading.Thread):
 #Default run program
 if __name__ == '__main__':
     #Set up LED strip
-    ledStrip1 = PiCont.LedSetup(ledCount = 98, ledPin = board.D18)
-    #ledStrip2 = PiCont.LedSetup(ledCount = 51, ledPin = board.D12)
+    ledStrip1 = PiCont.LedSetup(ledCount = 98, ledPin = board.D18) #Using board package
     
     #Set up queues for passing between threads
     runQ = queue.Queue()
@@ -105,16 +104,9 @@ if __name__ == '__main__':
 
     #Set up default run
     animationNameQ.put("Rainbow")
-    #animationNameQ.put("Rainbow")
     
-    #Start Flask thread
+    #Start first animation
     threading.Thread(target = animationClass).start()
-    #threading.Thread(target = animationClass, args = (ledStrip2,)).start()
-    app.run(host = '0.0.0.0', port = '5002')
-    #threading.Thread(target = flaskThread, name = "flaskThread").start()
     
-    """
-    #Start animation thread
-    t = threading.Thread(target = animationThread)
-    t.start()
-    """
+    #Start Flask
+    app.run(host = '0.0.0.0', port = '5002')

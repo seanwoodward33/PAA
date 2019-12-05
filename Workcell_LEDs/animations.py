@@ -20,7 +20,7 @@ import logging
 #Default for queues
 q=queue.Queue()
 
-#Function to check wait loop
+#Function to check wait queue
 def ThreadCheck(q, runLoop):
     #logging.debug("checking queue")
     if q.empty() == False:
