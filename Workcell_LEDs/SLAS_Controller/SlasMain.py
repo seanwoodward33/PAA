@@ -49,7 +49,7 @@ if __name__ == '__main__':
     SLAS = Workcell()
     
     logging.debug("Create SLAS Workcell object")
-    SLAS.LedSetup(18, 98, 0.2)
+    SLAS.LedSetup(board.D18, 98, 0.2)
     
     logging.debug("Initialise LEDs")
     SLAS.LedInitialise()
