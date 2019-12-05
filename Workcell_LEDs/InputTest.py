@@ -11,7 +11,7 @@ import time
 
 button = digitalio.DigitalInOut(board.D4)
 button.direction = digitalio.Direction.INPUT
-button.pull = digitalio.Pull.DOWN
+button.pull = digitalio.Pull.UP
 
 while True:
     if button.value == 1:
