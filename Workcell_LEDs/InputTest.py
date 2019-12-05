@@ -20,6 +20,7 @@ button.pull = digitalio.Pull.DOWN
 while True:
     if button.value == 1:
         print ("high value received")
+        print ("button value equals: " + str(button.value))
         time.sleep(0.5)
         print ("0.5 seconds waited")
         time.sleep(0.5)
