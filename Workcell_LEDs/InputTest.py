@@ -24,3 +24,10 @@ while True:
         time.sleep(0.5)
         print ("0.5 seconds waited")
         time.sleep(0.5)
+
+    if button.value == 0:
+        print ("low value received")
+        print ("button value equals: " + str(button.value))
+        time.sleep(0.5)
+        print ("0.5 seconds waited")
+        time.sleep(0.5)
