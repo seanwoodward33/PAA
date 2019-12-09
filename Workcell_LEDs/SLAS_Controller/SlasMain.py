@@ -40,7 +40,7 @@ class Workcell():
     def LedInitialise(self):
         self.ledStrip = neopixel.NeoPixel(self.ledPin, self.ledCount, brightness = self.ledBrightness, pixel_order=self.ledOrder, auto_write=False)
     
-    def LedSections(self, sections = [[0,ledCount]]):
+    def LedSections(self, sections = [[0,98]]):
         self.ledSections = sections
     
     def LedSectionAnimations(self, animations = ["RunComplete"]): #default runcomplete rainbow used
