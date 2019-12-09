@@ -27,7 +27,7 @@ class Workcell():
     def __init__(self):
         pass
     
-    def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
+    def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.RGB):
         self.ledPin = ledGpioPin
         self.ledCount = ledCount
         self.ledBrightness = ledBrightness
