@@ -14,16 +14,16 @@ def HsvToRgb(h,s,v):
 
 #Run complete - Run rainbow animation
 def RunComplete(self, section):
-    self.ledArray[section[0]:section[1]+1][:,3] = 1
-    ledCount = len(self.ledArray[section[0]:section[1]+1])+1
+    self.ledArray[section[0]:section[1]][:,3] = 1
+    ledCount = len(self.ledArray[section[0]:section[1]-1])+1
     if self.firstRun == True:
         #while self.animationRun == True:
-        for i in range(ledCount):
+        for i in range(ledCount+1):
             for j in range(3):
                 self.ledArray[section[0] + i][j] = HsvToRgb((((i)%ledCount)/ledCount),1.0,1.0)[j]
     
     if self.firstRun == False:
         #while self.animationRun == True:
-        for i in range(ledCount):
+        for i in range(ledCount+1):
             if self.animationRun == False: break
             self.ledArray[section[0] + i][0:3] = self.ledArray[section[0] + i - 1][0:3]
