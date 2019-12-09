@@ -61,8 +61,10 @@ class Workcell():
             self.firstRun = False
     
     def OutputLeds(self):
+        print(self.ledStrip[0])
         for i in range(self.ledCount):
             self.ledStrip[i] = np.rint(self.ledArray[i,0:3]*self.ledArray[i,3])#.dtype(int)
+        print(self.ledStrip[0])
         self.ledStrip.show()        
     
     def RunComplete(self, section):
