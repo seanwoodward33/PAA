@@ -64,11 +64,13 @@ class Workcell():
         print(self.ledStrip[0])
         print(self.ledStrip[48])
         print(self.ledStrip[49])
+        print(self.ledStrip[50])
         for i in range(self.ledCount):
             self.ledStrip[i] = (int(self.ledArray[i][0]*self.ledArray[i,3]),int(self.ledArray[i][1]*self.ledArray[i,3]),int(self.ledArray[i][2]*self.ledArray[i,3]))#.dtype(int) np.rint()
         print(self.ledStrip[0])
         print(self.ledStrip[48])
         print(self.ledStrip[49])
+        print(self.ledStrip[50])
         self.ledStrip.show()        
     
     def RunComplete(self, section):
