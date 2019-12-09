@@ -24,6 +24,6 @@ def RunComplete(self, section):
     
     if self.firstRun == False:
         #while self.animationRun == True:
-        for i in range(self.ledCount):
+        for i in range(ledCount):
             if self.animationRun == False: break
             self.ledArray[section[0] + i][0:3] = self.ledArray[section[0] + i - 1][0:3]
