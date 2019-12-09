@@ -20,7 +20,7 @@ def RunComplete(self, section):
         #while self.animationRun == True:
         for i in range(ledCount):
             for j in range(3):
-                self.ledArray[section[0] + i][j] = HsvToRgb((((i)%ledCount-1)/ledCount-1),1.0,1.0)[j]
+                self.ledArray[section[0] + i][j] = HsvToRgb((((i)%(ledCount-1))/(ledCount-1)),1.0,1.0)[j]
     
     if self.firstRun == False:
         #while self.animationRun == True:
