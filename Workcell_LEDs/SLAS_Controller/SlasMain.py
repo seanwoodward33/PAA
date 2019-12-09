@@ -33,7 +33,7 @@ class Workcell():
         self.ledBrightness = ledBrightness
         self.ledOrder = ledOrder
         self.ledArray = np.zeros((ledCount,4))
-        self.ledArray = 1.0
+        self.ledArray[:,4] = 1.0
         self.animationRun = True
         self.newRun = True
     
