@@ -85,7 +85,7 @@ if __name__ == '__main__':
     SLAS.LedInitialise()
     
     logging.debug("Setting up LED sections")
-    SLAS.LedSections([[0,50],[51,98]])
+    SLAS.LedSections([[0,49],[50,98]])
     
     logging.debug("Setting animation for each section")
     SLAS.LedSectionAnimations(["RunComplete", "TeachMode"])
