@@ -93,3 +93,6 @@ if __name__ == '__main__':
     
     logging.debug("Testing RunComplete animation")
     SLAS.RunComplete(SLAS.ledSections[0])
+    
+    logging.debug("Update LEDs to see lights")
+    SLAS.OutputLeds()
