@@ -15,7 +15,7 @@ def HsvToRgb(h,s,v):
 #Run complete - Run rainbow animation
 def RunComplete(self, section):
     self.ledArray[section[0]:section[1]][:,3] = 1
-    ledCount = len(self.ledArray[section[0]:section[1]+1])
+    ledCount = len(self.ledArray[section[0]:section[1]])
     print(ledCount)
     if self.firstRun == True:
         #while self.animationRun == True:
