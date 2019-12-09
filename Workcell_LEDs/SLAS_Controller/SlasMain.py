@@ -63,8 +63,7 @@ class Workcell():
     def OutputLeds(self):
         print(self.ledStrip[0])
         for i in range(self.ledCount):
-            for j in range(3):
-                self.ledStrip[i][j] = (self.ledArray[i][j]*self.ledArray[i,3])#.dtype(int) np.rint()
+            self.ledStrip[i] = (self.ledArray[i][0]*self.ledArray[i,3],self.ledArray[i][1]*self.ledArray[i,3],self.ledArray[i][2]*self.ledArray[i,3])#.dtype(int) np.rint()
         print(self.ledStrip[0])
         self.ledStrip.show()        
     
