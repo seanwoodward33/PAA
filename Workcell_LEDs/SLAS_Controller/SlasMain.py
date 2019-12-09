@@ -35,7 +35,7 @@ class Workcell():
         self.ledArray = np.zeros((ledCount,4))
         self.ledArray[:,3] = 1.0
         self.animationRun = True
-        self.newRun = True
+        self.firstRun = True
     
     def LedInitialise(self):
         self.ledStrip = neopixel.NeoPixel(self.ledPin, self.ledCount, brightness = self.ledBrightness, pixel_order=self.ledOrder, auto_write=False)
@@ -57,8 +57,8 @@ class Workcell():
         for i in len(self.ledSections):
             section = self.ledSections[i]
             self.AnimationCall(self.ledSectionAnimations[i],section)
-        if self.newRun == True:
-            self.newRun = False
+        if self.firstRun == True:
+            self.firstRun = False
     
     def OutputLeds(self):
         for i in range(len(self.ledCount)):
