@@ -92,4 +92,4 @@ if __name__ == '__main__':
     SLAS.PrintLedSections()
     
     logging.debug("Testing RunComplete animation")
-    SLAS.RunComplete(SLAS.sections[0])
+    SLAS.RunComplete(SLAS.ledSections[0])
