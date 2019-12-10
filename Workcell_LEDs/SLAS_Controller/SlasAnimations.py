@@ -18,7 +18,7 @@ def HsvToRgb(h,s,v):
 #Run complete - Run rainbow animation
 def RunComplete(self, section):
     x = datetime.datetime.now()
-    logging.debug("Rainbow animation. Time since last: " + str(x - self.time))
+    #logging.debug("Rainbow animation. Time since last: " + str(x - self.time))
     self.time = x
     self.ledArray[section[0]:section[1]][:,3] = 1
     ledCount = len(self.ledArray[section[0]:section[1]])
@@ -33,7 +33,7 @@ def RunComplete(self, section):
 #TeachMode - Pulse yellow
 def TeachMode(self, section):
     x = datetime.datetime.now()
-    logging.debug("TeachMode animation. Time since last: " + str(x - self.time))
+    #logging.debug("TeachMode animation. Time since last: " + str(x - self.time))
     self.time = x
     self.ledArray[section[0]:section[1]][:,0:3] = [255,255,0]
     
