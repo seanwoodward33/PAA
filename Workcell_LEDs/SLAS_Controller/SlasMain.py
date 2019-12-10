@@ -94,7 +94,7 @@ if __name__ == '__main__':
     SLAS.LedSectionAnimations(["RunComplete", "TeachMode"])
     
     logging.debug("Updating for all sections, 500 times")
-    for i in range(500:)
+    for i in range(500):
         SLAS.UpdateBySection()
         SLAS.OutputLeds()
        
