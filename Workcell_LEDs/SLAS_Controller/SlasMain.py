@@ -93,9 +93,10 @@ if __name__ == '__main__':
     logging.debug("Setting animation for each section")
     SLAS.LedSectionAnimations(["RunComplete", "TeachMode"])
     
-    logging.debug("Updating for all sections")
-    SLAS.UpdateBySection()
-    SLAS.OutputLeds()
+    logging.debug("Updating for all sections, 500 times")
+    for i in range(500:)
+        SLAS.UpdateBySection()
+        SLAS.OutputLeds()
        
     """
     logging.debug("Testing RunComplete animation")
