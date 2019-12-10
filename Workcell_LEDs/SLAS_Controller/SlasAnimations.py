@@ -35,9 +35,9 @@ def TeachMode(self, section):
     if self.firstRun == False:
         if self.pulseDirection == "Down":
             self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] - 0.1
-            if self.ledArray[section[0]][:,3] == 0.5:
+            if self.ledArray[section[0]][3] == 0.5:
                 self.pulseDirection = "Up"
         if self.pulseDirection == "Up":
             self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] + 0.1
-            if self.ledArray[section[0]][:,3] == 1.0:
+            if self.ledArray[section[0]][3] == 1.0:
                 self.pulseDirection = "Down"
