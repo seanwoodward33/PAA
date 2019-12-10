@@ -16,32 +16,37 @@ def HsvToRgb(h,s,v):
     return tuple(round(i * 255) for i in colorsys.hsv_to_rgb(h,s,v))
 
 #Run complete - Run rainbow animation
-def RunComplete(self, section):
+def RunComplete(self, i):
     x = datetime.datetime.now()
+    section = self.ledSections[i]
     #logging.debug("Rainbow animation. Time since last: " + str(x - self.time))
     self.time = x
     self.ledArray[section[0]:section[1]][:,3] = 1
     ledCount = len(self.ledArray[section[0]:section[1]])
-    if self.firstRun == True:
+    if self.firstRun[i] == True:
         for i in range(ledCount):
             for j in range(3):
                 self.ledArray[section[0] + i][j] = HsvToRgb((((i)%(ledCount+1))/(ledCount)),1.0,1.0)[j]
+        self.firstRun[i] = False
     
-    if self.firstRun == False:
+    if self.firstRun[i] == False:
         self.ledArray[section[0]:section[1]][:,0:3] = np.roll(self.ledArray[section[0]:section[1]][:,0:3],1, axis = 0)
 
 #TeachMode - Pulse yellow
-def TeachMode(self, section):
+def TeachMode(self, i):
     x = datetime.datetime.now()
     #logging.debug("TeachMode animation. Time since last: " + str(x - self.time))
     self.time = x
+    section = self.ledSections[i]
     self.ledArray[section[0]:section[1]][:,0:3] = [255,255,0]
     
-    if self.firstRun == True:
+    if self.firstRun[i] == True:
         self.ledArray[section[0]:section[1]][:,3] = 1
         if self.pulseDirection == "Up":
             self.pulseDirection = "Down"
-    if self.firstRun == False:
+        self.firstRun[i] = False
+    
+    if self.firstRun[i] == False:
         if self.pulseDirection == "Down":
             self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] - 0.05
             if self.ledArray[section[0]][3] <= 0.5:
