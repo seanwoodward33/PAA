@@ -98,7 +98,7 @@ if __name__ == '__main__':
     logging.debug("Setting firstRunt to False")
     SLAS.firstRun = False
     
-    logging.debug("Looping through colours 1000 times")
-    for i in range(1000):
+    logging.debug("Looping through colours 10000 times")
+    for i in range(10000):
         SLAS.RunComplete(SLAS.ledSections[0])
         SLAS.OutputLeds()
