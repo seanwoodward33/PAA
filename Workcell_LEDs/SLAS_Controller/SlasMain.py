@@ -103,6 +103,6 @@ if __name__ == '__main__':
     SLAS.firstRun = False
     
     logging.debug("Looping through colours 100 times")
-    for i in range(100):
+    for i in range(1):
         SLAS.RunComplete(SLAS.ledSections[0])
         SLAS.OutputLeds()

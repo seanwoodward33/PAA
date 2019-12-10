@@ -28,6 +28,8 @@ def RunComplete(self, section):
         print (self.ledArray[section[0]+1][0:3])
         print (self.ledArray[section[0]+2][0:3])
         print (self.ledArray[section[0]+3][0:3])
+        print(self.ledArray[section[0]:section[1]][:,3])
+        print(np.roll(self.ledArray[section[0]:section[1]][:,3],1, axis = 0))
         self.ledArray[section[0]:section[1]][:,3] = np.roll(self.ledArray[section[0]:section[1]][:,3],1, axis = 0)
         print (self.ledArray[section[0]][0:3])
         print (self.ledArray[section[0]+1][0:3])
