@@ -106,6 +106,7 @@ if __name__ == '__main__':
     for i in range(500):
         SLAS.RunComplete(SLAS.ledSections[0])
         SLAS.OutputLeds()
+        time.sleep(0.1)
     
     logging.debug("Setting firstRun to True")
     SLAS.firstRun = True
@@ -123,3 +124,4 @@ if __name__ == '__main__':
     for i in range(500):
         SLAS.TeachMode(SLAS.ledSections[0])
         SLAS.OutputLeds()
+        time.sleep(0.1)
