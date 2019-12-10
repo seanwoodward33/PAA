@@ -25,11 +25,11 @@ def RunComplete(self, section):
     
     if self.firstRun == False:
         print (self.ledArray[section[0]][0:3])
-        print (self.ledArray[section[1]][0:3])
-        print (self.ledArray[section[2]][0:3])
-        print (self.ledArray[section[3]][0:3])
+        print (self.ledArray[section[0]][1:3])
+        print (self.ledArray[section[0]][2:3])
+        print (self.ledArray[section[0]][3:3])
         self.ledArray[section[0]:section[1]][:,3] = np.roll(self.ledArray[section[0]:section[1]][:,3],1)
         print (self.ledArray[section[0]][0:3])
-        print (self.ledArray[section[1]][0:3])
-        print (self.ledArray[section[2]][0:3])
-        print (self.ledArray[section[3]][0:3])
+        print (self.ledArray[section[0]][1:3])
+        print (self.ledArray[section[0]][2:3])
+        print (self.ledArray[section[0]][3:3])
