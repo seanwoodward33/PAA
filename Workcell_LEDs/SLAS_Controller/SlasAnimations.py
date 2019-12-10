@@ -24,9 +24,9 @@ def RunComplete(self, i):
     self.ledArray[section[0]:section[1]][:,3] = 1
     ledCount = len(self.ledArray[section[0]:section[1]])
     if self.firstRun[i] == True:
-        for i in range(ledCount):
-            for j in range(3):
-                self.ledArray[section[0] + i][j] = HsvToRgb((((i)%(ledCount+1))/(ledCount)),1.0,1.0)[j]
+        for j in range(ledCount):
+            for k in range(3):
+                self.ledArray[section[0] + j][k] = HsvToRgb((((j)%(ledCount+1))/(ledCount)),1.0,1.0)[k]
         self.firstRun[i] = False
     
     if self.firstRun[i] == False:
