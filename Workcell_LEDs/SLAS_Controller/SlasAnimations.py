@@ -28,7 +28,7 @@ def RunComplete(self, section):
 #TeachMode - Pulse yellow
 def TeachMode(self, section):
     self.ledArray[section[0]:section[1]][:,0:3] = [255,255,0]
-    """
+    
     if self.firstRun == True:
         self.ledArray[section[0]:section[1]][:,3] = 1
         if self.pulseDirection == "Up":
@@ -42,4 +42,3 @@ def TeachMode(self, section):
             self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] + 0.1
             if self.ledArray[section[0]][3] == 1.0:
                 self.pulseDirection = "Down"
-    """
