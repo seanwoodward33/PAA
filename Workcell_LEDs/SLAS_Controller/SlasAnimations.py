@@ -17,13 +17,10 @@ def HsvToRgb(h,s,v):
 def RunComplete(self, section):
     self.ledArray[section[0]:section[1]][:,3] = 1
     ledCount = len(self.ledArray[section[0]:section[1]])
-    print(ledCount)
     if self.firstRun == True:
         for i in range(ledCount):
             for j in range(3):
                 self.ledArray[section[0] + i][j] = HsvToRgb((((i)%(ledCount+1))/(ledCount)),1.0,1.0)[j]
     
     if self.firstRun == False:
-        #print(self.ledArray[section[0]:section[1]][:,0:3])
-        #print(np.roll(self.ledArray[section[0]:section[1]][:,0:3],1, axis = 0))
         self.ledArray[section[0]:section[1]][:,0:3] = np.roll(self.ledArray[section[0]:section[1]][:,0:3],1, axis = 0)
