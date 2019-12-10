@@ -63,7 +63,6 @@ class Workcell():
     def OutputLeds(self):
         for i in range(self.ledCount):
             x = np.rint(self.ledArray[i][0:3]*self.ledArray[i,3]).astype(int)
-            #self.ledStrip[i] = (np.rint(self.ledArray[i][0]*self.ledArray[i,3]).astype(int),np.rint(self.ledArray[i][1]*self.ledArray[i,3]).astype(int),np.rint(self.ledArray[i][2]*self.ledArray[i,3]).astype(int))
             self.ledStrip[i] = (x[0],x[1],x[2])
         self.ledStrip.show()        
     
@@ -89,9 +88,6 @@ if __name__ == '__main__':
     
     logging.debug("Setting animation for each section")
     SLAS.LedSectionAnimations(["RunComplete", "TeachMode"])
-    
-    logging.debug("Printing LED sections")
-    SLAS.PrintLedSections()
     
     logging.debug("Testing RunComplete animation")
     SLAS.RunComplete(SLAS.ledSections[0])
