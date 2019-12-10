@@ -106,9 +106,11 @@ if __name__ == '__main__':
     
     logging.debug("Looping through colours 500 times")
     for i in range(500):
+        y = datetime.datetime.now()
         SLAS.RunComplete(SLAS.ledSections[0])
         SLAS.OutputLeds()
-        time.sleep(0.005)
+        while (datetime.datetime.now - y) < 0.005:
+            pass
     
     logging.debug("Setting firstRun to True")
     SLAS.firstRun = True
@@ -124,6 +126,8 @@ if __name__ == '__main__':
     
     logging.debug("Pulsing lights 500 times")
     for i in range(500):
+        y = datetime.datetime.now()
         SLAS.TeachMode(SLAS.ledSections[0])
         SLAS.OutputLeds()
-        time.sleep(0.005)
+        while (datetime.datetime.now - y) < 0.005:
+            pass
