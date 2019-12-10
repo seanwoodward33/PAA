@@ -42,8 +42,7 @@ def TeachMode(self, i):
     
     if self.firstRun[i] == True:
         self.ledArray[section[0]:section[1]][:,3] = 1
-        if self.pulseDirection == "Up":
-            self.pulseDirection = "Down"
+        self.pulseDirection = "Down"
         self.firstRun[i] = False
     
     if self.firstRun[i] == False:
@@ -66,8 +65,7 @@ def DoorOpen(self, i):
     
     if self.firstRun[i] == True:
         self.ledArray[section[0]:section[1]][:,3] = 1
-        if self.pulseDirection == "Up":
-            self.pulseDirection = "Down"
+        self.pulseDirection = "Down"
         self.firstRun[i] = False
     
     if self.firstRun[i] == False:
