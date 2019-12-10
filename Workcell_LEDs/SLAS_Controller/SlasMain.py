@@ -36,6 +36,7 @@ class Workcell():
         self.ledArray[:,3] = 1.0
         self.animationRun = True
         self.firstRun = True
+        self.pulseDirection = "Down"
     
     def LedInitialise(self):
         self.ledStrip = neopixel.NeoPixel(self.ledPin, self.ledCount, brightness = self.ledBrightness, pixel_order=self.ledOrder, auto_write=False)
@@ -68,6 +69,9 @@ class Workcell():
     
     def RunComplete(self, section):
         SlasAnimations.RunComplete(self, section)
+    
+    def TeachMode(self, section):
+        SlasAnimations.RunComplete(self, section)
 
 
 
@@ -95,10 +99,27 @@ if __name__ == '__main__':
     logging.debug("Update LEDs to see lights")
     SLAS.OutputLeds()
     
-    logging.debug("Setting firstRunt to False")
+    logging.debug("Setting firstRun to False")
     SLAS.firstRun = False
     
-    logging.debug("Looping through colours 10000 times")
-    for i in range(10000):
+    logging.debug("Looping through colours 500 times")
+    for i in range(500):
         SLAS.RunComplete(SLAS.ledSections[0])
+        SLAS.OutputLeds()
+    
+    logging.debug("Setting firstRun to True")
+    SLAS.firstRun = True
+    
+    logging.debug("Testing TeachMode animation")
+    SLAS.TeachMode(SLAS.ledSections[0])
+    
+    logging.debug("Update LEDs to see lights")
+    SLAS.OutputLeds()
+    
+    logging.debug("Setting firstRun to False")
+    SLAS.firstRun = False
+    
+    logging.debug("Looping through colours 500 times")
+    for i in range(500):
+        SLAS.TeachMode(SLAS.ledSections[0])
         SLAS.OutputLeds()

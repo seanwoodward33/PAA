@@ -24,3 +24,20 @@ def RunComplete(self, section):
     
     if self.firstRun == False:
         self.ledArray[section[0]:section[1]][:,0:3] = np.roll(self.ledArray[section[0]:section[1]][:,0:3],1, axis = 0)
+
+#TeachMode - Pulse yellow
+def TeachMode(self, section):
+    self.ledArray[section[0]:section[1]][:,0:3] = [255,255,0]
+    if self.firstRun == True:
+        self.ledArray[section[0]:section[1]][:,3] = 1
+        if self.pulseDirection == "Up":
+            self.pulseDirection = "Down"
+    if self.firstRun == False:
+        if self.pulseDirection == "Down":
+            self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] - 0.1
+            if self.ledArray[section[0]:section[1]][0,3] == 0.5
+                self.pulseDirection = "Up"
+        if self.pulseDirection == "Up":
+            self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] + 0.1
+            if self.ledArray[section[0]:section[1]][0,3] == 1.0
+                self.pulseDirection = "Down"
