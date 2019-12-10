@@ -8,6 +8,7 @@ Created on Fri Dec  6 10:06:26 2019
 import colorsys
 import numpy as np
 import logging
+import datetime
 
 """Functions to control LEDs"""
 #Non-normalised HSV to RGB function
@@ -16,7 +17,9 @@ def HsvToRgb(h,s,v):
 
 #Run complete - Run rainbow animation
 def RunComplete(self, section):
-    logging.debug("Rainbow animation")
+    x = datetime.datetime.now()
+    logging.debug("Rainbow animation. Time since last: " + (self.time - x))
+    self.time = x
     self.ledArray[section[0]:section[1]][:,3] = 1
     ledCount = len(self.ledArray[section[0]:section[1]])
     if self.firstRun == True:
@@ -29,7 +32,9 @@ def RunComplete(self, section):
 
 #TeachMode - Pulse yellow
 def TeachMode(self, section):
-    logging.debug("TeachMode animation")
+    x = datetime.datetime.now()
+    logging.debug("TeachMode animation. Time since last: " + (self.time - x))
+    self.time = x
     self.ledArray[section[0]:section[1]][:,0:3] = [255,255,0]
     
     if self.firstRun == True:

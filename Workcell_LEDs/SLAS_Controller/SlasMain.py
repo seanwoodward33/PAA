@@ -15,6 +15,7 @@ import logging
 import board
 import neopixel
 import numpy as np
+import datetime
 
 #Import other code
 import SlasAnimations
@@ -37,6 +38,7 @@ class Workcell():
         self.animationRun = True
         self.firstRun = True
         self.pulseDirection = "Down"
+        self.time = datetime.datetime.now()
     
     def LedInitialise(self):
         self.ledStrip = neopixel.NeoPixel(self.ledPin, self.ledCount, brightness = self.ledBrightness, pixel_order=self.ledOrder, auto_write=False)
