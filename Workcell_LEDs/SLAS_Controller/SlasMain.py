@@ -27,7 +27,7 @@ class Workcell():
     def __init__(self):
         pass
     
-    def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.RGB):
+    def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
         self.ledPin = ledGpioPin
         self.ledCount = ledCount
         self.ledBrightness = ledBrightness
@@ -82,7 +82,7 @@ if __name__ == '__main__':
     SLAS = Workcell()
     
     logging.debug("Create SLAS LED strip")
-    SLAS.LedSetup(board.D18, 98, 1)
+    SLAS.LedSetup(board.D18, 98, 0.2)
     
     logging.debug("Initialise LEDs")
     SLAS.LedInitialise()
