@@ -73,6 +73,8 @@ class Workcell():
     def TeachMode(self, i):
         SlasAnimations.TeachMode(self, i)
 
+    def DoorOpen(self, i):
+        SlasAnimations.DoorOpen(self, i)
 
 
 if __name__ == '__main__':
