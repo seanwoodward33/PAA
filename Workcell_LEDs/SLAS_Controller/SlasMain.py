@@ -116,6 +116,7 @@ if __name__ == '__main__':
             logging.debug("Updating animations. Currently they are: " + SLAS.ledSectionAnimations[0] + " and " + SLAS.ledSectionAnimations[1])
             SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
             logging.debug("Updating animations. Now they are: " + SLAS.ledSectionAnimations[0] + " and " + SLAS.ledSectionAnimations[1])
+            SLAS.firstRun = [True]*len(SLAS.ledSections)
             
        
     """
