@@ -106,8 +106,9 @@ if __name__ == '__main__':
     while x < 1000:
         SLAS.UpdateBySection()
         SLAS.OutputLeds()
+        x = x + 1
         if x == 750:
-            x=0
+            x = 0
             animationsTaught = animationsTaught[1:] + animationsTaught[:1]
             SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
             
