@@ -6,6 +6,7 @@ Created on Fri Dec  6 10:06:26 2019
 """
 
 import colorsys
+import numpy as np
 
 """Functions to control LEDs"""
 #Non-normalised HSV to RGB function
