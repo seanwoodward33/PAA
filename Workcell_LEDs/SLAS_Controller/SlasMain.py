@@ -109,7 +109,7 @@ if __name__ == '__main__':
         y = datetime.datetime.now()
         SLAS.RunComplete(SLAS.ledSections[0])
         SLAS.OutputLeds()
-        while (datetime.datetime.now - y) < 0.005:
+        while (datetime.datetime.now() - y) < 0.005:
             pass
     
     logging.debug("Setting firstRun to True")
@@ -129,5 +129,5 @@ if __name__ == '__main__':
         y = datetime.datetime.now()
         SLAS.TeachMode(SLAS.ledSections[0])
         SLAS.OutputLeds()
-        while (datetime.datetime.now - y) < 0.005:
+        while (datetime.datetime.now() - y) < 0.005:
             pass
