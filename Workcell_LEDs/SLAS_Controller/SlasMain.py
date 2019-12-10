@@ -71,7 +71,7 @@ class Workcell():
         SlasAnimations.RunComplete(self, section)
     
     def TeachMode(self, section):
-        SlasAnimations.RunComplete(self, section)
+        SlasAnimations.TeachMode(self, section)
 
 
 
