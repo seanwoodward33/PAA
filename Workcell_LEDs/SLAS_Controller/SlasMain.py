@@ -90,13 +90,25 @@ if __name__ == '__main__':
     logging.debug("Setting up LED sections")
     SLAS.LedSections([[0,49],[50,98]])
     
-    logging.debug("Setting animation for each section")
-    SLAS.LedSectionAnimations(["RunComplete", "TeachMode"])
+    #logging.debug("Setting animation for each section")
+    #SLAS.LedSectionAnimations(["RunComplete", "TeachMode"])
+    
+    #Create list of all programmed animations to cycle through
+    animationsTaught = ["RunComplete", "TeachMode", "DoorOpen"]
+    logging.debug("Setting animation to be first two animations in animationsTaught list")
+    SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
+    
     
     logging.debug("Updating for all sections, forever loop times")
-    while True:
+    x = 0
+    while x < 1000:
         SLAS.UpdateBySection()
         SLAS.OutputLeds()
+        if x%750 == 0:
+            x=0
+            animationsTaught = animationsTaught[1:] + animationsTaught[:1]
+            SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
+            
        
     """
     logging.debug("Testing RunComplete animation")

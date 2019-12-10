@@ -55,3 +55,28 @@ def TeachMode(self, i):
             self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] + 0.01
             if self.ledArray[section[0]][3] >= 1.0:
                 self.pulseDirection = "Down"
+
+#TeachMode - Pulse yellow
+def DoorOpen(self, i):
+    x = datetime.datetime.now()
+    #logging.debug("TeachMode animation. Time since last: " + str(x - self.time))
+    self.time = x
+    section = self.ledSections[i]
+    self.ledArray[section[0]:section[1]][:,0:3] = [128,0,128]
+    
+    if self.firstRun[i] == True:
+        self.ledArray[section[0]:section[1]][:,3] = 1
+        if self.pulseDirection == "Up":
+            self.pulseDirection = "Down"
+        self.firstRun[i] = False
+    
+    if self.firstRun[i] == False:
+        if self.pulseDirection == "Down":
+            self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] - 0.01
+            if self.ledArray[section[0]][3] <= 0.2:
+                self.pulseDirection = "Up"
+        if self.pulseDirection == "Up":
+            self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] + 0.01
+            if self.ledArray[section[0]][3] >= 1.0:
+                self.pulseDirection = "Down"
+
