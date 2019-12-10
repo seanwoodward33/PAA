@@ -24,14 +24,6 @@ def RunComplete(self, section):
                 self.ledArray[section[0] + i][j] = HsvToRgb((((i)%(ledCount))/(ledCount)),1.0,1.0)[j]
     
     if self.firstRun == False:
-        print (self.ledArray[section[0]][0:3])
-        print (self.ledArray[section[0]+1][0:3])
-        print (self.ledArray[section[0]+2][0:3])
-        print (self.ledArray[section[0]+3][0:3])
         #print(self.ledArray[section[0]:section[1]][:,0:3])
         #print(np.roll(self.ledArray[section[0]:section[1]][:,0:3],1, axis = 0))
         self.ledArray[section[0]:section[1]][:,0:3] = np.roll(self.ledArray[section[0]:section[1]][:,0:3],1, axis = 0)
-        print (self.ledArray[section[0]][0:3])
-        print (self.ledArray[section[0]+1][0:3])
-        print (self.ledArray[section[0]+2][0:3])
-        print (self.ledArray[section[0]+3][0:3])
