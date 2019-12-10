@@ -129,5 +129,5 @@ if __name__ == '__main__':
         y = datetime.datetime.now()
         SLAS.TeachMode(SLAS.ledSections[0])
         SLAS.OutputLeds()
-        while ((datetime.datetime.now() - y).microseconds * 1000) < 5000:
+        while ((datetime.datetime.now() - y).microseconds * 1000) < 1000:
             pass
