@@ -33,7 +33,7 @@ class Workcell():
         self.finishTime = datetime.datetime.now()
         self.percentageComplete = 0.0
         self.dimLevelLeds = 0.2
-        self.runLength= datetime.timedelta(seconds = 120)
+        self.runLength= datetime.timedelta(seconds = 20)
     
     def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
         self.ledPin = ledGpioPin
@@ -113,11 +113,11 @@ if __name__ == '__main__':
     
     logging.debug("Updating for all sections, forever loop times")
     x = 0
-    while x < 10000:
+    while x < 1000:
         SLAS.UpdateBySection()
         SLAS.OutputLeds()
         x = x + 1
-        if x == 7500:
+        if x == 750:
             x = 0
             animationsTaught = animationsTaught[1:] + animationsTaught[:1]
             for i in range(len(SLAS.ledSectionAnimations)):
