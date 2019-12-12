@@ -33,7 +33,7 @@ class Workcell():
         self.finishTime = datetime.datetime.now()
         self.percentageComplete = 0.0
         self.dimLevelLeds = 0.2
-        self.runLength= datetime.timedelta(seconds = 20)
+        self.runLength= datetime.timedelta(seconds = 17)
     
     def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
         self.ledPin = ledGpioPin
