@@ -113,9 +113,9 @@ if __name__ == '__main__':
         if x == 750:
             x = 0
             animationsTaught = animationsTaught[1:] + animationsTaught[:1]
-            logging.debug("Updating animations. Currently they are: " + SLAS.ledSectionAnimations[0] + " and " + SLAS.ledSectionAnimations[1])
-            SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
-            logging.debug("Updating animations. Now they are: " + SLAS.ledSectionAnimations[0] + " and " + SLAS.ledSectionAnimations[1])
+            for i in range(len(SLAS.LedSectionAnimations)):
+                SLAS.ledSectionAnimations[i] = animationsTaught[i]
+            #SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
             SLAS.firstRun = [True]*len(SLAS.ledSections)
             
        
