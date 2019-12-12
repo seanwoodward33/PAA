@@ -102,3 +102,49 @@ def SystemRunningLong(self, i):
             self.percentageComplete = 0.0
             self.firstRun[i] = True
         self.ledArray[section[0]:section[0]+round((self.percentageComplete*(section[1]-section[0])))][:,3]= self.ledBrightness
+
+#EStop - Pulse Red
+def EStop(self, i):
+    section = self.ledSections[i]
+    self.ledArray[section[0]:section[1]][:,0:3] = [255,0,0]
+    
+    if self.firstRun[i] == True:
+        self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
+        self.pulseDirection = "Down"
+        self.firstRun[i] = False
+    
+    if self.firstRun[i] == False:
+        if self.pulseDirection == "Down":
+            self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] - 0.01
+            if self.ledArray[section[0]][3] <= self.dimLevelLeds:
+                self.pulseDirection = "Up"
+        if self.pulseDirection == "Up":
+            self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] + 0.01
+            if self.ledArray[section[0]][3] >= self.ledBrightness:
+                self.pulseDirection = "Down"
+    
+    for stop in range(len(self.estops)):
+        if self.estops[stop] == True:
+            self.ledArray[self.estopPositions[stop][0]:self.estopPositions[stop][1]][:,0:3] = [255,0,0]
+            self.ledArray[self.estopPositions[stop][0]:self.estopPositions[stop][1]][:,3] = self.ledBrightness
+
+def EStopLocation(self, i):
+    section = self.ledSections[i]
+    self.ledArray[section[0]:section[1]][:,0:3] = [255,0,0]
+    
+    if self.firstRun[i] == True:
+        self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
+        self.pulseDirection = "Down"
+        self.firstRun[i] = False
+    
+    if self.firstRun[i] == False:
+        if self.pulseDirection == "Down":
+            self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] - 0.01
+            if self.ledArray[section[0]][3] <= self.dimLevelLeds:
+                self.pulseDirection = "Up"
+        if self.pulseDirection == "Up":
+            self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] + 0.01
+            if self.ledArray[section[0]][3] >= self.ledBrightness:
+                self.pulseDirection = "Down"
+    
+    

@@ -34,6 +34,8 @@ class Workcell():
         self.percentageComplete = 0.0
         self.dimLevelLeds = 0.2
         self.runLength= datetime.timedelta(seconds = 17)
+        self.estops = [True, False, False]
+        self.estopPositions = [[0,15],[42,56],[83,98]]
     
     def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
         self.ledPin = ledGpioPin
@@ -85,7 +87,12 @@ class Workcell():
     
     def SystemRunningLong(self, i):
         SlasAnimations.SystemRunningLong(self, i)
+    
+    def EStop(self,i):
+        SlasAnimations.EStop(self,i)
 
+    def EStopLocation(self,i):
+        SlasAnimations.EStopLocation(self,i)
 
 if __name__ == '__main__':
     logging.debug("Main SLAS control program running")
@@ -106,7 +113,7 @@ if __name__ == '__main__':
     #SLAS.LedSectionAnimations(["RunComplete", "TeachMode"])
     
     #Create list of all programmed animations to cycle through
-    animationsTaught = ["RunComplete", "TeachMode", "DoorOpen", "SystemRunningShort", "SystemRunningLong"]
+    animationsTaught = ["RunComplete", "TeachMode", "EstopLocation", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
     logging.debug("Setting animation to be first two animations in animationsTaught list")
     SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
     
@@ -124,35 +131,3 @@ if __name__ == '__main__':
                 SLAS.ledSectionAnimations[i] = animationsTaught[i]
             #SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
             SLAS.firstRun = [True]*len(SLAS.ledSections)
-            
-       
-    """
-    logging.debug("Testing RunComplete animation")
-    SLAS.RunComplete(0)
-    
-    logging.debug("Update LEDs to see lights")
-    SLAS.OutputLeds()
-    
-    logging.debug("Looping through colours 500 times")
-    for i in range(500):
-        y = datetime.datetime.now()
-        SLAS.RunComplete(0)
-        SLAS.OutputLeds()
-        while ((datetime.datetime.now() - y).microseconds * 1000) < 5000:
-            pass
-    
-    logging.debug("Testing TeachMode animation")
-    SLAS.TeachMode(0)
-    
-    logging.debug("Update LEDs to see lights")
-    SLAS.OutputLeds()
-
-    
-    logging.debug("Pulsing lights 500 times")
-    for i in range(500):
-        y = datetime.datetime.now()
-        SLAS.TeachMode(0)
-        SLAS.OutputLeds()
-        while ((datetime.datetime.now() - y).microseconds * 1000) < 1000:
-            pass
-    """
