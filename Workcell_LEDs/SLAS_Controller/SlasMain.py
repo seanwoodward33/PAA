@@ -110,7 +110,7 @@ if __name__ == '__main__':
     #SLAS.LedSectionAnimations(["RunComplete", "TeachMode"])
     
     #Create list of all programmed animations to cycle through
-    animationsTaught = ["RunComplete", "TeachMode", "Estop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
+    animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
     logging.debug("Setting animation to be first two animations in animationsTaught list")
     SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
     
