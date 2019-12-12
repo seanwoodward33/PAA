@@ -91,9 +91,6 @@ class Workcell():
     def EStop(self,i):
         SlasAnimations.EStop(self,i)
 
-    def EStopLocation(self,i):
-        SlasAnimations.EStopLocation(self,i)
-
 if __name__ == '__main__':
     logging.debug("Main SLAS control program running")
     
@@ -113,7 +110,7 @@ if __name__ == '__main__':
     #SLAS.LedSectionAnimations(["RunComplete", "TeachMode"])
     
     #Create list of all programmed animations to cycle through
-    animationsTaught = ["RunComplete", "TeachMode", "EstopLocation", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
+    animationsTaught = ["RunComplete", "TeachMode", "Estop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
     logging.debug("Setting animation to be first two animations in animationsTaught list")
     SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
     
