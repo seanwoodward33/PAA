@@ -85,9 +85,8 @@ def SystemRunningShort(self, i):
 def SystemRunningLong(self, i):
     section = self.ledSections[i]
     self.ledArray[section[0]:section[1]][:,0:3] = [0,255,0]
-    
+    self.ledArray[section[0]:section[1]][:,3] = self.dimLevelLeds
     if self.firstRun[i] == True:
-        self.ledArray[section[0]:section[1]][:,3] = self.dimLevelLeds
         if self.percentageComplete == 0:
             self.finishTime = datetime.datetime.now()+self.runLength
         if self.percentageComplete > 0:
