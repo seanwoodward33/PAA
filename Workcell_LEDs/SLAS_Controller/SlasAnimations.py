@@ -101,4 +101,5 @@ def SystemRunningLong(self, i):
             self.percentageComplete = 1
             self.ledSectionAnimations[i] = "RunComplete"
             self.percentageComplete = 0.0
+            self.firstRun[i] = True
         self.ledArray[section[0]:section[0]+round((self.percentageComplete*(section[1]-section[0])))][:,3]= self.ledBrightness
