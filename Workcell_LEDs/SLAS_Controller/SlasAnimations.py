@@ -96,7 +96,7 @@ def SystemRunningLong(self, i):
     
     if self.firstRun[i]  == False:
         self.percentageComplete = (self.finishTime - datetime.datetime.now())/self.runLength
-        print (self.finishTime + " " + self.datetime.datetime.now() + " " + self.percentageComplete)
+        print (str(self.finishTime) + " " + str(datetime.datetime.now()) + " " + str(self.percentageComplete))
         if self.percentageComplete > 1:
             self.percentageComplete = 1
             self.LedSectionAnimations[i] = "RunComplete"
