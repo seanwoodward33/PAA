@@ -117,7 +117,7 @@ if __name__ == '__main__':
         SLAS.UpdateBySection()
         SLAS.OutputLeds()
         x = x + 1
-        if x == 750:
+        if x == 950:
             x = 0
             animationsTaught = animationsTaught[1:] + animationsTaught[:1]
             for i in range(len(SLAS.ledSectionAnimations)):
