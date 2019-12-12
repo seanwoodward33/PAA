@@ -91,7 +91,7 @@ def SystemRunningLong(self, i):
         if self.percentageComplete == 0:
             self.finishTime = datetime.datetime.now()+self.runLength
         if self.percentageComplete > 0:
-            self.ledArray[section[0]:section[0]+round((self.percentageComplete*(section[1]-section[0])))][:,0:3]= self.ledBrightness
+            self.ledArray[section[0]:section[0]+round((self.percentageComplete*(section[1]-section[0])))][:,3]= self.ledBrightness
             self.finishTime = datetime.datetime.now()+(self.percentageComplete*self.runLength)        
         self.firstRun[i] = False
     
@@ -100,4 +100,5 @@ def SystemRunningLong(self, i):
         if self.percentageComplete > 1:
             self.percentageComplete = 1
             self.LedSectionAnimations[i] = "RunComplete"
-        self.ledArray[section[0]:section[0]+round((self.percentageComplete*(section[1]-section[0])))][:,0:3]= self.ledBrightness
+            self.percentageComplete = 0.0
+        self.ledArray[section[0]:section[0]+round((self.percentageComplete*(section[1]-section[0])))][:,3]= self.ledBrightness
