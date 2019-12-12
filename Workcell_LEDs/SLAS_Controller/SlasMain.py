@@ -26,7 +26,14 @@ logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] - %(asctime)s -
 #Define workcell class
 class Workcell():
     def __init__(self):
-        pass
+        self.animationRun = True
+        self.firstRun = True
+        self.pulseDirection = "Down"
+        self.time = datetime.datetime.now()
+        self.finishTime = datetime.datetime.now()
+        self.percentageComplete = 0.0
+        self.dimLevelLeds = 0.2
+        self.runLength= datetime.timedelta(seconds = 120)
     
     def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
         self.ledPin = ledGpioPin
@@ -34,11 +41,8 @@ class Workcell():
         self.ledBrightness = ledBrightness
         self.ledOrder = ledOrder
         self.ledArray = np.zeros((ledCount,4))
-        self.ledArray[:,3] = 1.0
-        self.animationRun = True
-        self.firstRun = True
-        self.pulseDirection = "Down"
-        self.time = datetime.datetime.now()
+        self.ledArray[:,3] = self.ledBrightness
+
     
     def LedInitialise(self):
         self.ledStrip = neopixel.NeoPixel(self.ledPin, self.ledCount, brightness = self.ledBrightness, pixel_order=self.ledOrder, auto_write=False)
@@ -78,6 +82,9 @@ class Workcell():
     
     def SystemRunningShort(self, i):
         SlasAnimations.SystemRunningShort(self, i)
+    
+    def SystemRunningLong(self, i):
+        SlasAnimations.SystemRunningLong(self, i)
 
 
 if __name__ == '__main__':
@@ -99,18 +106,18 @@ if __name__ == '__main__':
     #SLAS.LedSectionAnimations(["RunComplete", "TeachMode"])
     
     #Create list of all programmed animations to cycle through
-    animationsTaught = ["RunComplete", "TeachMode", "DoorOpen", "SystemRunningShort"]
+    animationsTaught = ["RunComplete", "TeachMode", "DoorOpen", "SystemRunningShort", "SystemRunningLong"]
     logging.debug("Setting animation to be first two animations in animationsTaught list")
     SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
     
     
     logging.debug("Updating for all sections, forever loop times")
     x = 0
-    while x < 1000:
+    while x < 10000:
         SLAS.UpdateBySection()
         SLAS.OutputLeds()
         x = x + 1
-        if x == 750:
+        if x == 7500:
             x = 0
             animationsTaught = animationsTaught[1:] + animationsTaught[:1]
             for i in range(len(SLAS.ledSectionAnimations)):

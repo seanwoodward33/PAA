@@ -35,18 +35,18 @@ def TeachMode(self, i):
     self.ledArray[section[0]:section[1]][:,0:3] = [255,255,0]
    
     if self.firstRun[i] == True:
-        self.ledArray[section[0]:section[1]][:,3] = 1
+        self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
         self.pulseDirection = "Down"
         self.firstRun[i] = False
     
     if self.firstRun[i] == False:
         if self.pulseDirection == "Down":
             self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] - 0.01
-            if self.ledArray[section[0]][3] <= 0.2:
+            if self.ledArray[section[0]][3] <= self.dimLevelLeds:
                 self.pulseDirection = "Up"
         if self.pulseDirection == "Up":
             self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] + 0.01
-            if self.ledArray[section[0]][3] >= 1.0:
+            if self.ledArray[section[0]][3] >= self.ledBrightness:
                 self.pulseDirection = "Down"
 
 #DoorOpen - Pulse purple
@@ -55,18 +55,18 @@ def DoorOpen(self, i):
     self.ledArray[section[0]:section[1]][:,0:3] = [128,0,128]
     
     if self.firstRun[i] == True:
-        self.ledArray[section[0]:section[1]][:,3] = 1
+        self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
         self.pulseDirection = "Down"
         self.firstRun[i] = False
     
     if self.firstRun[i] == False:
         if self.pulseDirection == "Down":
             self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] - 0.01
-            if self.ledArray[section[0]][3] <= 0.2:
+            if self.ledArray[section[0]][3] <= self.dimLevelLeds:
                 self.pulseDirection = "Up"
         if self.pulseDirection == "Up":
             self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] + 0.01
-            if self.ledArray[section[0]][3] >= 1.0:
+            if self.ledArray[section[0]][3] >= self.ledBrightness:
                 self.pulseDirection = "Down"
 
 #SystemRunningShort - Solid Green for short edges
@@ -75,8 +75,29 @@ def SystemRunningShort(self, i):
     self.ledArray[section[0]:section[1]][:,0:3] = [0,255,0]
     
     if self.firstRun[i] == True:
-        self.ledArray[section[0]:section[1]][:,3] = 1
+        self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
         self.firstRun[i] = False
     
     if self.firstRun[i] == False:
         pass
+
+#SystemRunningLong - Gradually growing Green for long edge
+def SystemRunningLong(self, i):
+    section = self.ledSections[i]
+    self.ledArray[section[0]:section[1]][:,0:3] = [0,255,0]
+    
+    if self.firstRun[i] == True:
+        self.ledArray[section[0]:section[1]][:,3] = self.dimLevelLeds
+        if self.percentageComplete == 0:
+            self.finishTime = datetime.datetime.now()+self.runLength
+        if self.percentageComplete > 0:
+            self.ledArray[section[0]:section[0]+round((self.percentageComplete*(section[1]-section[0])))][:,0:3]= self.ledBrightness
+            self.finishTime = datetime.datetime.now()+(self.percentageComplete*self.runLength)        
+        self.firstRun[i] = False
+    
+    if self.firstRun[i]  == False:
+        self.percentageComplete = (self.finishTime - datetime.datetime.now())/self.runLength
+        if self.percentageComplete > 1:
+            self.percentageComplete = 1
+            self.LedSectionAnimations[i] = "RunComplete"
+        self.ledArray[section[0]:section[0]+round((self.percentageComplete*(section[1]-section[0])))][:,0:3]= self.ledBrightness
