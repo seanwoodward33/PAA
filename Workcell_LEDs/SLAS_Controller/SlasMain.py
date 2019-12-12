@@ -64,9 +64,6 @@ class Workcell():
     def OutputLeds(self):
         for i in range(self.ledCount):
             x = np.rint(self.ledArray[i][0:3]*self.ledArray[i,3]).astype(int)
-            if i ==0:
-                print(self.ledArray[i])
-                print(x)
             self.ledStrip[i] = (x[0],x[1],x[2])
         self.ledStrip.show()        
     
@@ -113,7 +110,7 @@ if __name__ == '__main__':
         if x == 750:
             x = 0
             animationsTaught = animationsTaught[1:] + animationsTaught[:1]
-            for i in range(len(SLAS.LedSectionAnimations)):
+            for i in range(len(SLAS.ledSectionAnimations)):
                 SLAS.ledSectionAnimations[i] = animationsTaught[i]
             #SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
             SLAS.firstRun = [True]*len(SLAS.ledSections)
