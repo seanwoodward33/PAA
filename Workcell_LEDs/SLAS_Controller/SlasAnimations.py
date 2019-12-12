@@ -17,10 +17,7 @@ def HsvToRgb(h,s,v):
 
 #Run complete - Run rainbow animation
 def RunComplete(self, i):
-    x = datetime.datetime.now()
     section = self.ledSections[i]
-    #logging.debug("Rainbow animation. Time since last: " + str(x - self.time))
-    self.time = x
     self.ledArray[section[0]:section[1]][:,3] = 1
     ledCount = len(self.ledArray[section[0]:section[1]])
     if self.firstRun[i] == True:
@@ -34,12 +31,9 @@ def RunComplete(self, i):
 
 #TeachMode - Pulse yellow
 def TeachMode(self, i):
-    x = datetime.datetime.now()
-    #logging.debug("TeachMode animation. Time since last: " + str(x - self.time))
-    self.time = x
     section = self.ledSections[i]
     self.ledArray[section[0]:section[1]][:,0:3] = [255,255,0]
-    
+   
     if self.firstRun[i] == True:
         self.ledArray[section[0]:section[1]][:,3] = 1
         self.pulseDirection = "Down"
@@ -55,11 +49,8 @@ def TeachMode(self, i):
             if self.ledArray[section[0]][3] >= 1.0:
                 self.pulseDirection = "Down"
 
-#TeachMode - Pulse yellow
+#DoorOpen - Pulse purple
 def DoorOpen(self, i):
-    x = datetime.datetime.now()
-    #logging.debug("TeachMode animation. Time since last: " + str(x - self.time))
-    self.time = x
     section = self.ledSections[i]
     self.ledArray[section[0]:section[1]][:,0:3] = [128,0,128]
     
@@ -78,3 +69,14 @@ def DoorOpen(self, i):
             if self.ledArray[section[0]][3] >= 1.0:
                 self.pulseDirection = "Down"
 
+#SystemRunningShort - Solid Green for short edges
+def SystemRunningShort(self, i):
+    section = self.ledSections[i]
+    self.ledArray[section[0]:section[1]][:,0:3] = [0,255,0]
+    
+    if self.firstRun[i] == True:
+        self.ledArray[section[0]:section[1]][:,3] = 1
+        self.firstRun[i] = False
+    
+    if self.firstRun[i] == False:
+        pass

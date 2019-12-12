@@ -75,6 +75,9 @@ class Workcell():
 
     def DoorOpen(self, i):
         SlasAnimations.DoorOpen(self, i)
+    
+    def SystemRunningShort(self, i):
+        SlasAnimations.SystemRunningShort(self, i)
 
 
 if __name__ == '__main__':
@@ -96,7 +99,7 @@ if __name__ == '__main__':
     #SLAS.LedSectionAnimations(["RunComplete", "TeachMode"])
     
     #Create list of all programmed animations to cycle through
-    animationsTaught = ["RunComplete", "TeachMode", "DoorOpen"]
+    animationsTaught = ["RunComplete", "TeachMode", "DoorOpen", "SystemRunningShort"]
     logging.debug("Setting animation to be first two animations in animationsTaught list")
     SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
     
