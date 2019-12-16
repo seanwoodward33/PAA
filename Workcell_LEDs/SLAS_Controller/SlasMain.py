@@ -128,4 +128,4 @@ if __name__ == '__main__':
                 SLAS.ledSectionAnimations[i] = animationsTaught[i]
             #SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
             SLAS.firstRun = [True]*len(SLAS.ledSections)
-            logging.debug("Animations how set to be:" + SLAS.ledSectionAnimations)
+            logging.debug("Animations how set to be:" + str(SLAS.ledSectionAnimations))
