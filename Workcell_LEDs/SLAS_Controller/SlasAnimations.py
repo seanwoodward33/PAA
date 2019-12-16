@@ -123,9 +123,9 @@ def EStop(self, i):
             if self.ledArray[section[0]][3] >= self.ledBrightness:
                 self.pulseDirection = "Down"
     
-    for stop in range(len(self.estops)):
-        if self.estops[stop] == True:
-            self.ledArray[self.estopPositions[stop][0]:self.estopPositions[stop][1]][:,0:3] = [255,255,0]
-            self.ledArray[self.estopPositions[stop][0]:self.estopPositions[stop][1]][:,3] = self.ledBrightness
+    for j in range(len(self.estops)):
+        if self.estops[j] == True:
+            self.ledArray[self.estopPositions[j][0]:self.estopPositions[j][1]][:,0:3] = [255,255,0]
+            self.ledArray[self.estopPositions[j][0]:self.estopPositions[j][1]][:,3] = self.ledBrightness
     
     
