@@ -39,9 +39,9 @@ class Workcell():
         self.endRunFinishTime = datetime.datetime.now()
         self.endRunPercentage = 0.0
         self.endRunLength= datetime.timedelta(seconds = 3)
-        self.estops = [True, True, True]
+        self.estops = [True, False, False]
         self.estopPositions = [[0,5],[46,56],[293,302]]
-        self.doors = [True, True, True, True, True, True]
+        self.doors = [False, False, False, False, False, False]
         self.doorPositions = [[6,45],[55,100],[117,232],[117,232],[248,292],[303,344]]
     
     def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
@@ -131,7 +131,3 @@ if __name__ == '__main__':
             #SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
             SLAS.firstRun = [True]*len(SLAS.ledSections)
             logging.debug("Animations how set to be:" + str(SLAS.ledSectionAnimations))
-            for i in range(len(SLAS.estops)):
-                SLAS.estops[i] = random.choice([True, False])
-            for i in range(len(SLAS.doors)):
-                SLAS.doors[i] = random.choice([True, False])
