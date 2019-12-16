@@ -66,12 +66,8 @@ class Workcell():
             method = getattr(self,input)
             return method(section)
     
-    def PrintLedSections(self):
-        print (self.ledSections)
-    
     def UpdateBySection(self):
         for i in range(len(self.ledSections)):
-            print (i)
             self.AnimationCall(self.ledSectionAnimations[i], i)
     
     def OutputLeds(self):
@@ -117,7 +113,7 @@ if __name__ == '__main__':
     #Create list of all programmed animations to cycle through
     animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
     logging.debug("Setting animation to be first two animations in animationsTaught list")
-    SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
+    SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1],animationsTaught[2]])
     
     
     logging.debug("Updating for all sections, forever loop times")
