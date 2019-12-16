@@ -72,6 +72,11 @@ def DoorOpen(self, i):
             if self.ledArray[section[0]][3] >= self.ledBrightness:
                 #self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
                 self.pulseDirection = "Down"
+    
+    for j in range(len(self.doors)):
+        if self.doors[j] == True:
+            self.ledArray[self.doorPositions[j][0]:self.doorPositions[j][1]][:,0:3] = [255,255,0]
+            #self.ledArray[self.estopPositions[j][0]:self.estopPositions[j][1]][:,3] = self.ledBrightness
 
 #SystemRunningShort - Solid Green for short edges
 def SystemRunningShort(self, i):
@@ -129,7 +134,6 @@ def EStop(self, i):
                 #self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
                 self.pulseDirection = "Down"
     
-
     for j in range(len(self.estops)):
         if self.estops[j] == True:
             self.ledArray[self.estopPositions[j][0]:self.estopPositions[j][1]][:,0:3] = [255,255,0]
