@@ -105,13 +105,13 @@ if __name__ == '__main__':
     SLAS = Workcell()
     
     logging.debug("Create SLAS LED strip")
-    SLAS.LedSetup(board.D18, 98, 1)
+    SLAS.LedSetup(board.D18, 350, 1)
     
     logging.debug("Initialise LEDs")
     SLAS.LedInitialise()
     
     logging.debug("Setting up LED sections")
-    SLAS.LedSections([[0,49],[50,98]])
+    SLAS.LedSections([[0,49],[50,350]])
     
     #Create list of all programmed animations to cycle through
     animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
