@@ -16,6 +16,7 @@ import board
 import neopixel
 import numpy as np
 import datetime
+import random
 
 #Import other code
 import SlasAnimations
@@ -130,3 +131,7 @@ if __name__ == '__main__':
             #SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
             SLAS.firstRun = [True]*len(SLAS.ledSections)
             logging.debug("Animations how set to be:" + str(SLAS.ledSectionAnimations))
+            for i in len(SLAS.estops):
+                SLAS.estops[i] = random.choice([True, False])
+            for i in len(SLAS.doors):
+                SLAS.doors[i] = random.choice([True, False])
