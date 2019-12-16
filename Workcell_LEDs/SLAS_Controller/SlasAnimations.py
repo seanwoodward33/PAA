@@ -21,6 +21,8 @@ def RunComplete(self, i):
     self.ledArray[section[0]:section[1]][:,3] = 1
     ledCount = len(self.ledArray[section[0]:section[1]])
     if self.firstRun[i] == True:
+        if self.endRunPercentage == 0:
+            self.endRunFinishTime = datetime.datetime.now()+self.endRunLength
         for j in range(ledCount):
             for k in range(3):
                 self.ledArray[section[0] + j][k] = HsvToRgb((((j)%(ledCount+1))/(ledCount)),1.0,1.0)[k]
@@ -28,6 +30,27 @@ def RunComplete(self, i):
     
     if self.firstRun[i] == False:
         self.ledArray[section[0]:section[1]][:,0:3] = np.roll(self.ledArray[section[0]:section[1]][:,0:3],1, axis = 0)
+
+#SystemRunningLong - Gradually growing Green for long edge
+def SystemRunningLong(self, i):
+    section = self.ledSections[i]
+    self.ledArray[section[0]:section[1]][:,0:3] = [0,255,0]
+    self.ledArray[section[0]:section[1]][:,3] = self.dimLevelLeds
+    if self.firstRun[i] == True:
+        if self.percentageComplete == 0:
+            self.runFinishTime = datetime.datetime.now()+self.runLength
+        if self.percentageComplete > 0:
+            self.ledArray[section[0]:section[0]+round((self.percentageComplete*(section[1]-section[0])))][:,3]= self.ledBrightness
+            self.finishTime = datetime.datetime.now()+(self.percentageComplete*self.runLength)        
+        self.firstRun[i] = False
+    
+    if self.firstRun[i]  == False:
+        self.percentageComplete = (self.runLength - (self.runFinishTime - datetime.datetime.now())) / self.runLength
+        if self.percentageComplete >= 1:
+            self.ledSectionAnimations[i] = "RunComplete"
+            self.percentageComplete = 0.0
+            self.firstRun[i] = True
+        self.ledArray[section[0]:section[0]+round((self.percentageComplete*(section[1]-section[0])))][:,3]= self.ledBrightness
 
 #TeachMode - Pulse yellow
 def TeachMode(self, i):
@@ -90,27 +113,6 @@ def SystemRunningShort(self, i):
     if self.firstRun[i] == False:
         pass
 
-#SystemRunningLong - Gradually growing Green for long edge
-def SystemRunningLong(self, i):
-    section = self.ledSections[i]
-    self.ledArray[section[0]:section[1]][:,0:3] = [0,255,0]
-    self.ledArray[section[0]:section[1]][:,3] = self.dimLevelLeds
-    if self.firstRun[i] == True:
-        if self.percentageComplete == 0:
-            self.finishTime = datetime.datetime.now()+self.runLength
-        if self.percentageComplete > 0:
-            self.ledArray[section[0]:section[0]+round((self.percentageComplete*(section[1]-section[0])))][:,3]= self.ledBrightness
-            self.finishTime = datetime.datetime.now()+(self.percentageComplete*self.runLength)        
-        self.firstRun[i] = False
-    
-    if self.firstRun[i]  == False:
-        self.percentageComplete = (self.runLength - (self.finishTime - datetime.datetime.now())) / self.runLength
-        if self.percentageComplete > 1:
-            self.percentageComplete = 1
-            self.ledSectionAnimations[i] = "RunComplete"
-            self.percentageComplete = 0.0
-            self.firstRun[i] = True
-        self.ledArray[section[0]:section[0]+round((self.percentageComplete*(section[1]-section[0])))][:,3]= self.ledBrightness
 
 #EStop - Pulse Red
 def EStop(self, i):

@@ -29,11 +29,15 @@ class Workcell():
         self.animationRun = True
         self.firstRun = True
         self.pulseDirection = "Down"
-        self.time = datetime.datetime.now()
-        self.finishTime = datetime.datetime.now()
+        self.runTime = datetime.datetime.now()
+        self.runFinishTime = datetime.datetime.now()
         self.percentageComplete = 0.0
-        self.dimLevelLeds = 0.2
-        self.runLength= datetime.timedelta(seconds = 17)
+        self.runLength= datetime.timedelta(seconds = 7)
+        
+        self.endRunTime = datetime.datetime.now()
+        self.endRunFinishTime = datetime.datetime.now()
+        self.endRunPercentage = 0.0
+        self.endRunLength= datetime.timedelta(seconds = 3)
         self.estops = [True, True, True]
         self.estopPositions = [[0,15],[42,56],[83,98]]
         self.doors = [True, True, True, True, True, True]
@@ -108,9 +112,6 @@ if __name__ == '__main__':
     
     logging.debug("Setting up LED sections")
     SLAS.LedSections([[0,49],[50,98]])
-    
-    #logging.debug("Setting animation for each section")
-    #SLAS.LedSectionAnimations(["RunComplete", "TeachMode"])
     
     #Create list of all programmed animations to cycle through
     animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
