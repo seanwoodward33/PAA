@@ -36,7 +36,7 @@ class Workcell():
         self.runLength= datetime.timedelta(seconds = 17)
         self.estops = [True, True, True]
         self.estopPositions = [[0,15],[42,56],[83,98]]
-        self.doors = [False, False, False, False, False, False]
+        self.doors = [True, True, True, True, True, True]
         self.doorPositions = [[0,5],[10,15],[20,25],[30,35],[40,45],[50,55]]
     
     def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
