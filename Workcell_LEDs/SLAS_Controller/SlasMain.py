@@ -34,7 +34,7 @@ class Workcell():
         self.percentageComplete = 0.0
         self.dimLevelLeds = 0.2
         self.runLength= datetime.timedelta(seconds = 17)
-        self.estops = [True, False, False]
+        self.estops = [True, True, True]
         self.estopPositions = [[0,15],[42,56],[83,98]]
     
     def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
