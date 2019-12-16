@@ -68,8 +68,8 @@ class Workcell():
             self.AnimationCall(self.ledSectionAnimations[i], i)
     
     def OutputLeds(self):
-        print (str(self.ledArray[0]))
         for i in range(self.ledCount):
+            print (str(i) + " " + str(self.ledArray[i]))
             x = np.rint(self.ledArray[i][0:3]*self.ledArray[i,3]).astype(int)
             self.ledStrip[i] = (x[0],x[1],x[2])
         self.ledStrip.show()        
