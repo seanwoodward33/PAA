@@ -71,6 +71,7 @@ class Workcell():
     
     def UpdateBySection(self):
         for i in range(len(self.ledSections)):
+            print (i)
             self.AnimationCall(self.ledSectionAnimations[i], i)
     
     def OutputLeds(self):
