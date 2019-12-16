@@ -39,7 +39,7 @@ class Workcell():
         self.endRunPercentage = 0.0
         self.endRunLength= datetime.timedelta(seconds = 3)
         self.estops = [True, True, True]
-        self.estopPositions = [[0,5],[45,55],[293,302]]
+        self.estopPositions = [[0,5],[46,56],[293,302]]
         self.doors = [True, True, True, True, True, True]
         self.doorPositions = [[6,45],[55,100],[117,232],[117,232],[248,292],[303,344]]
     
