@@ -111,10 +111,10 @@ if __name__ == '__main__':
     SLAS.LedInitialise()
     
     logging.debug("Setting up LED sections")
-    SLAS.LedSections([[0,49],[50,350]])
+    SLAS.LedSections([[0,100],[101,249],[250,348]])
     
     #Create list of all programmed animations to cycle through
-    animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
+    animationsTaught = ["EStop","RunComplete", "DoorOpen" ]#["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
     logging.debug("Setting animation to be first two animations in animationsTaught list")
     SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
     
