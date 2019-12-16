@@ -29,11 +29,11 @@ class Workcell():
         self.animationRun = True
         self.firstRun = True
         self.pulseDirection = "Down"
+        self.dimLevelLeds = 0.3
         self.runTime = datetime.datetime.now()
         self.runFinishTime = datetime.datetime.now()
         self.percentageComplete = 0.0
         self.runLength= datetime.timedelta(seconds = 7)
-        
         self.endRunTime = datetime.datetime.now()
         self.endRunFinishTime = datetime.datetime.now()
         self.endRunPercentage = 0.0
