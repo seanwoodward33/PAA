@@ -39,7 +39,7 @@ class Workcell():
         self.endRunPercentage = 0.0
         self.endRunLength= datetime.timedelta(seconds = 3)
         self.estops = [True, True, True]
-        self.estopPositions = [[0,15],[42,56],[83,98]]
+        self.estopPositions = [[0,5],[45,55],[293,302]]
         self.doors = [True, True, True, True, True, True]
         self.doorPositions = [[6,45],[55,100],[117,232],[117,232],[248,292],[303,344]]
     
@@ -114,7 +114,7 @@ if __name__ == '__main__':
     SLAS.LedSections([[0,1],[2,348]]) #Section 1 - [0,110], section 2 - [111,238], section 3 =- [239,348]
     
     #Create list of all programmed animations to cycle through
-    animationsTaught = ["TeachMode","DoorOpen"]#["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
+    animationsTaught = ["TeachMode","EStop"]#["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
     logging.debug("Setting animation to be first two animations in animationsTaught list")
     SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1]])
     
