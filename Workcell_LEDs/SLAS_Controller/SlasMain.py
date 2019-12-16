@@ -41,7 +41,7 @@ class Workcell():
         self.estops = [True, True, True]
         self.estopPositions = [[0,15],[42,56],[83,98]]
         self.doors = [True, True, True, True, True, True]
-        self.doorPositions = [[6,45],[55,100],[117,232],[117,232],[245,290],[300,348]]
+        self.doorPositions = [[6,45],[55,100],[117,232],[117,232],[248,293],[303,340]]
     
     def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
         self.ledPin = ledGpioPin
