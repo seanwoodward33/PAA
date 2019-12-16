@@ -41,7 +41,7 @@ class Workcell():
         self.estops = [True, True, True]
         self.estopPositions = [[0,15],[42,56],[83,98]]
         self.doors = [True, True, True, True, True, True]
-        self.doorPositions = [[0,5],[10,15],[20,25],[30,35],[40,45],[50,55]]
+        self.doorPositions = [[6,45],[55,100],[117,232],[117,232],[245,290],[300,348]]
     
     def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
         self.ledPin = ledGpioPin
@@ -111,7 +111,7 @@ if __name__ == '__main__':
     SLAS.LedInitialise()
     
     logging.debug("Setting up LED sections")
-    SLAS.LedSections([[0,238],[239,348]]) #Section 1 - [0,110], section 2 - [111,XXX], section 3 =- [XXX,348]
+    SLAS.LedSections([[0,1],[2,348]]) #Section 1 - [0,110], section 2 - [111,238], section 3 =- [239,348]
     
     #Create list of all programmed animations to cycle through
     animationsTaught = ["TeachMode","DoorOpen"]#["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
