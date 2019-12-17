@@ -104,6 +104,10 @@ class Workcell():
         SlasAnimations.EStop(self,i)
 
 #Setup pins for RGB filter LEDs
+GPIO.setup(11, GPIO.OUT)
+GPIO.setup(12, GPIO.OUT)
+GPIO.setup(13, GPIO.OUT)
+
 GPIO.output(11, GPIO.HIGH)
 GPIO.output(12, GPIO.HIGH)
 GPIO.output(13, GPIO.HIGH)
