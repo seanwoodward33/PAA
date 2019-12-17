@@ -129,7 +129,7 @@ bluePin = pulseio.PWMOut(board.D13, frequency=5000, duty_cycle=0)
 """
 
 def RgbCycle(i):
-    i = colorsys.rgb_to_hsv(i)
+    i = colorsys.rgb_to_hsv(i[0],i[1],i[2])
     i = colorsys.hsv_to_rgb((i[0]+0.01)%1, 1, 1)
     return i
 
