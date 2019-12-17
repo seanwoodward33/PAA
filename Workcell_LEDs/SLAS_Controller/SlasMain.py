@@ -29,7 +29,7 @@ import SlasAnimations
 logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] - %(asctime)s - (%(threadName)-10s) %(message)s')
 
 #Setup GPIO mode
-GPIO.setmode(GPIO.BOARD)
+#GPIO.setmode(GPIO.BOARD)
 
 #Define workcell class
 class Workcell():
