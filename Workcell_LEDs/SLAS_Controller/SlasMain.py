@@ -17,6 +17,8 @@ import neopixel
 import numpy as np
 import datetime
 import random
+import colorsys
+import pulseio
 
 #Import other code
 import SlasAnimations
@@ -96,6 +98,19 @@ class Workcell():
     def EStop(self,i):
         SlasAnimations.EStop(self,i)
 
+#Setup pins for RGB filter LEDs
+redPin = pulseio.PWMOut(board.D11, frequency=5000, duty_cycle=0)
+greenPin = pulseio.PWMOut(board.D12, frequency=5000, duty_cycle=0)
+bluePin = pulseio.PWMOut(board.D13, frequency=5000, duty_cycle=0)
+
+rgbPwmValues = (0,0,0)
+
+def RgbCycle(i):
+    i = colorsys.rgb_to_hsv(i)
+    i = colorsys.hsv_to_rgb((i[0]+0.01)%1, 1, 1)
+    return i
+
+
 if __name__ == '__main__':
     logging.debug("Main SLAS control program running")
     
@@ -123,6 +138,13 @@ if __name__ == '__main__':
         SLAS.UpdateBySection()
         SLAS.OutputLeds()
         x = x + 1
+        
+        redPin.duty_cycle = rgbPwmValues[0]
+        greenPin.duty_cycle = rgbPwmValues[1]
+        bluePin.duty_cycle = rgbPwmValues[2]
+        
+        rgbPwmValues = RgbCycle(rgbPwmValues)
+        
         if x == 950:
             x = 0
             animationsTaught = animationsTaught[1:] + animationsTaught[:1]
