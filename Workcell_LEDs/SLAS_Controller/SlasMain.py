@@ -19,12 +19,17 @@ import datetime
 import random
 import colorsys
 import pulseio
+import RPi.GPIO as GPIO
+
 
 #Import other code
 import SlasAnimations
 
 #Setup logging
 logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] - %(asctime)s - (%(threadName)-10s) %(message)s')
+
+#Setup GPIO mode
+GPIO.setmode(GPIO.BOARD)
 
 #Define workcell class
 class Workcell():
@@ -99,11 +104,21 @@ class Workcell():
         SlasAnimations.EStop(self,i)
 
 #Setup pins for RGB filter LEDs
+redPin = GPIO.PWM(11, 1000)
+greenPin = GPIO.PWM(12, 1000)
+bluePin = GPIO.PWM(13, 1000)
+
+rgbPwmValues = (0,0,0)
+
+redPin.start(rgbPwmValues[0])
+greenPin.start(rgbPwmValues[1])
+bluePin.start(rgbPwmValues[2])
+
+"""
 redPin = pulseio.PWMOut(board.D11, frequency=5000, duty_cycle=0)
 greenPin = pulseio.PWMOut(board.D12, frequency=5000, duty_cycle=0)
 bluePin = pulseio.PWMOut(board.D13, frequency=5000, duty_cycle=0)
-
-rgbPwmValues = (0,0,0)
+"""
 
 def RgbCycle(i):
     i = colorsys.rgb_to_hsv(i)
@@ -139,9 +154,9 @@ if __name__ == '__main__':
         SLAS.OutputLeds()
         x = x + 1
         
-        redPin.duty_cycle = rgbPwmValues[0]
-        greenPin.duty_cycle = rgbPwmValues[1]
-        bluePin.duty_cycle = rgbPwmValues[2]
+        redPin.ChangeDutyCycle(rgbPwmValues[0]*100)
+        greenPin.ChangeDutyCycle(rgbPwmValues[1]*100)
+        bluePin.ChangeDutyCycle(rgbPwmValues[2]*100)
         
         rgbPwmValues = RgbCycle(rgbPwmValues)
         
