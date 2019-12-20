@@ -117,8 +117,7 @@ class SafetySystem(threading.Thread):
             self.doors[0] = self.pin.value
             if self.doors[0] != self.lastDoors[0]:
                 self.animationsTaught = self.animationsTaught[1:] + self.animationsTaught[:1]
-                for i in range(len(SLAS.ledSectionAnimations)):
-                    SLAS.ledSectionAnimations[i] = self.animationsTaught[i]
+                SLAS.LedSectionAnimations = [self.animationsTaught[0],self.animationsTaught[1],self.animationsTaught[2]]
                 SLAS.firstRun = [True]*len(SLAS.ledSections)
             self.lastDoors[0] = self.doors[0]
                 
