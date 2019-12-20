@@ -31,7 +31,6 @@ logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] - %(asctime)s -
 class Workcell():
     def __init__(self):
         self.animationRun = True
-        self.firstRun = True
         self.pulseDirection = "Down"
         self.dimLevelLeds = 0.3
         self.runTime = datetime.datetime.now()
