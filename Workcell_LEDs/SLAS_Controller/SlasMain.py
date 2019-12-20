@@ -56,8 +56,6 @@ class Workcell(threading.Thread):
         self.ledOrder = ledOrder
         self.ledArray = np.zeros((ledCount,4))
         self.ledArray[:,3] = self.ledBrightness
-        print (self.ledArray)
-
     
     def LedInitialise(self):
         self.ledStrip = neopixel.NeoPixel(self.ledPin, self.ledCount, brightness = self.ledBrightness, pixel_order=self.ledOrder, auto_write=False)
@@ -78,6 +76,7 @@ class Workcell(threading.Thread):
             self.AnimationCall(self.ledSectionAnimations[i], i)
     
     def OutputLeds(self):
+        print("here")
         for i in range(self.ledCount):
             #print (str(i) + " " + str(self.ledArray[i]))
             x = np.rint(self.ledArray[i][0:3]*self.ledArray[i,3]).astype(int)
