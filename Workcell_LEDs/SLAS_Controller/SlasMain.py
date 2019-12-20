@@ -56,6 +56,7 @@ class Workcell(threading.Thread):
         self.ledOrder = ledOrder
         self.ledArray = np.zeros((ledCount,4))
         self.ledArray[:,3] = self.ledBrightness
+        print (self.ledArray)
 
     
     def LedInitialise(self):
