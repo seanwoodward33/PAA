@@ -131,6 +131,9 @@ if __name__ == '__main__':
     SLAS = Workcell()
     
     SLAS.start()
+    SLAS.LedSetup(board.D18, 98, 1) #When running on test board
+    SLAS.LedInitialise()
+    SLAS.LedSections([[0,30],[30,60],[60,98]])
     
     """
     logging.debug("Main SLAS control program running")
