@@ -52,4 +52,27 @@ Door5.pull = digitalio.Pull.DOWN
 Door6.pull = digitalio.Pull.DOWN
 
 #Setup array for reading input values
-inputs = [0,0,0,0,0,0,0,0]
+estopInputs = [0,0,0]
+lastEstopInput = [0,0,0]
+doorInputs = [0,0,0,0,0,0]
+lastDoorInputs = [0,0,0,0,0,0]
+
+while True:
+    estopInputs[0] = Estop1.value
+    estopInputs[1] = Estop2.value
+    estopInputs[2] = Estop3.value
+    doorInputs[0] = Door1.value
+    doorInputs[1] = Door2.value
+    doorInputs[2] = Door3.value
+    doorInputs[3] = Door4.value
+    doorInputs[4] = Door5.value
+    doorInputs[5] = Door6.value
+    
+    for i in range(len(estopInputs)):
+        if estopInputs[i] != lastEstopInput[i]:
+            if lastEstopInput[i] = 1:
+                    
+            if inputs[i] = 0:
+                pass
+    
+    lastInput = inputs

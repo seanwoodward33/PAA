@@ -30,7 +30,14 @@ def RunComplete(self, i):
         self.firstRun[i] = False
     
     if self.firstRun[i] == False:
+        self.percentageComplete = (self.runLength - (self.endRunFinishTime - datetime.datetime.now())) / self.endRunLength
         self.ledArray[section[0]:section[1]][:,0:3] = np.roll(self.ledArray[section[0]:section[1]][:,0:3],1, axis = 0)
+        if self.endRunPercentage >=1:
+            self.ledSectionAnimations[i] = "SystemRunningLong"
+            self.endRunPercentage = 0.0
+            self.firstRun[i] = True
+        self.ledArray[section[0]:section[1]][:,0:3] = np.roll(self.ledArray[section[0]:section[1]][:,0:3],1, axis = 0)
+            
 
 #SystemRunningLong - Gradually growing Green for long edge
 def SystemRunningLong(self, i):

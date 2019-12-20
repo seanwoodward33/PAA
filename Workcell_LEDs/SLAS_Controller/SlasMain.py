@@ -16,7 +16,6 @@ import board
 import neopixel
 import numpy as np
 import datetime
-import random
 import colorsys
 import RPi.GPIO as GPIO
 
@@ -41,7 +40,7 @@ class Workcell():
         self.endRunFinishTime = datetime.datetime.now()
         self.endRunPercentage = 0.0
         self.endRunLength= datetime.timedelta(seconds = 3)
-        self.estops = [True, False, False]
+        self.estops = [False, False, False]
         self.estopPositions = [[0,2],[46,48],[96,98]] # Testing board
         #self.estopPositions = [[0,5],[46,56],[293,302]] # SLAS Workcell
         self.doors = [False, False, False, False, False, False]
@@ -113,7 +112,7 @@ redPin = GPIO.PWM(11, 1000)
 greenPin = GPIO.PWM(12, 1000)
 bluePin = GPIO.PWM(13, 1000)
 
-rgbPwmValues = (0,0,0)
+rgbPwmValues = (1,0,0)
 
 redPin.start(rgbPwmValues[0])
 greenPin.start(rgbPwmValues[1])
