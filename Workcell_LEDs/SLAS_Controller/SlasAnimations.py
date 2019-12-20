@@ -21,7 +21,7 @@ def RunComplete(self, i):
     self.ledArray[section[0]:section[1]][:,3] = 1
     ledCount = len(self.ledArray[section[0]:section[1]])
     if self.firstRun[i] == True:
-            logging.debug("Running RunComplete for first time. i value = " + str(i))
+        logging.debug("Running RunComplete for first time. i value = " + str(i))
         if self.endRunPercentage == 0:
             self.endRunFinishTime = datetime.datetime.now()+self.endRunLength
         for j in range(ledCount):
