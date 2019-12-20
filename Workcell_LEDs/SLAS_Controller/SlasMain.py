@@ -27,7 +27,7 @@ import SlasAnimations
 logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] - %(asctime)s - (%(threadName)-10s) %(message)s')
 
 #Define workcell class
-class Workcell():
+class Workcell(threading.Thread):
     def __init__(self):
         self.animationRun = True
         self.pulseDirection = "Down"
@@ -126,6 +126,10 @@ def RgbCycle(i):
 
 
 if __name__ == '__main__':
+    
+    SLAS = Workcell()
+    
+    """
     logging.debug("Main SLAS control program running")
     
     logging.debug("Create SLAS workcell object")
@@ -169,3 +173,4 @@ if __name__ == '__main__':
                 SLAS.ledSectionAnimations[i] = animationsTaught[i]
             SLAS.firstRun = [True]*len(SLAS.ledSections)
             logging.debug("Animations now set to be:" + str(SLAS.ledSectionAnimations))
+    """
