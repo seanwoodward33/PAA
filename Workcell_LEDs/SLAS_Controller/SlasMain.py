@@ -114,6 +114,7 @@ class SafetySystem(threading.Thread):
     
     def checking(self):
         while True:
+            print (self.doors[0])
             self.doors[0] = self.pin.value
             if self.doors[0] != self.lastDoors[0]:
                 self.animationsTaught = self.animationsTaught[1:] + self.animationsTaught[:1]
