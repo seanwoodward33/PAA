@@ -21,6 +21,7 @@ def RunComplete(self, i):
     self.ledArray[section[0]:section[1]][:,3] = 1
     ledCount = len(self.ledArray[section[0]:section[1]])
     if self.firstRun[i] == True:
+            logging.debug("Running RunComplete for first time. i value = " + str(i))
         if self.endRunPercentage == 0:
             self.endRunFinishTime = datetime.datetime.now()+self.endRunLength
         for j in range(ledCount):
@@ -37,6 +38,7 @@ def SystemRunningLong(self, i):
     self.ledArray[section[0]:section[1]][:,0:3] = [0,255,0]
     self.ledArray[section[0]:section[1]][:,3] = self.dimLevelLeds
     if self.firstRun[i] == True:
+        logging.debug("Running SystemRunningLong for first time. i value = " + str(i))
         if self.percentageComplete == 0:
             self.runFinishTime = datetime.datetime.now()+self.runLength
         if self.percentageComplete > 0:
@@ -58,6 +60,7 @@ def TeachMode(self, i):
     self.ledArray[section[0]:section[1]][:,0:3] = [255,255,0]
    
     if self.firstRun[i] == True:
+        logging.debug("Running TeachMode for first time. i value = " + str(i))
         self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
         self.pulseDirection = "Down"
         self.firstRun[i] = False
@@ -80,6 +83,7 @@ def DoorOpen(self, i):
     self.ledArray[section[0]:section[1]][:,0:3] = [128,0,128]
     
     if self.firstRun[i] == True:
+        logging.debug("Running DoorOpen for first time. i value = " + str(i))
         self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
         self.pulseDirection = "Down"
         self.firstRun[i] = False
@@ -107,6 +111,7 @@ def SystemRunningShort(self, i):
     self.ledArray[section[0]:section[1]][:,0:3] = [0,255,0]
     
     if self.firstRun[i] == True:
+        logging.debug("Running SystemRunningShort for first time. i value = " + str(i))
         self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
         self.firstRun[i] = False
     
@@ -120,6 +125,7 @@ def EStop(self, i):
     self.ledArray[section[0]:section[1]][:,0:3] = [255,0,0]
     
     if self.firstRun[i] == True:
+        logging.debug("Running EStop for first time. i value = " + str(i))
         self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
         self.pulseDirection = "Down"
         self.firstRun[i] = False
