@@ -18,7 +18,6 @@ import numpy as np
 import datetime
 import random
 import colorsys
-import pulseio
 import RPi.GPIO as GPIO
 
 
@@ -27,9 +26,6 @@ import SlasAnimations
 
 #Setup logging
 logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] - %(asctime)s - (%(threadName)-10s) %(message)s')
-
-#Setup GPIO mode
-#GPIO.setmode(GPIO.BOARD)
 
 #Define workcell class
 class Workcell():
@@ -47,9 +43,11 @@ class Workcell():
         self.endRunPercentage = 0.0
         self.endRunLength= datetime.timedelta(seconds = 3)
         self.estops = [True, False, False]
-        self.estopPositions = [[0,5],[46,56],[293,302]]
+        self.estopPositions = [[0,2],[46,48],[96,98]] # Testing board
+        #self.estopPositions = [[0,5],[46,56],[293,302]] # SLAS Workcell
         self.doors = [False, False, False, False, False, False]
-        self.doorPositions = [[6,45],[55,100],[117,232],[117,232],[248,292],[303,344]]
+        self.doorPositions = [[3,10],[15,22],[36,43],[44,50],[75,83],[88,95]] #Testing board
+        #self.doorPositions = [[6,45],[55,100],[117,232],[117,232],[248,292],[303,344]] #SLAS Workcell
     
     def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
         self.ledPin = ledGpioPin
@@ -122,11 +120,6 @@ redPin.start(rgbPwmValues[0])
 greenPin.start(rgbPwmValues[1])
 bluePin.start(rgbPwmValues[2])
 
-"""
-redPin = pulseio.PWMOut(board.D11, frequency=5000, duty_cycle=0)
-greenPin = pulseio.PWMOut(board.D12, frequency=5000, duty_cycle=0)
-bluePin = pulseio.PWMOut(board.D13, frequency=5000, duty_cycle=0)
-"""
 
 def RgbCycle(i):
     i = colorsys.rgb_to_hsv(i[0],i[1],i[2])
@@ -141,13 +134,15 @@ if __name__ == '__main__':
     SLAS = Workcell()
     
     logging.debug("Create SLAS LED strip")
-    SLAS.LedSetup(board.D18, 348, 1)
+    SLAS.LedSetup(board.D18, 98, 0.2) #When running on test board
+    #SLAS.LedSetup(board.D18, 348, 1) #When running on SLAS workcell
     
     logging.debug("Initialise LEDs")
     SLAS.LedInitialise()
     
     logging.debug("Setting up LED sections")
-    SLAS.LedSections([[0,110],[111,238],[239,348]]) #Section 1 - [0,110], section 2 - [111,238], section 3 =- [239,348]
+    SLAS.LedSections([[0,30],[31,60],[61,98]]) #Testing board
+    #SLAS.LedSections([[0,110],[111,238],[239,348]]) #Section 1 - [0,110], section 2 - [111,238], section 3 =- [239,348]
     
     #Create list of all programmed animations to cycle through
     animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]

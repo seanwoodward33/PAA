@@ -53,4 +53,3 @@ Door6.pull = digitalio.Pull.DOWN
 
 #Setup array for reading input values
 inputs = [0,0,0,0,0,0,0,0]
-
