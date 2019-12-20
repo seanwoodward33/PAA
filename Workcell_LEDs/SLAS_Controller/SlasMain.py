@@ -148,6 +148,7 @@ if __name__ == '__main__':
     animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
     logging.debug("Setting animation to be first two animations in animationsTaught list")
     SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1],animationsTaught[2]])
+    logging.debug("Animations how set to be:" + str(SLAS.ledSectionAnimations))
     
     
     logging.debug("Updating for all sections, forever loop times")
