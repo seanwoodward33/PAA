@@ -134,7 +134,26 @@ if __name__ == '__main__':
     SLAS.LedSetup(board.D18, 98, 1) #When running on test board
     SLAS.LedInitialise()
     SLAS.LedSections([[0,30],[30,60],[60,98]])
-    
+    animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
+    SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1],animationsTaught[2]])
+    x = 0
+    while x < 2000:
+        SLAS.UpdateBySection()
+        SLAS.OutputLeds()
+        x = x + 1
+        
+        redPin.ChangeDutyCycle(rgbPwmValues[0]*100)
+        greenPin.ChangeDutyCycle(rgbPwmValues[1]*100)
+        bluePin.ChangeDutyCycle(rgbPwmValues[2]*100)
+        
+        rgbPwmValues = RgbCycle(rgbPwmValues)
+        
+        if x == 1950:
+            x = 0
+            animationsTaught = animationsTaught[1:] + animationsTaught[:1]
+            for i in range(len(SLAS.ledSectionAnimations)):
+                SLAS.ledSectionAnimations[i] = animationsTaught[i]
+            SLAS.firstRun = [True]*len(SLAS.ledSections)
     """
     logging.debug("Main SLAS control program running")
     
