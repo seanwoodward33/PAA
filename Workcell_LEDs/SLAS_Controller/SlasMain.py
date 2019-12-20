@@ -18,6 +18,7 @@ import numpy as np
 import datetime
 import colorsys
 import RPi.GPIO as GPIO
+import digitalio
 
 
 #Import other code
@@ -99,6 +100,30 @@ class Workcell(threading.Thread):
     
     def EStop(self,i):
         SlasAnimations.EStop(self,i)
+        
+#Define SafetySystem Class
+class SafetySystem(threading.Thread):
+    def __init__(self):
+        threading.Thread.__init__(self)
+        self.doors = [0]
+        self.lastDoors =[0]
+        self.pin = digitalio.DigitalInOut(board.D4)
+        self.pin.direction = digitalio.Direction.INPUT
+        self.pin.pull = digitalio.Pull.DOWN
+        self.animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
+    
+    def checking(self):
+        while True:
+            self.doors[0] = self.pin.value
+            if self.doors[0] != self.lastDoors[0]:
+                self.animationsTaught = self.animationsTaught[1:] + self.animationsTaught[:1]
+                for i in range(len(SLAS.ledSectionAnimations)):
+                    SLAS.ledSectionAnimations[i] = self.animationsTaught[i]
+                SLAS.firstRun = [True]*len(SLAS.ledSections)
+            self.lastDoors[0] = self.doors[0]
+                
+                        
+        
 
 #Setup pins for RGB filter LEDs
 GPIO.setup(11, GPIO.OUT)
@@ -129,8 +154,11 @@ def RgbCycle(i):
 if __name__ == '__main__':
     
     SLAS = Workcell()
+    safety = SafetySystem()
     
     SLAS.start()
+    safety.start()
+    safety.checking()
     SLAS.LedSetup(board.D18, 98, 1) #When running on test board
     SLAS.LedInitialise()
     SLAS.LedSections([[0,30],[30,60],[60,98]])
@@ -150,10 +178,13 @@ if __name__ == '__main__':
         
         if x == 1950:
             x = 0
+            
+            """
             animationsTaught = animationsTaught[1:] + animationsTaught[:1]
             for i in range(len(SLAS.ledSectionAnimations)):
                 SLAS.ledSectionAnimations[i] = animationsTaught[i]
             SLAS.firstRun = [True]*len(SLAS.ledSections)
+            """
     """
     logging.debug("Main SLAS control program running")
     
