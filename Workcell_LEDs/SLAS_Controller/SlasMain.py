@@ -132,7 +132,7 @@ if __name__ == '__main__':
     SLAS = Workcell()
     
     logging.debug("Create SLAS LED strip")
-    SLAS.LedSetup(board.D18, 98, 0.2) #When running on test board
+    SLAS.LedSetup(board.D18, 98, 1) #When running on test board
     #SLAS.LedSetup(board.D18, 348, 1) #When running on SLAS workcell
     
     logging.debug("Initialise LEDs")
