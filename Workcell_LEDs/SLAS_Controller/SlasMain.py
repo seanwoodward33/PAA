@@ -156,13 +156,13 @@ if __name__ == '__main__':
     safety = SafetySystem()
     
     SLAS.start()
-    safety.start()
-    safety.checking()
     SLAS.LedSetup(board.D18, 98, 1) #When running on test board
     SLAS.LedInitialise()
     SLAS.LedSections([[0,30],[30,60],[60,98]])
     animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
     SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1],animationsTaught[2]])
+    safety.start()
+    safety.checking()
     x = 0
     while x < 2000:
         SLAS.UpdateBySection()
