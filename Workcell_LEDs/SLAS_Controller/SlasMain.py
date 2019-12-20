@@ -29,6 +29,7 @@ logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] - %(asctime)s -
 #Define workcell class
 class Workcell(threading.Thread):
     def __init__(self):
+        threading.Thread.__init__(self)
         self.animationRun = True
         self.pulseDirection = "Down"
         self.dimLevelLeds = 0.3
