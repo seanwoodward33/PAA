@@ -162,7 +162,6 @@ if __name__ == '__main__':
     SLAS.LedSections([[0,30],[30,60],[60,98]])
     animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
     SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1],animationsTaught[2]])
-    SLAS.UpdateBySection()
     safety.start()
     safety.checking()
     
@@ -172,13 +171,14 @@ if __name__ == '__main__':
         SLAS.UpdateBySection()
         SLAS.OutputLeds()
         x = x + 1
-        
+        print (X)
+        """
         redPin.ChangeDutyCycle(rgbPwmValues[0]*100)
         greenPin.ChangeDutyCycle(rgbPwmValues[1]*100)
         bluePin.ChangeDutyCycle(rgbPwmValues[2]*100)
         
         rgbPwmValues = RgbCycle(rgbPwmValues)
-        
+        """
         if x == 1950:
             x = 0
             
