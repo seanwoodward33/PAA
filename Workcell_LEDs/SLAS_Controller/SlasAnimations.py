@@ -24,6 +24,8 @@ def RunComplete(self, i):
         logging.debug("Running RunComplete for first time. i value = " + str(i))
         if self.endRunPercentage == 0:
             self.endRunFinishTime = datetime.datetime.now()+self.endRunLength
+        if self.endRunPercentage > 0:
+            self.endRunFinishTime = datetime.datetime.now()+(self.endRunPercentage*self.endRunLength)
         for j in range(ledCount):
             for k in range(3):
                 self.ledArray[section[0] + j][k] = HsvToRgb((((j)%(ledCount+1))/(ledCount)),1.0,1.0)[k]
