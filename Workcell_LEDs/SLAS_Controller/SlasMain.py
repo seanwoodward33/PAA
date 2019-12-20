@@ -129,6 +129,8 @@ if __name__ == '__main__':
     
     SLAS = Workcell()
     
+    SLAS.start()
+    
     """
     logging.debug("Main SLAS control program running")
     
