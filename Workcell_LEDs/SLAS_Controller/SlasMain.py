@@ -151,7 +151,7 @@ if __name__ == '__main__':
     
     logging.debug("Updating for all sections, forever loop times")
     x = 0
-    while x < 1000:
+    while x < 2000:
         SLAS.UpdateBySection()
         SLAS.OutputLeds()
         x = x + 1
@@ -162,7 +162,7 @@ if __name__ == '__main__':
         
         rgbPwmValues = RgbCycle(rgbPwmValues)
         
-        if x == 950:
+        if x == 1950:
             x = 0
             animationsTaught = animationsTaught[1:] + animationsTaught[:1]
             for i in range(len(SLAS.ledSectionAnimations)):
