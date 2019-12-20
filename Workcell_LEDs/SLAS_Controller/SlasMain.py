@@ -162,9 +162,12 @@ if __name__ == '__main__':
     SLAS.LedSections([[0,30],[30,60],[60,98]])
     animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
     SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1],animationsTaught[2]])
+    SLAS.UpdateBySection()
     safety.start()
     safety.checking()
+    
     x = 0
+    
     while x < 2000:
         SLAS.UpdateBySection()
         SLAS.OutputLeds()
