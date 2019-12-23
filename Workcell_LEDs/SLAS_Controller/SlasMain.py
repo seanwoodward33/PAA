@@ -208,10 +208,10 @@ if __name__ == '__main__':
     #safety.start()
     safety.checking()
     
-    x = 0
+    #x = 0
     
-    while x < 2000:
-        x = x+1
+    #while x < 2000:
+     #   x = x+1
         """
         redPin.ChangeDutyCycle(rgbPwmValues[0]*100)
         greenPin.ChangeDutyCycle(rgbPwmValues[1]*100)
@@ -219,8 +219,8 @@ if __name__ == '__main__':
         
         rgbPwmValues = RgbCycle(rgbPwmValues)
         """
-        if x == 1950:
-            x = 0
+      #  if x == 1950:
+       #     x = 0
             
             """
             animationsTaught = animationsTaught[1:] + animationsTaught[:1]
