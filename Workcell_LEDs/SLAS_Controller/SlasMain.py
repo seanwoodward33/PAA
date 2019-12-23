@@ -97,19 +97,19 @@ class Workcell(threading.Thread):
             return method(section)
     
     def UpdateBySection(self):
-        logging.debug("Updating the LED sections")
+       #logging.debug("Updating the LED sections")
         for i in range(len(self.ledSections)):
             self.AnimationCall(self.ledSectionAnimations[i], i)
     
     def OutputLeds(self):
-        logging.debug("Outputting LED values")
+        #logging.debug("Outputting LED values")
         for i in range(self.ledCount):
             x = np.rint(self.ledArray[i][0:3]*self.ledArray[i,3]).astype(int)
             self.ledStrip[i] = (x[0],x[1],x[2])
         self.ledStrip.show()
     
     def QueueCheck(self):
-        logging.debug("Checking the LED queue")
+        #logging.debug("Checking the LED queue")
         if runQ.empty() == False:
             runQ.get()
             self.animationsTaught = self.animationsTaught[1:] + self.animationsTaught[:1]
