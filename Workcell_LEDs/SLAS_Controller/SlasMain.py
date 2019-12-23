@@ -164,7 +164,7 @@ class SafetySystem(threading.Thread):
         while True:
             self.doors[0] = self.pin.value
             if self.doors[0] != self.lastDoors[0]:
-                print("Change in self.doors")
+                logging.debug("Change in self.doors")
                 while runQ.empty() == False:
                     runQ.get()
                 runQ.put(self.doors)
