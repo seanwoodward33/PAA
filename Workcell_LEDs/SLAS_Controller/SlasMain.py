@@ -193,8 +193,9 @@ if __name__ == '__main__':
     SLAS.OnThread(SLAS.LedSetup(board.D18, 98, 1))
     SLAS.OnThread(SLAS.LedInitialise())
     SLAS.OnThread(SLAS.LedSections([[0,30],[30,60],[60,98]]))
-    SLAS.OnThread(SLAS.LedAnimationsTaught(["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]))
-    SLAS.OnThread(SLAS.LedSectionAnimations([SLAS.animationsTaught[0], SLAS.animationsTaught[1],SLAS.animationsTaught[2]]))
+    animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
+    SLAS.OnThread(SLAS.LedAnimationsTaught(animationsTaught))
+    SLAS.OnThread(SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1], animationsTaught[2]]))
     SLAS.OnThread(SLAS.RunLoop())
     #SLAS.start()    
     #SLAS.LedSetup(board.D18, 98, 1) #When running on test board
