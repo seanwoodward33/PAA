@@ -37,11 +37,11 @@ class Workcell(threading.Thread):
         self.runTime = datetime.datetime.now()
         self.runFinishTime = datetime.datetime.now()
         self.percentageComplete = 0.0
-        self.runLength= datetime.timedelta(seconds = 7)
+        self.runLength= datetime.timedelta(seconds = 60)
         self.endRunTime = datetime.datetime.now()
         self.endRunFinishTime = datetime.datetime.now()
         self.endRunPercentage = 0.0
-        self.endRunLength= datetime.timedelta(seconds = 3)
+        self.endRunLength= datetime.timedelta(seconds = 10)
         self.lastRunState = ["SystemRunningShort", "SystemRunningLong", "SystemRunningShort"]
         self.estops = [False, False, False]
         self.estopPositions = [[0,2],[46,48],[96,98]] # Testing board
