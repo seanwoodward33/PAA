@@ -175,6 +175,7 @@ class SafetySystem(threading.Thread):
     def checking(self):
         logging.debug("Starting SafetySystem checking loop")
         position = 0
+        increment = 0
         while True:
             self.doors[position] = self.pin.value
             if self.doors[position] != self.lastDoors[position]:
@@ -182,7 +183,9 @@ class SafetySystem(threading.Thread):
                 while runQ.empty() == False:
                     runQ.get()
                 runQ.put(self.doors)
-                position = (position + 1) % 8
+                increment = (increment + 1) % 2
+                if increment == 0:
+                    position = (position + 1) % 9
             self.lastDoors[position] = self.doors[position]
 
 #Setup pins for RGB filter LEDs
