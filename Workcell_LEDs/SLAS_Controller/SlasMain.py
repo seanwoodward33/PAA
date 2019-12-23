@@ -122,7 +122,7 @@ class Workcell(threading.Thread):
 class SafetySystem(threading.Thread):
     def __init__(self):
         #threading.Thread.__init__(self)
-        logging.debug("Starting SafetySstem thread")
+        logging.debug("Starting SafetySystem thread")
         self.doors = [0]
         self.lastDoors =[0]
         self.pin = digitalio.DigitalInOut(board.D4)
@@ -181,9 +181,10 @@ if __name__ == '__main__':
     SLAS.LedAnimationsTaught(["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"])
     SLAS.LedSectionAnimations([SLAS.animationsTaught[0], SLAS.animationsTaught[1],SLAS.animationsTaught[2]])
     SLAS.RunLoop()
+    
     threading.Thread(target = safety).start()
     #safety.start()
-    safety.checking()
+    #safety.checking()
     
     x = 0
     
