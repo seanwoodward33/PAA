@@ -196,8 +196,8 @@ if __name__ == '__main__':
     
     #SLAS = Workcell()
     #SLAS.start()
-    threading.Thread(target = Workcell).start()
-    #SLAS.start()
+    SLAS = threading.Thread(target = Workcell)
+    SLAS.start()
     #safety = SafetySystem()
 
     #threading.Thread(target = SLAS).start()
