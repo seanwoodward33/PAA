@@ -202,7 +202,7 @@ if __name__ == '__main__':
 
     #threading.Thread(target = SLAS).start()
     #time.sleep(1)
-    #SLAS.OnThread(SLAS.LedSetup(board.D18, 98, 1))
+    SLAS.OnThread(SLAS.LedSetup(board.D18, 98, 1))
     #SLAS.OnThread(SLAS.LedInitialise())
     #SLAS.OnThread(SLAS.LedSections([[0,30],[30,60],[60,98]]))
     #animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
