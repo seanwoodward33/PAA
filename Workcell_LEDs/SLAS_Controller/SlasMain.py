@@ -67,6 +67,7 @@ class Workcell(threading.Thread):
     
     
     def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
+        logging.debug("LedSetup Running")
         self.ledPin = ledGpioPin
         self.ledCount = ledCount
         self.ledBrightness = ledBrightness
@@ -75,16 +76,20 @@ class Workcell(threading.Thread):
         self.ledArray[:,3] = self.ledBrightness
     
     def LedInitialise(self):
+        logging.debug("LEDs initialised")
         self.ledStrip = neopixel.NeoPixel(self.ledPin, self.ledCount, brightness = self.ledBrightness, pixel_order=self.ledOrder, auto_write=False)
     
     def LedSections(self, sections = [[0,98]]):
+        logging.debug("LED sections defined")
         self.ledSections = sections
         self.firstRun = [True]*len(self.ledSections)
 
     def LedAnimationsTaught(self, animations = ["RunComplete"]): #default runcomplete rainbow used
+        logging.debug("LED animations taught taught")
         self.animationsTaught = animations
     
     def LedSectionAnimations(self, animations = ["RunComplete"]): #default runcomplete rainbow used
+        logging.debug("LED animations to use sorted")
         self.ledSectionAnimations = animations
     
     def AnimationCall(self, input, section):
@@ -92,16 +97,19 @@ class Workcell(threading.Thread):
             return method(section)
     
     def UpdateBySection(self):
+        logging.debug("Updating the LED sections")
         for i in range(len(self.ledSections)):
             self.AnimationCall(self.ledSectionAnimations[i], i)
     
     def OutputLeds(self):
+        logging.debug("Outputting LED values")
         for i in range(self.ledCount):
             x = np.rint(self.ledArray[i][0:3]*self.ledArray[i,3]).astype(int)
             self.ledStrip[i] = (x[0],x[1],x[2])
         self.ledStrip.show()
     
     def QueueCheck(self):
+        logging.debug("Checking the LED queue")
         if runQ.empty() == False:
             runQ.get()
             self.animationsTaught = self.animationsTaught[1:] + self.animationsTaught[:1]
