@@ -190,13 +190,19 @@ if __name__ == '__main__':
     safety = SafetySystem()
 
     threading.Thread(target = SLAS).start()
+    SLAS.OnThread(SLAS.LedSetup(board.D18, 98, 1))
+    SLAS.OnThread(SLAS.LedInitialise())
+    SLAS.OnThread(SLAS.LedSections([[0,30],[30,60],[60,98]]))
+    SLAS.OnThread(SLAS.LedAnimationsTaught(["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]))
+    SLAS.OnThread(SLAS.LedSectionAnimations([SLAS.animationsTaught[0], SLAS.animationsTaught[1],SLAS.animationsTaught[2]]))
+    SLAS.OnThread(SLAS.RunLoop())
     #SLAS.start()    
-    SLAS.LedSetup(board.D18, 98, 1) #When running on test board
-    SLAS.LedInitialise()
-    SLAS.LedSections([[0,30],[30,60],[60,98]])
-    SLAS.LedAnimationsTaught(["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"])
-    SLAS.LedSectionAnimations([SLAS.animationsTaught[0], SLAS.animationsTaught[1],SLAS.animationsTaught[2]])
-    SLAS.RunLoop()
+    #SLAS.LedSetup(board.D18, 98, 1) #When running on test board
+    #SLAS.LedInitialise()
+    #SLAS.LedSections([[0,30],[30,60],[60,98]])
+    #SLAS.LedAnimationsTaught(["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"])
+    #SLAS.LedSectionAnimations([SLAS.animationsTaught[0], SLAS.animationsTaught[1],SLAS.animationsTaught[2]])
+    #SLAS.RunLoop()
     
     threading.Thread(target = safety).start()
     #safety.start()
