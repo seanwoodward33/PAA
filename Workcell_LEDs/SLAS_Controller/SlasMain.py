@@ -117,6 +117,7 @@ class Workcell(threading.Thread):
             if queue[0] == True or queue[1] == True or queue[2] == True:
                 self.estops = queue[0:3]
                 self.ledSectionAnimations = ["EStop","EStop","EStop"]
+                self.firstRun = [True]*len(self.ledSections)
             
     def RunLoop(self):
         logging.debug("Starting Workcell running loop")
