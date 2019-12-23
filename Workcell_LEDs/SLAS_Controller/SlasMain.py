@@ -31,6 +31,7 @@ logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] - %(asctime)s -
 class Workcell(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
+        logging.debug("Starting Workcell thread")
         self.animationRun = True
         self.pulseDirection = "Down"
         self.dimLevelLeds = 0.3
@@ -120,6 +121,7 @@ class Workcell(threading.Thread):
 class SafetySystem(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
+        logging.debug("Starting SafetySstem thread")
         self.doors = [0]
         self.lastDoors =[0]
         self.pin = digitalio.DigitalInOut(board.D4)
