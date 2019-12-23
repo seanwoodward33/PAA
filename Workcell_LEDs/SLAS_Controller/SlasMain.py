@@ -84,6 +84,9 @@ class Workcell(threading.Thread):
         logging.debug("LED sections defined")
         self.ledSections = sections
         self.firstRun = [True]*len(self.ledSections)
+    
+    def PrintTest(self):
+        print ("test")
 
     def LedAnimationsTaught(self, animations = ["RunComplete"]): #default runcomplete rainbow used
         logging.debug("LED animations taught taught")
@@ -203,7 +206,8 @@ if __name__ == '__main__':
 
     #threading.Thread(target = SLAS).start()
     #time.sleep(1)
-    SLAS.OnThread(SLAS.LedSetup(board.D18, 98, 1))
+    SLAS.OnThread(SLAS.PrintTest())
+    #SLAS.OnThread(SLAS.LedSetup(board.D18, 98, 1))
     #SLAS.OnThread(SLAS.LedInitialise())
     #SLAS.OnThread(SLAS.LedSections([[0,30],[30,60],[60,98]]))
     #animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
