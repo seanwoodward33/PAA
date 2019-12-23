@@ -42,7 +42,7 @@ class Workcell(threading.Thread):
         self.endRunFinishTime = datetime.datetime.now()
         self.endRunPercentage = 0.0
         self.endRunLength= datetime.timedelta(seconds = 3)
-        self.lastRunState = ["","",""]
+        self.lastRunState = ["SystemRunningShort", "SystemRunningLong", "SystemRunningShort"]
         self.estops = [False, False, False]
         self.estopPositions = [[0,2],[46,48],[96,98]] # Testing board
         #self.estopPositions = [[0,5],[46,56],[293,302]] # SLAS Workcell
