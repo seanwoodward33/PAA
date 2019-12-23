@@ -48,6 +48,7 @@ def SystemRunningLong(self, i):
     self.ledArray[section[0]:section[1]][:,3] = self.dimLevelLeds
     if self.firstRun[i] == True:
         logging.debug("Running SystemRunningLong for first time. i value = " + str(i))
+        logging.debug("Percentage Complete = " + str(self.percentageComplete))
         if self.percentageComplete == 0:
             self.runFinishTime = datetime.datetime.now()+self.runLength
         if self.percentageComplete > 0:
