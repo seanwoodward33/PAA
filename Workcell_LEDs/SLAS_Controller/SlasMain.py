@@ -30,9 +30,9 @@ logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] - %(asctime)s -
 #Define workcell class
 class Workcell(threading.Thread):
     def __init__(self):
-        threading.Thread.__init__(self)
+        #threading.Thread.__init__(self)
         logging.debug("Starting Workcell thread")
-        self.q = queue.Queue()
+        #self.q = queue.Queue()
         self.animationRun = True
         self.pulseDirection = "Down"
         self.dimLevelLeds = 0.3
@@ -50,8 +50,18 @@ class Workcell(threading.Thread):
         self.doors = [False, False, False, False, False, False]
         self.doorPositions = [[3,10],[15,22],[36,43],[44,50],[75,83],[88,95]] #Testing board
         #self.doorPositions = [[6,45],[55,100],[117,232],[117,232],[248,292],[303,344]] #SLAS Workcell
-        super(Workcell, self).__init__()
-    
+        #super(Workcell, self).__init__()
+        
+        self.LedSetup(board.D18, 98, 1) #When running on test board
+        self.LedInitialise()
+        self.LedSections([[0,30],[30,60],[60,98]])
+        self.LedAnimationsTaught(["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"])
+        self.LedSectionAnimations([SLAS.animationsTaught[0], SLAS.animationsTaught[1],SLAS.animationsTaught[2]])
+        self.RunLoop()
+        
+        
+        
+    """
     def OnThread(self, function, *args, **kwargs):
         self.q.put((function, args, kwargs))
     
@@ -66,7 +76,7 @@ class Workcell(threading.Thread):
     def idle(self):
             pass
     
-    
+    """
     def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
         logging.debug("LedSetup Running")
         self.ledPin = ledGpioPin
