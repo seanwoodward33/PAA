@@ -182,8 +182,8 @@ class SafetySystem(threading.Thread):
                 while runQ.empty() == False:
                     runQ.get()
                 runQ.put(self.doors)
+                position = (position + 1) % 8
             self.lastDoors[position] = self.doors[position]
-            position = position + 1
 
 #Setup pins for RGB filter LEDs
 GPIO.setup(11, GPIO.OUT)
