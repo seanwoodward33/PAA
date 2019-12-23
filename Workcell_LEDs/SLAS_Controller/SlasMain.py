@@ -50,6 +50,7 @@ class Workcell(threading.Thread):
         self.doors = [False, False, False, False, False, False]
         self.doorPositions = [[3,10],[15,22],[36,43],[44,50],[75,83],[88,95]] #Testing board
         #self.doorPositions = [[6,45],[55,100],[117,232],[117,232],[248,292],[303,344]] #SLAS Workcell
+        super(Workcell, self).__init__()
     
     def OnThread(self, function, *args, **kwargs):
         self.q.put((function, args, kwargs))
