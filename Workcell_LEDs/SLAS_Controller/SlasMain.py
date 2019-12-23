@@ -212,23 +212,23 @@ if __name__ == '__main__':
     
     #while x < 2000:
      #   x = x+1
-        """
+"""
         redPin.ChangeDutyCycle(rgbPwmValues[0]*100)
         greenPin.ChangeDutyCycle(rgbPwmValues[1]*100)
         bluePin.ChangeDutyCycle(rgbPwmValues[2]*100)
         
         rgbPwmValues = RgbCycle(rgbPwmValues)
-        """
+"""
       #  if x == 1950:
        #     x = 0
             
-            """
+"""
             animationsTaught = animationsTaught[1:] + animationsTaught[:1]
             for i in range(len(SLAS.ledSectionAnimations)):
                 SLAS.ledSectionAnimations[i] = animationsTaught[i]
             SLAS.firstRun = [True]*len(SLAS.ledSections)
-            """
-    """
+"""
+"""
     logging.debug("Main SLAS control program running")
     
     logging.debug("Create SLAS workcell object")
@@ -272,4 +272,4 @@ if __name__ == '__main__':
                 SLAS.ledSectionAnimations[i] = animationsTaught[i]
             SLAS.firstRun = [True]*len(SLAS.ledSections)
             logging.debug("Animations now set to be:" + str(SLAS.ledSectionAnimations))
-    """
+"""
