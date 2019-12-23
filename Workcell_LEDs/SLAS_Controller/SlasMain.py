@@ -30,7 +30,7 @@ logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] - %(asctime)s -
 #Define workcell class
 class Workcell(threading.Thread):
     def __init__(self):
-        threading.Thread.__init__(self)
+        #threading.Thread.__init__(self)
         logging.debug("Starting Workcell thread")
         self.animationRun = True
         self.pulseDirection = "Down"
@@ -121,7 +121,7 @@ class Workcell(threading.Thread):
 #Define SafetySystem Class
 class SafetySystem(threading.Thread):
     def __init__(self):
-        threading.Thread.__init__(self)
+        #threading.Thread.__init__(self)
         logging.debug("Starting SafetySstem thread")
         self.doors = [0]
         self.lastDoors =[0]
@@ -173,14 +173,16 @@ if __name__ == '__main__':
     SLAS = Workcell()
     safety = SafetySystem()
 
-    SLAS.start()    
+    threading.Thread(target = SLAS).start()
+    #SLAS.start()    
     SLAS.LedSetup(board.D18, 98, 1) #When running on test board
     SLAS.LedInitialise()
     SLAS.LedSections([[0,30],[30,60],[60,98]])
     SLAS.LedAnimationsTaught(["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"])
     SLAS.LedSectionAnimations([SLAS.animationsTaught[0], SLAS.animationsTaught[1],SLAS.animationsTaught[2]])
     SLAS.RunLoop()
-    safety.start()
+    threading.Thread(target = safety).start()
+    #safety.start()
     safety.checking()
     
     x = 0
