@@ -194,10 +194,11 @@ if __name__ == '__main__':
     
     runQ = queue.Queue()
     
-    SLAS = Workcell()
+    SLAS = threading.Thread(target = Workcell())
+    SLAS.start()
     #safety = SafetySystem()
 
-    threading.Thread(target = SLAS).start()
+    #threading.Thread(target = SLAS).start()
     time.sleep(1)
     SLAS.OnThread(SLAS.LedSetup(board.D18, 98, 1))
     SLAS.OnThread(SLAS.LedInitialise())
