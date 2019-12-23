@@ -93,10 +93,10 @@ class Workcell(threading.Thread):
             
     def RunLoop(self):
         while True:
-            QueueCheck()
-            SLAS.UpdateBySection()
-            QueueCheck()
-            SLAS.OutputLeds()
+            self.QueueCheck()
+            self.UpdateBySection()
+            self.QueueCheck()
+            self.SLAS.OutputLeds()
     
     def RunComplete(self, i):
         SlasAnimations.RunComplete(self, i)
@@ -168,12 +168,12 @@ if __name__ == '__main__':
     SLAS = Workcell()
     safety = SafetySystem()
     
-    SLAS.start()
     SLAS.LedSetup(board.D18, 98, 1) #When running on test board
     SLAS.LedInitialise()
     SLAS.LedSections([[0,30],[30,60],[60,98]])
     SLAS.LedAnimationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
     SLAS.LedSectionAnimations([SLAS.animationsTaught[0], SLAS.animationsTaught[1],SLAS.animationsTaught[2]])
+    SLAS.start()
     SLAS.RunLoop()
     safety.start()
     safety.checking()
