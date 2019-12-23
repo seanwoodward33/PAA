@@ -53,7 +53,7 @@ class Workcell(threading.Thread):
         self.LedSetup(board.D18, 98, 1) #When running on test board
         #SLAS.LedSetup(board.D18, 348, 1) #When running on SLAS workcell
         self.LedInitialise()
-        self.LedSections([[0,30],[30,60],[60,98]])
+        self.LedSections([[0,21],[21,63],[63,98]])
         #SLAS.LedSections([[0,110],[111,238],[239,348]]) #When running on SLAS workcell #Section 1 - [0,110], section 2 - [111,238], section 3 =- [239,348]
         #self.LedAnimationsTaught(["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"])
         #self.LedSectionAnimations([self.animationsTaught[0], self.animationsTaught[1], self.animationsTaught[2]])
