@@ -109,7 +109,7 @@ class Workcell(threading.Thread):
         if runQ.empty() == False:
             queue = runQ.get()
 
-            if queue == [0,0,0,0,0,0,0,0]:
+            if queue == [0,0,0,0,0,0,0,0,0]:
                 self.estops = [False, False, False]
                 self.doors = [False, False, False, False, False, False]
                 self.ledSectionAnimations = self.lastRunState
@@ -124,6 +124,12 @@ class Workcell(threading.Thread):
                 self.estops = queue[0:3]
                 self.ledSectionAnimations = ["EStop","EStop","EStop"]
                 self.firstRun = [True]*len(self.ledSections)
+            
+            if queue[3] == True or queue[4] == True or queue[5] == True or queue[6] == True or queue[7] == True or queue[8] == True:
+                self.doors = queue[3:]
+                self.ledSectionAnimations = ["DoorOpen","DoorOpen","DoorOpen"]
+                self.firstRun = [True]*len(self.ledSections)
+            
             
     def RunLoop(self):
         logging.debug("Starting Workcell running loop")
@@ -159,8 +165,8 @@ class SafetySystem(threading.Thread):
     def __init__(self):
         #threading.Thread.__init__(self)
         logging.debug("Starting SafetySystem thread")
-        self.doors = [0,0,0,0,0,0,0,0]
-        self.lastDoors =[0,0,0,0,0,0,0,0]
+        self.doors = [0,0,0,0,0,0,0,0,0]
+        self.lastDoors =[0,0,0,0,0,0,0,0,0]
         self.pin = digitalio.DigitalInOut(board.D4)
         self.pin.direction = digitalio.Direction.INPUT
         self.pin.pull = digitalio.Pull.DOWN
