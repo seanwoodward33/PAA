@@ -32,6 +32,7 @@ class Workcell(threading.Thread):
     def __init__(self):
         #threading.Thread.__init__(self)
         logging.debug("Starting Workcell thread")
+        self.q = queue.Queue()
         self.animationRun = True
         self.pulseDirection = "Down"
         self.dimLevelLeds = 0.3
@@ -49,6 +50,21 @@ class Workcell(threading.Thread):
         self.doors = [False, False, False, False, False, False]
         self.doorPositions = [[3,10],[15,22],[36,43],[44,50],[75,83],[88,95]] #Testing board
         #self.doorPositions = [[6,45],[55,100],[117,232],[117,232],[248,292],[303,344]] #SLAS Workcell
+    
+    def OnThread(self, function, *args, **kwargs):
+        self.q.put((function, args, kwargs))
+    
+    def run(self):
+        while True:
+            try:
+                function, args, kwargs = self.q.get(timeout = 0.01)
+                function (*args, **kwargs)
+            except queue.Empty:
+                self.idle()
+    
+    def idle(self):
+            pass
+    
     
     def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
         self.ledPin = ledGpioPin
@@ -184,7 +200,7 @@ if __name__ == '__main__':
     
     threading.Thread(target = safety).start()
     #safety.start()
-    #safety.checking()
+    safety.checking()
     
     x = 0
     
