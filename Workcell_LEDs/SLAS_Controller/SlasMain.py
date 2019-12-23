@@ -175,7 +175,7 @@ class SafetySystem(threading.Thread):
     def checking(self):
         logging.debug("Starting SafetySystem checking loop")
         while True:
-            position = 1
+            position = 2
             self.doors[position] = self.pin.value
             if self.doors[position] != self.lastDoors[position]:
                 logging.debug("Change in inputs")
