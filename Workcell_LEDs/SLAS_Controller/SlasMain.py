@@ -30,9 +30,7 @@ logging.basicConfig(level=logging.DEBUG, format='[%(levelname)s] - %(asctime)s -
 #Define workcell class
 class Workcell(threading.Thread):
     def __init__(self):
-        #threading.Thread.__init__(self)
         logging.debug("Starting Workcell thread")
-        #self.q = queue.Queue()
         self.animationRun = True
         self.pulseDirection = "Down"
         self.dimLevelLeds = 0.3
@@ -44,39 +42,24 @@ class Workcell(threading.Thread):
         self.endRunFinishTime = datetime.datetime.now()
         self.endRunPercentage = 0.0
         self.endRunLength= datetime.timedelta(seconds = 3)
+        self.lastRunState = ["","",""]
         self.estops = [False, False, False]
         self.estopPositions = [[0,2],[46,48],[96,98]] # Testing board
         #self.estopPositions = [[0,5],[46,56],[293,302]] # SLAS Workcell
         self.doors = [False, False, False, False, False, False]
         self.doorPositions = [[3,10],[15,22],[36,43],[44,50],[75,83],[88,95]] #Testing board
         #self.doorPositions = [[6,45],[55,100],[117,232],[117,232],[248,292],[303,344]] #SLAS Workcell
-        #super(Workcell, self).__init__()
         
         self.LedSetup(board.D18, 98, 1) #When running on test board
+        #SLAS.LedSetup(board.D18, 348, 1) #When running on SLAS workcell
         self.LedInitialise()
         self.LedSections([[0,30],[30,60],[60,98]])
+        #SLAS.LedSections([[0,110],[111,238],[239,348]]) #When running on SLAS workcell #Section 1 - [0,110], section 2 - [111,238], section 3 =- [239,348]
+        
         self.LedAnimationsTaught(["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"])
         self.LedSectionAnimations([self.animationsTaught[0], self.animationsTaught[1], self.animationsTaught[2]])
         self.RunLoop()
-        
-        
-        
-    """
-    def OnThread(self, function, *args, **kwargs):
-        self.q.put((function, args, kwargs))
-    
-    def run(self):
-        while True:
-            try:
-                function, args, kwargs = self.q.get(timeout = 0.01)
-                function (*args, **kwargs)
-            except queue.Empty:
-                self.idle()
-    
-    def idle(self):
-            pass
-    
-    """
+
     def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
         logging.debug("LedSetup Running")
         self.ledPin = ledGpioPin
@@ -123,12 +106,17 @@ class Workcell(threading.Thread):
         self.ledStrip.show()
     
     def QueueCheck(self):
-        #logging.debug("Checking the LED queue")
         if runQ.empty() == False:
-            runQ.get()
-            self.animationsTaught = self.animationsTaught[1:] + self.animationsTaught[:1]
-            self.ledSectionAnimations = [self.animationsTaught[0],self.animationsTaught[1],self.animationsTaught[2]]
-            self.firstRun = [True]*len(self.ledSections)
+            queue = runQ.get()
+
+            if queue == [0,0,0,0,0,0,0,0]:
+                self.estops = [False, False, False]
+                self.doors = [False, False, False, False, False, False]
+                self.ledSectionAnimations = self.lastRunState
+            
+            if queue[0] == True or queue[1] == True or queue[2] == True:
+                self.estops = queue[0:3]
+                self.ledSectionAnimations = ["EStop","EStop","EStop"]
             
     def RunLoop(self):
         logging.debug("Starting Workcell running loop")
@@ -139,6 +127,7 @@ class Workcell(threading.Thread):
             self.OutputLeds()
     
     def RunComplete(self, i):
+        self.lastRunState[i] = "RunComplete"
         SlasAnimations.RunComplete(self, i)
     
     def TeachMode(self, i):
@@ -148,9 +137,11 @@ class Workcell(threading.Thread):
         SlasAnimations.DoorOpen(self, i)
     
     def SystemRunningShort(self, i):
+        self.lastRunState[i] = "SystemRunningShort"
         SlasAnimations.SystemRunningShort(self, i)
     
     def SystemRunningLong(self, i):
+        self.lastRunState[i] = "SystemRunningLong"
         SlasAnimations.SystemRunningLong(self, i)
     
     def EStop(self,i):
@@ -161,22 +152,22 @@ class SafetySystem(threading.Thread):
     def __init__(self):
         #threading.Thread.__init__(self)
         logging.debug("Starting SafetySystem thread")
-        self.doors = [0]
-        self.lastDoors =[0]
+        self.doors = [0,0,0,0,0,0,0,0]
+        self.lastDoors =[0,0,0,0,0,0,0,0]
         self.pin = digitalio.DigitalInOut(board.D4)
         self.pin.direction = digitalio.Direction.INPUT
         self.pin.pull = digitalio.Pull.DOWN
         self.checking()
     
     def checking(self):
-        logging.debug("Starting SafetySstem checking loop")
+        logging.debug("Starting SafetySystem checking loop")
         while True:
             self.doors[0] = self.pin.value
             if self.doors[0] != self.lastDoors[0]:
                 print("Change in self.doors")
                 while runQ.empty() == False:
                     runQ.get()
-                runQ.put(self.doors[0])
+                runQ.put(self.doors)
             self.lastDoors[0] = self.doors[0]
             time.sleep(0.5)
 
@@ -207,103 +198,9 @@ def RgbCycle(i):
 
 
 if __name__ == '__main__':
-    
+    #Define queue to pass between threads    
     runQ = queue.Queue()
-    
-    #SLAS = Workcell()
-    #SLAS.start()
-    #SLAS = threading.Thread(target = Workcell)
-    #SLAS.start()
-    #safety = SafetySystem()
-    
+
+    #Establish Workcell and SafetySystem workcell
     threading.Thread(target = Workcell).start()
     threading.Thread(target = SafetySystem).start()
-
-    #threading.Thread(target = SLAS).start()
-    #time.sleep(1)
-    #SLAS.OnThread(SLAS.PrintTest())
-    #SLAS.OnThread(SLAS.LedSetup(board.D18, 98, 1))
-    #SLAS.OnThread(SLAS.LedInitialise())
-    #SLAS.OnThread(SLAS.LedSections([[0,30],[30,60],[60,98]]))
-    #animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
-    #SLAS.OnThread(SLAS.LedAnimationsTaught(animationsTaught))
-    #SLAS.OnThread(SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1], animationsTaught[2]]))
-    #SLAS.OnThread(SLAS.RunLoop())
-    #SLAS.start()    
-    #SLAS.LedSetup(board.D18, 98, 1) #When running on test board
-    #SLAS.LedInitialise()
-    #SLAS.LedSections([[0,30],[30,60],[60,98]])
-    #SLAS.LedAnimationsTaught(["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"])
-    #SLAS.LedSectionAnimations([SLAS.animationsTaught[0], SLAS.animationsTaught[1],SLAS.animationsTaught[2]])
-    #SLAS.RunLoop()
-    
-    #threading.Thread(target = safety).start()
-    #safety.start()
-    #safety.checking()
-    #SLAS.animationRun = False
-    
-    #x = 0
-    
-    #while x < 2000:
-     #   x = x+1
-"""
-        redPin.ChangeDutyCycle(rgbPwmValues[0]*100)
-        greenPin.ChangeDutyCycle(rgbPwmValues[1]*100)
-        bluePin.ChangeDutyCycle(rgbPwmValues[2]*100)
-        
-        rgbPwmValues = RgbCycle(rgbPwmValues)
-"""
-      #  if x == 1950:
-       #     x = 0
-            
-"""
-            animationsTaught = animationsTaught[1:] + animationsTaught[:1]
-            for i in range(len(SLAS.ledSectionAnimations)):
-                SLAS.ledSectionAnimations[i] = animationsTaught[i]
-            SLAS.firstRun = [True]*len(SLAS.ledSections)
-"""
-"""
-    logging.debug("Main SLAS control program running")
-    
-    logging.debug("Create SLAS workcell object")
-    SLAS = Workcell()
-    
-    logging.debug("Create SLAS LED strip")
-    SLAS.LedSetup(board.D18, 98, 1) #When running on test board
-    #SLAS.LedSetup(board.D18, 348, 1) #When running on SLAS workcell
-    
-    logging.debug("Initialise LEDs")
-    SLAS.LedInitialise()
-    
-    logging.debug("Setting up LED sections")
-    SLAS.LedSections([[0,30],[30,60],[60,98]]) #Testing board
-    #SLAS.LedSections([[0,110],[111,238],[239,348]]) #Section 1 - [0,110], section 2 - [111,238], section 3 =- [239,348]
-    
-    #Create list of all programmed animations to cycle through
-    animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
-    logging.debug("Setting animation to be first two animations in animationsTaught list")
-    SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1],animationsTaught[2]])
-    logging.debug("Animations now set to be:" + str(SLAS.ledSectionAnimations))
-    
-    
-    logging.debug("Updating for all sections, forever loop times")
-    x = 0
-    while x < 2000:
-        SLAS.UpdateBySection()
-        SLAS.OutputLeds()
-        x = x + 1
-        
-        redPin.ChangeDutyCycle(rgbPwmValues[0]*100)
-        greenPin.ChangeDutyCycle(rgbPwmValues[1]*100)
-        bluePin.ChangeDutyCycle(rgbPwmValues[2]*100)
-        
-        rgbPwmValues = RgbCycle(rgbPwmValues)
-        
-        if x == 1950:
-            x = 0
-            animationsTaught = animationsTaught[1:] + animationsTaught[:1]
-            for i in range(len(SLAS.ledSectionAnimations)):
-                SLAS.ledSectionAnimations[i] = animationsTaught[i]
-            SLAS.firstRun = [True]*len(SLAS.ledSections)
-            logging.debug("Animations now set to be:" + str(SLAS.ledSectionAnimations))
-"""
