@@ -93,6 +93,7 @@ class Workcell(threading.Thread):
             self.firstRun = [True]*len(SLAS.ledSections)
             
     def RunLoop(self):
+        logging.debug("Starting Workcell running loop")
         while True:
             self.QueueCheck()
             self.UpdateBySection()
@@ -129,6 +130,7 @@ class SafetySystem(threading.Thread):
         self.pin.pull = digitalio.Pull.DOWN
     
     def checking(self):
+        logging.debug("Starting SafetySstem checking loop")
         while True:
             self.doors[0] = self.pin.value
             if self.doors[0] != self.lastDoors[0]:
