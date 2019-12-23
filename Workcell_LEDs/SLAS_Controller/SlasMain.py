@@ -110,7 +110,7 @@ class Workcell(threading.Thread):
             
     def RunLoop(self):
         logging.debug("Starting Workcell running loop")
-        while True:
+        while self.animationRun == True:
             self.QueueCheck()
             self.UpdateBySection()
             self.QueueCheck()
@@ -208,6 +208,7 @@ if __name__ == '__main__':
     threading.Thread(target = safety).start()
     #safety.start()
     safety.checking()
+    SLAS.animationRun = False
     
     #x = 0
     
