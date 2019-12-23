@@ -195,7 +195,7 @@ if __name__ == '__main__':
     runQ = queue.Queue()
     
     SLAS = Workcell()
-    safety = SafetySystem()
+    #safety = SafetySystem()
 
     threading.Thread(target = SLAS).start()
     time.sleep(1)
@@ -214,10 +214,10 @@ if __name__ == '__main__':
     #SLAS.LedSectionAnimations([SLAS.animationsTaught[0], SLAS.animationsTaught[1],SLAS.animationsTaught[2]])
     #SLAS.RunLoop()
     
-    threading.Thread(target = safety).start()
+    #threading.Thread(target = safety).start()
     #safety.start()
-    safety.checking()
-    SLAS.animationRun = False
+    #safety.checking()
+    #SLAS.animationRun = False
     
     #x = 0
     
