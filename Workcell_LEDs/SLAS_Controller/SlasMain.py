@@ -166,6 +166,7 @@ class SafetySystem(threading.Thread):
         self.pin = digitalio.DigitalInOut(board.D4)
         self.pin.direction = digitalio.Direction.INPUT
         self.pin.pull = digitalio.Pull.DOWN
+        self.checking()
     
     def checking(self):
         logging.debug("Starting SafetySstem checking loop")
@@ -215,6 +216,7 @@ if __name__ == '__main__':
     #safety = SafetySystem()
     
     threading.Thread(target = Workcell).start()
+    threading.Thread(target = SafetySystem).start()
 
     #threading.Thread(target = SLAS).start()
     #time.sleep(1)
