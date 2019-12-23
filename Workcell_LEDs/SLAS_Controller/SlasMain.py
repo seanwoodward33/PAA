@@ -194,7 +194,9 @@ if __name__ == '__main__':
     
     runQ = queue.Queue()
     
-    SLAS = threading.Thread(target = Workcell()).start()
+    SLAS = Workcell()
+    SLAS.start()
+    #SLAS = threading.Thread(target = Workcell()).start()
     #SLAS.start()
     #safety = SafetySystem()
 
