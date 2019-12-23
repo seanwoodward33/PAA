@@ -33,7 +33,7 @@ class Workcell(threading.Thread):
         logging.debug("Starting Workcell thread")
         self.animationRun = True
         self.pulseDirection = "Down"
-        self.dimLevelLeds = 0.3
+        self.dimLevelLeds = 0.2
         self.runTime = datetime.datetime.now()
         self.runFinishTime = datetime.datetime.now()
         self.percentageComplete = 0.0
@@ -57,7 +57,7 @@ class Workcell(threading.Thread):
         #SLAS.LedSections([[0,110],[111,238],[239,348]]) #When running on SLAS workcell #Section 1 - [0,110], section 2 - [111,238], section 3 =- [239,348]
         #self.LedAnimationsTaught(["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"])
         #self.LedSectionAnimations([self.animationsTaught[0], self.animationsTaught[1], self.animationsTaught[2]])
-        self.LedSectionAnimations(["SystemRunningShort", "SystemRunningLong", "SystemRunningShort"])
+        self.LedSectionAnimations(["SystemRunningLong", "SystemRunningLong", "SystemRunningLong"])
         self.RunLoop()
 
     def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
@@ -119,16 +119,18 @@ class Workcell(threading.Thread):
                     if self.ledSectionAnimations[i] == "RunComplete":
                        self.firstRun[i] = True
                 """
+            if queue[3] == True or queue[4] == True or queue[5] == True or queue[6] == True or queue[7] == True or queue[8] == True:
+                self.doors = queue[3:]
+                self.ledSectionAnimations = ["DoorOpen","DoorOpen","DoorOpen"]
+                if sum(queue[3:]) > 1:
+                    self.ledSectionAnimations = ["TwoDoorOpen","TwoDoorOpen","TwoDoorOpen"]
+                self.firstRun = [True]*len(self.ledSections)
                 
             if queue[0] == True or queue[1] == True or queue[2] == True:
                 self.estops = queue[0:3]
                 self.ledSectionAnimations = ["EStop","EStop","EStop"]
                 self.firstRun = [True]*len(self.ledSections)
-            
-            if queue[3] == True or queue[4] == True or queue[5] == True or queue[6] == True or queue[7] == True or queue[8] == True:
-                self.doors = queue[3:]
-                self.ledSectionAnimations = ["DoorOpen","DoorOpen","DoorOpen"]
-                self.firstRun = [True]*len(self.ledSections)
+
             
             
     def RunLoop(self):
@@ -136,7 +138,6 @@ class Workcell(threading.Thread):
         while self.animationRun == True:
             self.QueueCheck()
             self.UpdateBySection()
-            #self.QueueCheck()
             self.OutputLeds()
     
     def RunComplete(self, i):
@@ -147,6 +148,9 @@ class Workcell(threading.Thread):
         SlasAnimations.TeachMode(self, i)
 
     def DoorOpen(self, i):
+        SlasAnimations.DoorOpen(self, i)
+    
+    def TwoDoorOpen(self, i):
         SlasAnimations.DoorOpen(self, i)
     
     def SystemRunningShort(self, i):

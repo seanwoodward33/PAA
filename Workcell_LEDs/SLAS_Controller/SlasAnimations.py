@@ -36,7 +36,7 @@ def RunComplete(self, i):
         self.ledArray[section[0]:section[1]][:,0:3] = np.roll(self.ledArray[section[0]:section[1]][:,0:3],1, axis = 0)
         if self.endRunPercentage >= 1:
             #self.ledSectionAnimations[i] = "SystemRunningLong"
-            self.ledSectionAnimations = ["SystemRunningShort","SystemRunningLong","SystemRunningShort"]
+            self.ledSectionAnimations = ["SystemRunningLong","SystemRunningLong","SystemRunningLong"]
             self.endRunPercentage = 0.0
             #self.firstRun[i] = True
             self.firstRun = [True,True,True]
@@ -116,7 +116,33 @@ def DoorOpen(self, i):
     for j in range(len(self.doors)):
         if self.doors[j] == True:
             self.ledArray[self.doorPositions[j][0]:self.doorPositions[j][1]][:,0:3] = [255,255,0]
-            #self.ledArray[self.estopPositions[j][0]:self.estopPositions[j][1]][:,3] = self.ledBrightness
+
+#TwoDoorOpen - White centre, Red nightrider left, Blue nightrider right
+def TwoDoorOpen(self, i):
+    section = self.ledSections[i]
+    self.ledArray[section[0]:section[1]][:,0:3] = [255,255,255]
+    
+    if self.firstRun[i] == True:
+        logging.debug("Running DoorOpen for first time. i value = " + str(i))
+        self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
+        self.pulseDirection = "Down"
+        self.firstRun[i] = False
+    
+    if self.firstRun[i] == False:
+        if self.pulseDirection == "Down":
+            self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] - 0.01
+            if self.ledArray[section[0]][3] <= self.dimLevelLeds:
+                #self.ledArray[section[0]:section[1]][:,3] = self.dimLevelLeds
+                self.pulseDirection = "Up"
+        if self.pulseDirection == "Up":
+            self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] + 0.01
+            if self.ledArray[section[0]][3] >= self.ledBrightness:
+                #self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
+                self.pulseDirection = "Down"
+    
+    for j in range(len(self.doors)):
+        if self.doors[j] == True:
+            self.ledArray[self.doorPositions[j][0]:self.doorPositions[j][1]][:,0:3] = [255,255,0]
 
 #SystemRunningShort - Solid Green for short edges
 def SystemRunningShort(self, i):
