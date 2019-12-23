@@ -63,6 +63,9 @@ class Workcell(threading.Thread):
     def LedSections(self, sections = [[0,98]]):
         self.ledSections = sections
         self.firstRun = [True]*len(self.ledSections)
+
+    def LedAnimationsTaught(self, animations = ["RunComplete"]): #default runcomplete rainbow used
+        self.animationsTaught = animations
     
     def LedSectionAnimations(self, animations = ["RunComplete"]): #default runcomplete rainbow used
         self.ledSectionAnimations = animations
@@ -76,12 +79,24 @@ class Workcell(threading.Thread):
             self.AnimationCall(self.ledSectionAnimations[i], i)
     
     def OutputLeds(self):
-        print("here")
         for i in range(self.ledCount):
-            #print (str(i) + " " + str(self.ledArray[i]))
             x = np.rint(self.ledArray[i][0:3]*self.ledArray[i,3]).astype(int)
             self.ledStrip[i] = (x[0],x[1],x[2])
-        self.ledStrip.show()        
+        self.ledStrip.show()
+    
+    def QueueCheck(self):
+        if runQ.empty() == False:
+            runQ.get()
+            self.animationsTaught = self.animationsTaught[1:] + self.animationsTaught[:1]
+            self.ledSectionAnimations = [self.animationsTaught[0],self.animationsTaught[1],self.animationsTaught[2]]
+            self.firstRun = [True]*len(SLAS.ledSections)
+            
+    def RunLoop(self):
+        while True:
+            QueueCheck()
+            SLAS.UpdateBySection()
+            QueueCheck()
+            SLAS.OutputLeds()
     
     def RunComplete(self, i):
         SlasAnimations.RunComplete(self, i)
@@ -110,20 +125,15 @@ class SafetySystem(threading.Thread):
         self.pin = digitalio.DigitalInOut(board.D4)
         self.pin.direction = digitalio.Direction.INPUT
         self.pin.pull = digitalio.Pull.DOWN
-        self.animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
     
     def checking(self):
         while True:
             self.doors[0] = self.pin.value
             if self.doors[0] != self.lastDoors[0]:
-                print (self.doors[0])
-                self.animationsTaught = self.animationsTaught[1:] + self.animationsTaught[:1]
-                SLAS.LedSectionAnimations = [self.animationsTaught[0],self.animationsTaught[1],self.animationsTaught[2]]
-                SLAS.firstRun = [True]*len(SLAS.ledSections)
+                while runQ.empty() == False:
+                    runQ.get()
+                runQ.put(self.doors[0])
             self.lastDoors[0] = self.doors[0]
-                
-                        
-        
 
 #Setup pins for RGB filter LEDs
 GPIO.setup(11, GPIO.OUT)
@@ -153,6 +163,8 @@ def RgbCycle(i):
 
 if __name__ == '__main__':
     
+    runQ = queue.Queue()
+    
     SLAS = Workcell()
     safety = SafetySystem()
     
@@ -160,18 +172,16 @@ if __name__ == '__main__':
     SLAS.LedSetup(board.D18, 98, 1) #When running on test board
     SLAS.LedInitialise()
     SLAS.LedSections([[0,30],[30,60],[60,98]])
-    animationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
-    SLAS.LedSectionAnimations([animationsTaught[0], animationsTaught[1],animationsTaught[2]])
+    SLAS.LedAnimationsTaught = ["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"]
+    SLAS.LedSectionAnimations([SLAS.animationsTaught[0], SLAS.animationsTaught[1],SLAS.animationsTaught[2]])
+    SLAS.RunLoop()
     safety.start()
     safety.checking()
     
     x = 0
     
     while x < 2000:
-        SLAS.UpdateBySection()
-        SLAS.OutputLeds()
-        x = x + 1
-        print (X)
+        x = x+1
         """
         redPin.ChangeDutyCycle(rgbPwmValues[0]*100)
         greenPin.ChangeDutyCycle(rgbPwmValues[1]*100)
