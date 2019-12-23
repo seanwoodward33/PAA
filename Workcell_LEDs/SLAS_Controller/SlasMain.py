@@ -55,9 +55,9 @@ class Workcell(threading.Thread):
         self.LedInitialise()
         self.LedSections([[0,30],[30,60],[60,98]])
         #SLAS.LedSections([[0,110],[111,238],[239,348]]) #When running on SLAS workcell #Section 1 - [0,110], section 2 - [111,238], section 3 =- [239,348]
-        
-        self.LedAnimationsTaught(["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"])
-        self.LedSectionAnimations([self.animationsTaught[0], self.animationsTaught[1], self.animationsTaught[2]])
+        #self.LedAnimationsTaught(["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"])
+        #self.LedSectionAnimations([self.animationsTaught[0], self.animationsTaught[1], self.animationsTaught[2]])
+        self.LedSectionAnimations(["SystemRunningShort", "SystemRunningLong", "SystemRunningShort"])
         self.RunLoop()
 
     def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):
