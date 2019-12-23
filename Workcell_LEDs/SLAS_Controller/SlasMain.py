@@ -176,7 +176,6 @@ class SafetySystem(threading.Thread):
                     runQ.get()
                 runQ.put(self.doors)
             self.lastDoors[0] = self.doors[0]
-            time.sleep(0.5)
 
 #Setup pins for RGB filter LEDs
 GPIO.setup(11, GPIO.OUT)
