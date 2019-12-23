@@ -123,7 +123,7 @@ class Workcell(threading.Thread):
         while self.animationRun == True:
             self.QueueCheck()
             self.UpdateBySection()
-            self.QueueCheck()
+            #self.QueueCheck()
             self.OutputLeds()
     
     def RunComplete(self, i):
