@@ -56,7 +56,7 @@ class Workcell(threading.Thread):
         self.LedInitialise()
         self.LedSections([[0,30],[30,60],[60,98]])
         self.LedAnimationsTaught(["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"])
-        self.LedSectionAnimations([SLAS.animationsTaught[0], SLAS.animationsTaught[1],SLAS.animationsTaught[2]])
+        self.LedSectionAnimations([self.animationsTaught[0], self.animationsTaught[1], self.animationsTaught[2]])
         self.RunLoop()
         
         
