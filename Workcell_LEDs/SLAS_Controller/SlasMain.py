@@ -96,7 +96,7 @@ class Workcell(threading.Thread):
             self.QueueCheck()
             self.UpdateBySection()
             self.QueueCheck()
-            self.SLAS.OutputLeds()
+            self.OutputLeds()
     
     def RunComplete(self, i):
         SlasAnimations.RunComplete(self, i)
