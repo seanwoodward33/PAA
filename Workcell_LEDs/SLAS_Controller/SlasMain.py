@@ -86,7 +86,7 @@ class Workcell(threading.Thread):
         self.firstRun = [True]*len(self.ledSections)
     
     def PrintTest(self):
-        print ("test")
+        logging.debug("Test")
 
     def LedAnimationsTaught(self, animations = ["RunComplete"]): #default runcomplete rainbow used
         logging.debug("LED animations taught taught")
