@@ -113,6 +113,9 @@ class Workcell(threading.Thread):
                 self.estops = [False, False, False]
                 self.doors = [False, False, False, False, False, False]
                 self.ledSectionAnimations = self.lastRunState
+                for i in range(len(self.ledSectionAnimations)):
+                    if self.ledSectionAnimations[i] == "RunComplete":
+                       self.firstRun[i] = True
             
             if queue[0] == True or queue[1] == True or queue[2] == True:
                 self.estops = queue[0:3]
