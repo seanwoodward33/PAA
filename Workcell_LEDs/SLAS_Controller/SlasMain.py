@@ -128,7 +128,7 @@ class Workcell(threading.Thread):
             runQ.get()
             self.animationsTaught = self.animationsTaught[1:] + self.animationsTaught[:1]
             self.ledSectionAnimations = [self.animationsTaught[0],self.animationsTaught[1],self.animationsTaught[2]]
-            self.firstRun = [True]*len(SLAS.ledSections)
+            self.firstRun = [True]*len(self.ledSections)
             
     def RunLoop(self):
         logging.debug("Starting Workcell running loop")
