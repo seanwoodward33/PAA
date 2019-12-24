@@ -179,7 +179,7 @@ class SafetySystem(threading.Thread):
         logging.debug("Starting SafetySystem thread")
         self.doors = [0,0,0,0,0,0,0,0,0]
         self.lastDoors =[0,0,0,0,0,0,0,0,0]
-        self.pin = digitalio.DigitalInOut(board.D1)
+        self.pin = digitalio.DigitalInOut(board.D2)
         self.pin.direction = digitalio.Direction.INPUT
         self.pin.pull = digitalio.Pull.DOWN
         self.checking()
