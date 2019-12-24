@@ -233,7 +233,7 @@ class SafetySystem(threading.Thread):
                     logging.debug("Doors string = " + str(self.doors))
                     while runQ.empty() == False:
                         runQ.get()
-                        runQ.put(self.doors)
+                    runQ.put(self.doors)
                     self.lastDoors[i] = self.doors[i]
 
 #Setup pins for RGB filter LEDs
