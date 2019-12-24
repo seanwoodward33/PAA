@@ -33,7 +33,7 @@ class Workcell(threading.Thread):
         logging.debug("Starting Workcell thread")
         self.animationRun = True
         self.pulseDirection = "Down"
-        self.dimLevelLeds = 0.2
+        self.dimLevelLeds = 0.1
         self.runTime = datetime.datetime.now()
         self.runFinishTime = datetime.datetime.now()
         self.percentageComplete = 0.0
