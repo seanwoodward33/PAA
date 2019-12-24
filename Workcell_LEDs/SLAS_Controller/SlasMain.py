@@ -116,6 +116,8 @@ class Workcell(threading.Thread):
     def QueueCheck(self):
         if runQ.empty() == False:
             queue = runQ.get()
+            #Safety system treats high as safe, code treats low as safe
+            queue = [not i for i in queue]
 
             if queue == [0,0,0,0,0,0,0,0,0]:
                 self.estops = [False, False, False]
@@ -177,8 +179,8 @@ class SafetySystem(threading.Thread):
     def __init__(self):
         #threading.Thread.__init__(self)
         logging.debug("Starting SafetySystem thread")
-        self.doors = [0,0,0,0,0,0,0,0,0]
-        self.lastDoors =[0,0,0,0,0,0,0,0,0]
+        self.doors = [1,1,1,1,1,1,1,1,1] #High/True equals safe
+        self.lastDoors =[1,1,1,1,1,1,1,1,1] #High/True equals safe
         self.pin = digitalio.DigitalInOut(board.D2)
         self.pin.direction = digitalio.Direction.INPUT
         self.pin.pull = digitalio.Pull.DOWN
