@@ -117,10 +117,10 @@ class Workcell(threading.Thread):
         if runQ.empty() == False:
             logging.debug("Change in safetySystem state detected.")
             queue = runQ.get()
-            logging.debug("Queue read to be: " + str(queue))
+            #logging.debug("Queue read to be: " + str(queue))
             #Safety system treats high as safe, code treats low as safe
             queue = [not i for i in queue]
-            logging.debug("Negated queue is: " + str(queue))
+            #logging.debug("Negated queue is: " + str(queue))
 
             if queue == [0,0,0,0,0,0,0,0,0]:
                 self.estops = [False, False, False]
@@ -230,7 +230,7 @@ class SafetySystem(threading.Thread):
             
             for i in range(len(self.doors)):
                 if self.doors[i] != self.lastDoors[i]:
-                    logging.debug("Change in inputs")
+                    #logging.debug("Change in inputs")
                     logging.debug("Doors string = " + str(self.doors))
                     while runQ.empty() == False:
                         runQ.get()
