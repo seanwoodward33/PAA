@@ -161,7 +161,8 @@ def SystemRunningShort(self, i):
 #EStop - Pulse Red
 def EStop(self, i):
     section = self.ledSections[i]
-    self.ledArray[section[0]:section[1]][:,0:3] = [255,0,0]
+    self.ledArray[section[0]:section[1]][:,0:3] = [0,0,0]
+    #self.ledArray[section[0]:section[1]][:,0:3] = [255,0,0]
     
     if self.firstRun[i] == True:
         logging.debug("Running EStop for first time. i value = " + str(i))
@@ -183,5 +184,6 @@ def EStop(self, i):
     
     for j in range(len(self.estops)):
         if self.estops[j] == True:
-            self.ledArray[self.estopPositions[j][0]:self.estopPositions[j][1]][:,0:3] = [255,255,0]
+            self.ledArray[self.estopPositions[j][0]:self.estopPositions[j][1]][:,0:3] = [0,0,0]
+            #self.ledArray[self.estopPositions[j][0]:self.estopPositions[j][1]][:,0:3] = [255,255,0]
             #self.ledArray[self.estopPositions[j][0]:self.estopPositions[j][1]][:,3] = self.ledBrightness
