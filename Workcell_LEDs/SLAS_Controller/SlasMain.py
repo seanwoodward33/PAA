@@ -48,6 +48,8 @@ class Workcell(threading.Thread):
         #self.estopPositions = [[0,5],[46,56],[293,302]] # SLAS Workcell
         self.doors = [False, False, False, False, False, False]
         self.doorPositions = [[3,10],[15,22],[36,43],[44,50],[75,83],[88,95]] #Testing board
+        self.twoDoorColours = [[255,0,0], [255,255,255],[0,0,255]]
+        self.twoDoorWidth = 5
         #self.doorPositions = [[6,45],[55,100],[117,232],[117,232],[248,292],[303,344]] #SLAS Workcell
         
         self.LedSetup(board.D18, 98, 1) #When running on test board
@@ -57,7 +59,8 @@ class Workcell(threading.Thread):
         #SLAS.LedSections([[0,110],[111,238],[239,348]]) #When running on SLAS workcell #Section 1 - [0,110], section 2 - [111,238], section 3 =- [239,348]
         #self.LedAnimationsTaught(["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"])
         #self.LedSectionAnimations([self.animationsTaught[0], self.animationsTaught[1], self.animationsTaught[2]])
-        self.LedSectionAnimations(["SystemRunningLong", "SystemRunningLong", "SystemRunningLong"])
+        self.LedSectionAnimations(["TwoDoorsOpen", "TwoDoorsOpen", "TwoDoorsOpen"])
+        #self.LedSectionAnimations(["SystemRunningLong", "SystemRunningLong", "SystemRunningLong"])
         self.RunLoop()
 
     def LedSetup(self, ledGpioPin, ledCount, ledBrightness, ledOrder = neopixel.GRB):

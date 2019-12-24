@@ -123,27 +123,27 @@ def TwoDoorOpen(self, i):
     self.ledArray[section[0]:section[1]][:,0:3] = [255,255,255]
     
     if self.firstRun[i] == True:
-        logging.debug("Running DoorOpen for first time. i value = " + str(i))
+        logging.debug("Running TwoDoorOpen for first time. i value = " + str(i))
         self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
+        self.ledArray[section[0]:section[0]+self.twoDoorWidth][:,0,3] = self.twoDoorColours[i]
         self.pulseDirection = "Down"
         self.firstRun[i] = False
     
     if self.firstRun[i] == False:
         if self.pulseDirection == "Down":
-            self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] - 0.01
-            if self.ledArray[section[0]][3] <= self.dimLevelLeds:
-                #self.ledArray[section[0]:section[1]][:,3] = self.dimLevelLeds
+            self.ledArray[section[0]:section[1]][:,3] = np.roll(self.ledArray[section[0]:section[1]][:,0:3],1, axis = 0)
+            if self.ledArray[section[1]][:,3] == self.twoDoorColours[i]:
                 self.pulseDirection = "Up"
+                
         if self.pulseDirection == "Up":
-            self.ledArray[section[0]:section[1]][:,3] = self.ledArray[section[0]:section[1]][:,3] + 0.01
-            if self.ledArray[section[0]][3] >= self.ledBrightness:
-                #self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
+            self.ledArray[section[0]:section[1]][:,3] = np.roll(self.ledArray[section[0]:section[1]][:,0:3],-1, axis = 0)
+            if self.ledArray[section[0]][:,3] == self.twoDoorColours[i]:
                 self.pulseDirection = "Down"
-    
+"""
     for j in range(len(self.doors)):
         if self.doors[j] == True:
             self.ledArray[self.doorPositions[j][0]:self.doorPositions[j][1]][:,0:3] = [255,255,0]
-
+"""
 #SystemRunningShort - Solid Green for short edges
 def SystemRunningShort(self, i):
     section = self.ledSections[i]
