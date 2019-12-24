@@ -115,9 +115,12 @@ class Workcell(threading.Thread):
     
     def QueueCheck(self):
         if runQ.empty() == False:
+            logging.debug("Change in safetySystem state detected.")
             queue = runQ.get()
+            logging.debug("Queue read to be: " + str(queue))
             #Safety system treats high as safe, code treats low as safe
             queue = [not i for i in queue]
+            logging.debug("Negated queue is: " + str(queue))
 
             if queue == [0,0,0,0,0,0,0,0,0]:
                 self.estops = [False, False, False]
@@ -181,6 +184,7 @@ class SafetySystem(threading.Thread):
         logging.debug("Starting SafetySystem thread")
         self.doors = [1,1,1,1,1,1,1,1,1] #High/True equals safe
         self.lastDoors =[1,1,1,1,1,1,1,1,1] #High/True equals safe
+        
         self.estop1 = digitalio.DigitalInOut(board.D2)
         self.estop1.direction = digitalio.Direction.INPUT
         self.estop1.pull = digitalio.Pull.DOWN
