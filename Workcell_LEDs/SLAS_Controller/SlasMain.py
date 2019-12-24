@@ -223,7 +223,7 @@ class SafetySystem(threading.Thread):
             self.doors[7] = self.door5.value
             self.doors[8] = self.door6.value
             
-            for i in len(self.doors):
+            for i in range(len(self.doors)):
                 if self.doors[i] != self.lastDoors[i]:
                     logging.debug("Change in inputs")
                     logging.debug("Doors string = " + str(self.doors))
