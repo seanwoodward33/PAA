@@ -125,7 +125,7 @@ def TwoDoorOpen(self, i):
     if self.firstRun[i] == True:
         logging.debug("Running TwoDoorOpen for first time. i value = " + str(i))
         self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
-        self.ledArray[section[0]:section[0]+self.twoDoorWidth][:,0,3] = self.twoDoorColours[i]
+        self.ledArray[section[0]:section[0]+self.twoDoorWidth][:,0:3] = self.twoDoorColours[i]
         self.pulseDirection = "Down"
         self.firstRun[i] = False
     
