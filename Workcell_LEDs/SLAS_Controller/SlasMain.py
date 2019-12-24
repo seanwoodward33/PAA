@@ -181,27 +181,56 @@ class SafetySystem(threading.Thread):
         logging.debug("Starting SafetySystem thread")
         self.doors = [1,1,1,1,1,1,1,1,1] #High/True equals safe
         self.lastDoors =[1,1,1,1,1,1,1,1,1] #High/True equals safe
-        self.pin = digitalio.DigitalInOut(board.D2)
-        self.pin.direction = digitalio.Direction.INPUT
-        self.pin.pull = digitalio.Pull.DOWN
+        self.estop1 = digitalio.DigitalInOut(board.D2)
+        self.estop1.direction = digitalio.Direction.INPUT
+        self.estop1.pull = digitalio.Pull.DOWN
+        self.estop2 = digitalio.DigitalInOut(board.D3)
+        self.estop2.direction = digitalio.Direction.INPUT
+        self.estop2.pull = digitalio.Pull.DOWN
+        self.estop3 = digitalio.DigitalInOut(board.D4)
+        self.estop3.direction = digitalio.Direction.INPUT
+        self.estop3.pull = digitalio.Pull.DOWN
+        self.door1 = digitalio.DigitalInOut(board.D5)
+        self.door1.direction = digitalio.Direction.INPUT
+        self.door1.pull = digitalio.Pull.DOWN
+        self.door2 = digitalio.DigitalInOut(board.D6)
+        self.door2.direction = digitalio.Direction.INPUT
+        self.door2.pull = digitalio.Pull.DOWN
+        self.door3 = digitalio.DigitalInOut(board.D7)
+        self.door3.direction = digitalio.Direction.INPUT
+        self.door3.pull = digitalio.Pull.DOWN
+        self.door4 = digitalio.DigitalInOut(board.D8)
+        self.door4.direction = digitalio.Direction.INPUT
+        self.door4.pull = digitalio.Pull.DOWN
+        self.door5 = digitalio.DigitalInOut(board.D9)
+        self.door5.direction = digitalio.Direction.INPUT
+        self.door5.pull = digitalio.Pull.DOWN
+        self.door6 = digitalio.DigitalInOut(board.D10)
+        self.door6.direction = digitalio.Direction.INPUT
+        self.door6.pull = digitalio.Pull.DOWN
         self.checking()
     
     def checking(self):
         logging.debug("Starting SafetySystem checking loop")
-        position = 0
-        increment = 0
         while True:
-            self.doors[position] = self.pin.value
-            if self.doors[position] != self.lastDoors[position]:
-                logging.debug("Change in inputs")
-                logging.debug("Doors string = " + str(self.doors))
-                while runQ.empty() == False:
-                    runQ.get()
-                runQ.put(self.doors)
-                increment = (increment + 1) % 2
-                if increment == 0:
-                    position = (position + 1) % 9
-            self.lastDoors[position] = self.doors[position]
+            self.doors[0] = self.estop1.value
+            self.doors[1] = self.estop2.value
+            self.doors[2] = self.estop3.value
+            self.doors[3] = self.door1.value
+            self.doors[4] = self.door2.value
+            self.doors[5] = self.door3.value
+            self.doors[6] = self.door4.value
+            self.doors[7] = self.door5.value
+            self.doors[8] = self.door6.value
+            
+            for i in len(self.doors):
+                if self.doors[i] != self.lastDoors[i]:
+                    logging.debug("Change in inputs")
+                    logging.debug("Doors string = " + str(self.doors))
+                    while runQ.empty() == False:
+                        runQ.get()
+                        runQ.put(self.doors)
+                    self.lastDoors[i] = self.doors[i]
 
 #Setup pins for RGB filter LEDs
 GPIO.setup(11, GPIO.OUT)
