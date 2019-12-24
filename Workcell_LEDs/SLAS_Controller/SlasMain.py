@@ -179,7 +179,7 @@ class SafetySystem(threading.Thread):
         logging.debug("Starting SafetySystem thread")
         self.doors = [0,0,0,0,0,0,0,0,0]
         self.lastDoors =[0,0,0,0,0,0,0,0,0]
-        self.pin = digitalio.DigitalInOut(board.D4)
+        self.pin = digitalio.DigitalInOut(board.D1)
         self.pin.direction = digitalio.Direction.INPUT
         self.pin.pull = digitalio.Pull.DOWN
         self.checking()
@@ -192,6 +192,7 @@ class SafetySystem(threading.Thread):
             self.doors[position] = self.pin.value
             if self.doors[position] != self.lastDoors[position]:
                 logging.debug("Change in inputs")
+                logging.debug("Doors string = " + str(self.doors))
                 while runQ.empty() == False:
                     runQ.get()
                 runQ.put(self.doors)
