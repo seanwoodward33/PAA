@@ -50,6 +50,10 @@ class Workcell(threading.Thread):
         self.doorPositions = [[3,10],[15,22],[36,43],[44,50],[75,83],[88,95]] #Testing board
         self.twoDoorColours = [[255,0,0], [255,255,255],[0,0,255]]
         self.twoDoorWidth = 5
+        self.animationDirection = ["Right","Right","Right"]
+       
+        
+        #Setting up system to run
         #self.doorPositions = [[6,45],[55,100],[117,232],[117,232],[248,292],[303,344]] #SLAS Workcell
         
         self.LedSetup(board.D18, 98, 1) #When running on test board
@@ -208,7 +212,7 @@ redPin = GPIO.PWM(11, 1000)
 greenPin = GPIO.PWM(12, 1000)
 bluePin = GPIO.PWM(13, 1000)
 
-rgbPwmValues = (1,0,0)
+rgbPwmValues = (1,0,1)
 
 redPin.start(rgbPwmValues[0])
 greenPin.start(rgbPwmValues[1])

@@ -126,21 +126,19 @@ def TwoDoorOpen(self, i):
         self.ledArray[section[0]:section[1]][:,0:3] = [255,255,255]
         self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
         self.ledArray[section[0]:section[0]+self.twoDoorWidth][:,0:3] = self.twoDoorColours[i]
-        self.pulseDirection = "Down"
+        self.animationDirection[i]= "Right"
         self.firstRun[i] = False
     
     if self.firstRun[i] == False:
-        if self.pulseDirection == "Down":
+        if self.animationDirection[i] == "Right":
             self.ledArray[section[0]:section[1]][:,0:3] = np.roll(self.ledArray[section[0]:section[1]][:,0:3],1, axis = 0)
-            if i == len(self.ledSections)-1:
-                if np.array_equal(self.ledArray[section[1]-1][0:3],self.twoDoorColours[i]):
-                    self.pulseDirection = "Up"
+            if np.array_equal(self.ledArray[section[1]-1][0:3],self.twoDoorColours[i]):
+                self.animationDirection[i] = "Left"
                 
-        if self.pulseDirection == "Up":
+        if self.animationDirection[i] == "Left":
             self.ledArray[section[0]:section[1]][:,0:3] = np.roll(self.ledArray[section[0]:section[1]][:,0:3],-1, axis = 0)
-            if i == len(self.ledSections)-1:
-                if np.array_equal(self.ledArray[section[0]][0:3],self.twoDoorColours[i]):
-                    self.pulseDirection = "Down"
+            if np.array_equal(self.ledArray[section[0]][0:3],self.twoDoorColours[i]):
+                self.animationDirection[i] = "Right"
 """
     for j in range(len(self.doors)):
         if self.doors[j] == True:
