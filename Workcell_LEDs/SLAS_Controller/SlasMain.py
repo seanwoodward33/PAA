@@ -117,16 +117,17 @@ class Workcell(threading.Thread):
         if runQ.empty() == False:
             logging.debug("Change in safetySystem state detected.")
             queue = runQ.get()
-            #logging.debug("Queue read to be: " + str(queue))
+            logging.debug("Queue read to be: " + str(queue))
             #Safety system treats high as safe, code treats low as safe
             queue = [not i for i in queue]
-            #logging.debug("Negated queue is: " + str(queue))
+            logging.debug("Negated queue is: " + str(queue))
 
             if queue == [0,0,0,0,0,0,0,0,0]:
                 self.estops = [False, False, False]
                 self.doors = [False, False, False, False, False, False]
                 self.ledSectionAnimations = self.lastRunState
                 self.firstRun = [True]*len(self.ledSections)
+                
                 """
                 for i in range(len(self.ledSectionAnimations)):
                     if self.ledSectionAnimations[i] == "RunComplete":
