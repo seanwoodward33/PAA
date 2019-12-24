@@ -132,7 +132,7 @@ def TwoDoorOpen(self, i):
     if self.firstRun[i] == False:
         if self.pulseDirection == "Down":
             self.ledArray[section[0]:section[1]][:,0:3] = np.roll(self.ledArray[section[0]:section[1]][:,0:3],1, axis = 0)
-            if np.array_equal(self.ledArray[section[1]][0:3],self.twoDoorColours[i]):
+            if np.array_equal(self.ledArray[section[1]-1][0:3],self.twoDoorColours[i]):
                 self.pulseDirection = "Up"
                 
         if self.pulseDirection == "Up":
