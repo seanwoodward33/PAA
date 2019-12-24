@@ -95,7 +95,7 @@ class animationClass(threading.Thread):
 #Default run program
 if __name__ == '__main__':
     #Set up LED strip
-    ledStrip1 = PiCont.LedSetup(ledCount = 98, ledPin = board.D18) #Using board package
+    ledStrip1 = PiCont.LedSetup(ledCount = 348, ledPin = board.D18) #Using board package
     
     #Set up queues for passing between threads
     runQ = queue.Queue()
