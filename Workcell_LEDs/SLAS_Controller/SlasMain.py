@@ -132,13 +132,14 @@ class Workcell(threading.Thread):
                     if self.ledSectionAnimations[i] == "RunComplete":
                        self.firstRun[i] = True
                 """
+            """    
             if queue[3] == True or queue[4] == True or queue[5] == True or queue[6] == True or queue[7] == True or queue[8] == True:
                 self.doors = queue[3:]
                 self.ledSectionAnimations = ["DoorOpen","DoorOpen","DoorOpen"]
                 if sum(queue[3:]) > 1:
                     self.ledSectionAnimations = ["TwoDoorOpen","TwoDoorOpen","TwoDoorOpen"]
                 self.firstRun = [True]*len(self.ledSections)
-                
+            """    
             if queue[0] == True or queue[1] == True or queue[2] == True:
                 self.estops = queue[0:3]
                 self.ledSectionAnimations = ["EStop","EStop","EStop"]
