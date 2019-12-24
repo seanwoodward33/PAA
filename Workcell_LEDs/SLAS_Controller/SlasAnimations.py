@@ -120,10 +120,10 @@ def DoorOpen(self, i):
 #TwoDoorOpen - White centre, Red nightrider left, Blue nightrider right
 def TwoDoorOpen(self, i):
     section = self.ledSections[i]
-    self.ledArray[section[0]:section[1]][:,0:3] = [255,255,255]
     
     if self.firstRun[i] == True:
         logging.debug("Running TwoDoorOpen for first time. i value = " + str(i))
+        self.ledArray[section[0]:section[1]][:,0:3] = [255,255,255]
         self.ledArray[section[0]:section[1]][:,3] = self.ledBrightness
         self.ledArray[section[0]:section[0]+self.twoDoorWidth][:,0:3] = self.twoDoorColours[i]
         self.pulseDirection = "Down"
