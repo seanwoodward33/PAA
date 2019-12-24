@@ -59,7 +59,7 @@ class Workcell(threading.Thread):
         #SLAS.LedSections([[0,110],[111,238],[239,348]]) #When running on SLAS workcell #Section 1 - [0,110], section 2 - [111,238], section 3 =- [239,348]
         #self.LedAnimationsTaught(["RunComplete", "TeachMode", "EStop", "DoorOpen", "SystemRunningShort", "EStop", "SystemRunningLong"])
         #self.LedSectionAnimations([self.animationsTaught[0], self.animationsTaught[1], self.animationsTaught[2]])
-        self.LedSectionAnimations(["TwoDoorsOpen", "TwoDoorsOpen", "TwoDoorsOpen"])
+        self.LedSectionAnimations(["TwoDoorOpen", "TwoDoorOpen", "TwoDoorOpen"])
         #self.LedSectionAnimations(["SystemRunningLong", "SystemRunningLong", "SystemRunningLong"])
         self.RunLoop()
 
@@ -154,7 +154,7 @@ class Workcell(threading.Thread):
         SlasAnimations.DoorOpen(self, i)
     
     def TwoDoorOpen(self, i):
-        SlasAnimations.DoorOpen(self, i)
+        SlasAnimations.TwoDoorOpen(self, i)
     
     def SystemRunningShort(self, i):
         self.lastRunState[i] = "SystemRunningShort"
