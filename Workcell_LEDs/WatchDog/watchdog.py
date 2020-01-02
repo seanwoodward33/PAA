@@ -13,4 +13,4 @@ for searches in prog_array:
     m = re.search("./" + searches[0], result.decode("utf_8"))
     if m == None:
         
-        subprocess.Popen("sudo", [searches[1], "&"])
+        subprocess.Popen(["sudo", searches[1], "&"])
