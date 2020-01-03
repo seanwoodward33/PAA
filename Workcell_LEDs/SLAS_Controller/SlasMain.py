@@ -245,37 +245,59 @@ class SafetySystem(threading.Thread):
                         runQ.get()
                     runQ.put(self.doors)
                     self.lastDoors[i] = self.doors[i]
-    
+""" 
+#Define RGB Class for dumb lights
+class RgbLights(threading.Thread):
+    def __init__(self):
+        logging.debug("Starting RGBLights thread")
+        #Setup pins for RGB filter LEDs
+        GPIO.setup(11, GPIO.OUT)
+        GPIO.setup(12, GPIO.OUT)
+        GPIO.setup(13, GPIO.OUT)
+
+        GPIO.output(11, GPIO.HIGH)
+        GPIO.output(12, GPIO.HIGH)
+        GPIO.output(13, GPIO.HIGH)
+
+        self.redPin = GPIO.PWM(11, 1000)
+        self.greenPin = GPIO.PWM(12, 1000)
+        self.bluePin = GPIO.PWM(13, 1000)
+
+        self.rgbPwmValues = (0,1,0)
+        self.rgbColour = "Green"
+"""        
+        
+
 def RgbRed():
     rgbPwmValues = (1,0,0)
-    redPin.start(rgbPwmValues[0])
-    greenPin.start(rgbPwmValues[1])
-    bluePin.start(rgbPwmValues[2])
+    redPin.ChangeDutyCycle(rgbPwmValues[0])
+    greenPin.ChangeDutyCycle(rgbPwmValues[1])
+    bluePin.ChangeDutyCycle(rgbPwmValues[2])
 
 def RgbGreen():
     rgbPwmValues = (0,1,0)
-    redPin.start(rgbPwmValues[0])
-    greenPin.start(rgbPwmValues[1])
-    bluePin.start(rgbPwmValues[2])
+    redPin.ChangeDutyCycle(rgbPwmValues[0])
+    greenPin.ChangeDutyCycle(rgbPwmValues[1])
+    bluePin.ChangeDutyCycle(rgbPwmValues[2])
 
 def RgbPurple():
     rgbPwmValues = (0.5,0,0.5)
-    redPin.start(rgbPwmValues[0])
-    greenPin.start(rgbPwmValues[1])
-    bluePin.start(rgbPwmValues[2])
+    redPin.ChangeDutyCycle(rgbPwmValues[0])
+    greenPin.ChangeDutyCycle(rgbPwmValues[1])
+    bluePin.ChangeDutyCycle(rgbPwmValues[2])
 
 def RgbWhite():
     rgbPwmValues = (1,1,1)
-    redPin.start(rgbPwmValues[0])
-    greenPin.start(rgbPwmValues[1])
-    bluePin.start(rgbPwmValues[2])
+    redPin.ChangeDutyCycle(rgbPwmValues[0])
+    greenPin.ChangeDutyCycle(rgbPwmValues[1])
+    bluePin.ChangeDutyCycle(rgbPwmValues[2])
 
 def RgbRainbow(i):
     i = colorsys.rgb_to_hsv(i[0],i[1],i[2])
     rgbPwmValues = colorsys.hsv_to_rgb((i[0]+0.01)%1, 1, 1)
-    redPin.start(rgbPwmValues[0])
-    greenPin.start(rgbPwmValues[1])
-    bluePin.start(rgbPwmValues[2])
+    redPin.ChangeDutyCycle(rgbPwmValues[0])
+    greenPin.ChangeDutyCycle(rgbPwmValues[1])
+    bluePin.ChangeDutyCycle(rgbPwmValues[2])
     return i
 
 #Setup pins for RGB filter LEDs
