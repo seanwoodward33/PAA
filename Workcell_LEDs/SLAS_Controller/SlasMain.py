@@ -56,8 +56,6 @@ class Workcell(threading.Thread):
        
         
         """Setting up system to run"""
-        
-        
         #self.LedSetup(board.D18, 98, 1) #When running on test board
         self.LedSetup(board.D18, 348, 1) #When running on SLAS workcell
         self.LedInitialise()
@@ -160,6 +158,7 @@ class Workcell(threading.Thread):
             self.OutputLeds()
     
     def RunComplete(self, i):
+        rgbQ.put("Rainbow")
         self.lastRunState[i] = "RunComplete"
         SlasAnimations.RunComplete(self, i)
     
@@ -167,20 +166,25 @@ class Workcell(threading.Thread):
         SlasAnimations.TeachMode(self, i)
 
     def DoorOpen(self, i):
+        rgbQ.put("Purple")
         SlasAnimations.DoorOpen(self, i)
     
     def TwoDoorOpen(self, i):
+        rgbQ.put("White")
         SlasAnimations.TwoDoorOpen(self, i)
     
     def SystemRunningShort(self, i):
+        rgbQ.put("Green")
         self.lastRunState[i] = "SystemRunningShort"
         SlasAnimations.SystemRunningShort(self, i)
     
     def SystemRunningLong(self, i):
+        rgbQ.put("Green")
         self.lastRunState[i] = "SystemRunningLong"
         SlasAnimations.SystemRunningLong(self, i)
     
     def EStop(self,i):
+        rgbQ.put("Red")
         SlasAnimations.EStop(self,i)
         
 #Define SafetySystem Class
@@ -218,9 +222,9 @@ class SafetySystem(threading.Thread):
         self.door6 = digitalio.DigitalInOut(board.D10)
         self.door6.direction = digitalio.Direction.INPUT
         self.door6.pull = digitalio.Pull.DOWN
-        self.checking()
+        self.Checking()
     
-    def checking(self):
+    def Checking(self):
         logging.debug("Starting SafetySystem checking loop")
         while True:
             self.doors[0] = self.estop1.value
@@ -241,6 +245,38 @@ class SafetySystem(threading.Thread):
                         runQ.get()
                     runQ.put(self.doors)
                     self.lastDoors[i] = self.doors[i]
+    
+def RgbRed():
+    rgbPwmValues = (1,0,0)
+    redPin.start(rgbPwmValues[0])
+    greenPin.start(rgbPwmValues[1])
+    bluePin.start(rgbPwmValues[2])
+
+def RgbGreen():
+    rgbPwmValues = (0,1,0)
+    redPin.start(rgbPwmValues[0])
+    greenPin.start(rgbPwmValues[1])
+    bluePin.start(rgbPwmValues[2])
+
+def RgbPurple():
+    rgbPwmValues = (0.5,0,0.5)
+    redPin.start(rgbPwmValues[0])
+    greenPin.start(rgbPwmValues[1])
+    bluePin.start(rgbPwmValues[2])
+
+def RgbWhite():
+    rgbPwmValues = (1,1,1)
+    redPin.start(rgbPwmValues[0])
+    greenPin.start(rgbPwmValues[1])
+    bluePin.start(rgbPwmValues[2])
+
+def RgbRainbow(i):
+    i = colorsys.rgb_to_hsv(i[0],i[1],i[2])
+    rgbPwmValues = colorsys.hsv_to_rgb((i[0]+0.01)%1, 1, 1)
+    redPin.start(rgbPwmValues[0])
+    greenPin.start(rgbPwmValues[1])
+    bluePin.start(rgbPwmValues[2])
+    return i
 
 #Setup pins for RGB filter LEDs
 GPIO.setup(11, GPIO.OUT)
@@ -255,23 +291,38 @@ redPin = GPIO.PWM(11, 1000)
 greenPin = GPIO.PWM(12, 1000)
 bluePin = GPIO.PWM(13, 1000)
 
-rgbPwmValues = (1,0,1)
+rgbPwmValues = (0,1,0)
+rgbColour = "Green"
 
 redPin.start(rgbPwmValues[0])
 greenPin.start(rgbPwmValues[1])
 bluePin.start(rgbPwmValues[2])
 
 
-def RgbCycle(i):
-    i = colorsys.rgb_to_hsv(i[0],i[1],i[2])
-    i = colorsys.hsv_to_rgb((i[0]+0.01)%1, 1, 1)
-    return i
-
-
 if __name__ == '__main__':
     #Define queue to pass between threads    
     runQ = queue.Queue()
+    rgbQ = queue.Queue()
 
     #Establish Workcell and SafetySystem workcell
     threading.Thread(target = Workcell).start()
     threading.Thread(target = SafetySystem).start()
+    
+    while True:
+        if rgbQ.empty() == False:
+            rgbColour = runQ.get()
+            
+        if rgbColour == "Green":
+            RgbGreen()
+            
+        if rgbColour == "Red":
+            RgbRed()
+            
+        if rgbColour == "Purple":
+            RgbPurple()
+            
+        if rgbColour == "White":
+            RgbWhite()
+        
+        if rgbColour == "Rainbow":
+            rgbPwmValues = RgbRainbow()    
