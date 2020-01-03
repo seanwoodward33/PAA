@@ -158,7 +158,7 @@ class Workcell(threading.Thread):
             self.OutputLeds()
     
     def RunComplete(self, i):
-        rgbQ.put("Rainbow")
+        #rgbQ.put("Rainbow")
         self.lastRunState[i] = "RunComplete"
         SlasAnimations.RunComplete(self, i)
     
@@ -166,25 +166,25 @@ class Workcell(threading.Thread):
         SlasAnimations.TeachMode(self, i)
 
     def DoorOpen(self, i):
-        rgbQ.put("Purple")
+        #rgbQ.put("Purple")
         SlasAnimations.DoorOpen(self, i)
     
     def TwoDoorOpen(self, i):
-        rgbQ.put("White")
+        #rgbQ.put("White")
         SlasAnimations.TwoDoorOpen(self, i)
     
     def SystemRunningShort(self, i):
-        rgbQ.put("Green")
+        #rgbQ.put("Green")
         self.lastRunState[i] = "SystemRunningShort"
         SlasAnimations.SystemRunningShort(self, i)
     
     def SystemRunningLong(self, i):
-        rgbQ.put("Green")
+        #rgbQ.put("Green")
         self.lastRunState[i] = "SystemRunningLong"
         SlasAnimations.SystemRunningLong(self, i)
     
     def EStop(self,i):
-        rgbQ.put("Red")
+        #rgbQ.put("Red")
         SlasAnimations.EStop(self,i)
         
 #Define SafetySystem Class
