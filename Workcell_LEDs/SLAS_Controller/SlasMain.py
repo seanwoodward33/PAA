@@ -158,6 +158,8 @@ class Workcell(threading.Thread):
             self.OutputLeds()
     
     def RunComplete(self, i):
+        while rgbQ.empty() == False:
+            rgbQ.get()
         rgbQ.put("Rainbow")
         self.lastRunState[i] = "RunComplete"
         SlasAnimations.RunComplete(self, i)
@@ -166,24 +168,34 @@ class Workcell(threading.Thread):
         SlasAnimations.TeachMode(self, i)
 
     def DoorOpen(self, i):
+        while rgbQ.empty() == False:
+            rgbQ.get()
         rgbQ.put("Purple")
         SlasAnimations.DoorOpen(self, i)
     
     def TwoDoorOpen(self, i):
+        while rgbQ.empty() == False:
+            rgbQ.get()
         rgbQ.put("White")
         SlasAnimations.TwoDoorOpen(self, i)
     
     def SystemRunningShort(self, i):
+        while rgbQ.empty() == False:
+            rgbQ.get()
         rgbQ.put("Green")
         self.lastRunState[i] = "SystemRunningShort"
         SlasAnimations.SystemRunningShort(self, i)
     
     def SystemRunningLong(self, i):
+        while rgbQ.empty() == False:
+            rgbQ.get()
         rgbQ.put("Green")
         self.lastRunState[i] = "SystemRunningLong"
         SlasAnimations.SystemRunningLong(self, i)
     
     def EStop(self,i):
+        while rgbQ.empty() == False:
+            rgbQ.get()
         rgbQ.put("Red")
         SlasAnimations.EStop(self,i)
         
@@ -245,7 +257,7 @@ class SafetySystem(threading.Thread):
                         runQ.get()
                     runQ.put(self.doors)
                     self.lastDoors[i] = self.doors[i]
-""" 
+ 
 #Define RGB Class for dumb lights
 class RgbLights(threading.Thread):
     def __init__(self):
@@ -265,9 +277,58 @@ class RgbLights(threading.Thread):
 
         self.rgbPwmValues = (0,1,0)
         self.rgbColour = "Green"
-"""        
+        
+        self.Running()
+        
+    def UpdatePins(self):
+        self.redPin.ChangeDutyCycle(self.rgbPwmValues[0])
+        self.greenPin.ChangeDutyCycle(self.rgbPwmValues[1])
+        self.bluePin.ChangeDutyCycle(self.rgbPwmValues[2])        
+        
+    def RgbRed(self):
+        self.rgbPwmValues = (1,0,0)
+        self.UpdatePins()
+        
+    def RgbGreen(self):
+        self.rgbPwmValues = (0,1,0)
+        self.UpdatePins()
+
+    def RgbPurple(self):
+        self.rgbPwmValues = (0.5,0,0.5)
+        self.UpdatePins()
+
+    def RgbWhite(self):
+        self.rgbPwmValues = (1,1,1)
+        self.UpdatePins()
+
+    def RgbRainbow(self):
+        i = self.rgbPwmValues
+        i = colorsys.rgb_to_hsv(i[0],i[1],i[2])
+        self.rgbPwmValues = colorsys.hsv_to_rgb((i[0]+0.01)%1, 1, 1)
+        self.UpdatePins()
+
+    def Running(self):
+        while True:
+            if rgbQ.empty() == False:   
+                self.rgbColour = rgbQ.get()
+                
+            if self.rgbColour == "Green":
+                self.RgbGreen()
+            
+            if self.rgbColour == "Red":
+                self.RgbRed()
+            
+            if self.rgbColour == "Purple":
+                self.RgbPurple()
+            
+            if self.rgbColour == "White":
+                self.RgbWhite()
+        
+            if self.rgbColour == "Rainbow":
+                self.RgbRainbow()    
         
 
+"""     
 def RgbRed():
     rgbPwmValues = (1,0,0)
     redPin.ChangeDutyCycle(rgbPwmValues[0])
@@ -319,7 +380,7 @@ rgbColour = "Green"
 redPin.start(rgbPwmValues[0])
 greenPin.start(rgbPwmValues[1])
 bluePin.start(rgbPwmValues[2])
-
+"""
 
 if __name__ == '__main__':
     #Define queue to pass between threads    
@@ -329,22 +390,4 @@ if __name__ == '__main__':
     #Establish Workcell and SafetySystem workcell
     threading.Thread(target = Workcell).start()
     threading.Thread(target = SafetySystem).start()
-    
-    while True:
-        if rgbQ.empty() == False:
-            rgbColour = rgbQ.get()
-            
-        if rgbColour == "Green":
-            RgbGreen()
-            
-        if rgbColour == "Red":
-            RgbRed()
-            
-        if rgbColour == "Purple":
-            RgbPurple()
-            
-        if rgbColour == "White":
-            RgbWhite()
-        
-        if rgbColour == "Rainbow":
-            rgbPwmValues = RgbRainbow()    
+    threading.Thread(target = RgbLights).start()
