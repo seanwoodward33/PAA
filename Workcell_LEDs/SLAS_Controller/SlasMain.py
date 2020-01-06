@@ -280,7 +280,7 @@ class RgbLights(threading.Thread):
         """
         #self.rgbColour = "Green"
         
-        #self.Running()
+        self.Running()
         
     def UpdatePins(self):
         self.redPin.ChangeDutyCycle(self.rgbPwmValues[0]*100)
@@ -288,26 +288,51 @@ class RgbLights(threading.Thread):
         self.bluePin.ChangeDutyCycle(self.rgbPwmValues[2]*100)
         
     def RgbRed(self):
+        GPIO.output(11, GPIO.HIGH)
+        GPIO.output(12, GPIO.LOW)
+        GPIO.output(13, GPIO.LOW)
+        """
         self.rgbPwmValues = (1,0,0)
         self.UpdatePins()
+        """
         
     def RgbGreen(self):
+        GPIO.output(11, GPIO.LOW)
+        GPIO.output(12, GPIO.HIGH)
+        GPIO.output(13, GPIO.LOW)
+        """
         self.rgbPwmValues = (0,1,0)
         self.UpdatePins()
+        """
 
     def RgbPurple(self):
+        GPIO.output(11, GPIO.HIGH)
+        GPIO.output(12, GPIO.LOW)
+        GPIO.output(13, GPIO.HIGH)
+        """
         self.rgbPwmValues = (0.5,0,0.5)
         self.UpdatePins()
-
+        """
+        
     def RgbWhite(self):
+        GPIO.output(11, GPIO.HIGH)
+        GPIO.output(12, GPIO.HIGH)
+        GPIO.output(13, GPIO.HIGH)
+        """
         self.rgbPwmValues = (1,1,1)
         self.UpdatePins()
+        """
 
     def RgbRainbow(self):
+        GPIO.output(11, GPIO.HIGH)
+        GPIO.output(12, GPIO.HIGH)
+        GPIO.output(13, GPIO.HIGH)
+        """
         i = self.rgbPwmValues
         i = colorsys.rgb_to_hsv(i[0],i[1],i[2])
         self.rgbPwmValues = colorsys.hsv_to_rgb((i[0]+0.01)%1, 1, 1)
         self.UpdatePins()
+        """
 
     def Running(self):
         while True:
