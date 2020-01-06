@@ -269,7 +269,7 @@ class RgbLights(threading.Thread):
         
         self.redPin.start(0)
         self.greenPin.start(0)
-        self.bluePin.start(100)
+        self.bluePin.start(1)
 
         """
         self.redPin.start(self.rgbPwmValues[0]*100)
