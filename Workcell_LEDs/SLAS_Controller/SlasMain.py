@@ -266,7 +266,10 @@ class RgbLights(threading.Thread):
         self.bluePin = GPIO.PWM(13, 1000)
 
         self.rgbPwmValues = (0,0,1)
-        self.UpdatePins()
+        self.redPin.Start(self.rgbPwmValues[0])
+        self.greenPin.Start(self.rgbPwmValues[1])
+        self.bluePin.Start(self.rgbPwmValues[2])
+        
         #self.rgbColour = "Green"
         
         #self.Running()
@@ -274,7 +277,7 @@ class RgbLights(threading.Thread):
     def UpdatePins(self):
         self.redPin.ChangeDutyCycle(self.rgbPwmValues[0])
         self.greenPin.ChangeDutyCycle(self.rgbPwmValues[1])
-        self.bluePin.ChangeDutyCycle(self.rgbPwmValues[2])        
+        self.bluePin.ChangeDutyCycle(self.rgbPwmValues[2])
         
     def RgbRed(self):
         self.rgbPwmValues = (1,0,0)
