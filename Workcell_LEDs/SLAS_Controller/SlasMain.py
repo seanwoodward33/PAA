@@ -278,7 +278,7 @@ class RgbLights(threading.Thread):
         self.greenPin.start(self.rgbPwmValues[1]*100)
         self.bluePin.start(self.rgbPwmValues[2]*100)
         """
-        #self.rgbColour = "Green"
+        self.rgbColour = "Green"
         
         self.Running()
         
@@ -324,8 +324,8 @@ class RgbLights(threading.Thread):
         """
 
     def RgbRainbow(self):
-        GPIO.output(11, GPIO.HIGH)
-        GPIO.output(12, GPIO.HIGH)
+        GPIO.output(11, GPIO.LOW)
+        GPIO.output(12, GPIO.LOW)
         GPIO.output(13, GPIO.HIGH)
         """
         i = self.rgbPwmValues
