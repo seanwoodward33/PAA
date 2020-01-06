@@ -261,6 +261,7 @@ class RgbLights(threading.Thread):
         GPIO.output(12, GPIO.HIGH)
         GPIO.output(13, GPIO.HIGH)
 
+        """
         self.redPin = GPIO.PWM(11, 1000)
         self.greenPin = GPIO.PWM(12, 1000)
         self.bluePin = GPIO.PWM(13, 1000)
@@ -270,6 +271,7 @@ class RgbLights(threading.Thread):
         self.redPin.start(50)
         self.greenPin.start(50)
         self.bluePin.start(50)
+        """
 
         """
         self.redPin.start(self.rgbPwmValues[0]*100)
