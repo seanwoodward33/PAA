@@ -267,10 +267,15 @@ class RgbLights(threading.Thread):
 
         self.rgbPwmValues = (0,0,1)
         
+        self.redPin.start(0)
+        self.greenPin.start(0)
+        self.bluePin.start(100)
+
+        """
         self.redPin.start(self.rgbPwmValues[0]*100)
         self.greenPin.start(self.rgbPwmValues[1]*100)
         self.bluePin.start(self.rgbPwmValues[2]*100)
-        
+        """
         #self.rgbColour = "Green"
         
         #self.Running()
