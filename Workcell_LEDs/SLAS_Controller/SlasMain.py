@@ -257,8 +257,8 @@ class RgbLights(threading.Thread):
         GPIO.setup(12, GPIO.OUT)
         GPIO.setup(13, GPIO.OUT)
 
-        GPIO.output(11, GPIO.HIGH)
-        GPIO.output(12, GPIO.HIGH)
+        GPIO.output(11, GPIO.LOW)
+        GPIO.output(12, GPIO.LOW)
         GPIO.output(13, GPIO.HIGH)
 
         """
