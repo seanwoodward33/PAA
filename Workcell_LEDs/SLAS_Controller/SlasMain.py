@@ -122,7 +122,7 @@ class Workcell(threading.Thread):
             logging.debug("Negated queue is: " + str(queue))
             
             #While ignoring doors
-            queue[3:] = [0,0,0,0,0,0]
+            #queue[3:] = [0,0,0,0,0,0]
 
             if queue == [0,0,0,0,0,0,0,0,0]:
                 self.estops = [False, False, False]
