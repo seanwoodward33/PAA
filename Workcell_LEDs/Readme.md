@@ -13,7 +13,7 @@ These can be installed from the from the commandline using the code below:
 
 `sudo pip3 install rpi_ws281x adafruit-circuitpython-neopixel`
 
-##Watchdog file
+## Watchdog file
 
 To get this code to run at startup, there is a watchdog program written that is to be run every minute by the crontab.
 
