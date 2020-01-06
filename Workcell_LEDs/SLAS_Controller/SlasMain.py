@@ -277,10 +277,11 @@ class RgbLights(threading.Thread):
         self.redPin.start(self.rgbPwmValues[0]*100)
         self.greenPin.start(self.rgbPwmValues[1]*100)
         self.bluePin.start(self.rgbPwmValues[2]*100)
-        """
+        
         self.rgbColour = "Green"
         
         self.Running()
+        """
         
     def UpdatePins(self):
         self.redPin.ChangeDutyCycle(self.rgbPwmValues[0]*100)
