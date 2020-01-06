@@ -160,8 +160,6 @@ class Workcell(threading.Thread):
             self.OutputLeds()
     
     def RunComplete(self, i):
-        while rgbQ.empty() == False:
-            rgbQ.get()
         rgbQ.put("Rainbow")
         self.lastRunState[i] = "RunComplete"
         SlasAnimations.RunComplete(self, i)
@@ -170,34 +168,24 @@ class Workcell(threading.Thread):
         SlasAnimations.TeachMode(self, i)
 
     def DoorOpen(self, i):
-        while rgbQ.empty() == False:
-            rgbQ.get()
         rgbQ.put("Purple")
         SlasAnimations.DoorOpen(self, i)
     
     def TwoDoorOpen(self, i):
-        while rgbQ.empty() == False:
-            rgbQ.get()
         rgbQ.put("White")
         SlasAnimations.TwoDoorOpen(self, i)
     
     def SystemRunningShort(self, i):
-        while rgbQ.empty() == False:
-            rgbQ.get()
         rgbQ.put("Green")
         self.lastRunState[i] = "SystemRunningShort"
         SlasAnimations.SystemRunningShort(self, i)
     
     def SystemRunningLong(self, i):
-        while rgbQ.empty() == False:
-            rgbQ.get()
         rgbQ.put("Green")
         self.lastRunState[i] = "SystemRunningLong"
         SlasAnimations.SystemRunningLong(self, i)
     
     def EStop(self,i):
-        while rgbQ.empty() == False:
-            rgbQ.get()
         rgbQ.put("Red")
         SlasAnimations.EStop(self,i)
         
